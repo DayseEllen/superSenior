@@ -1,0 +1,25 @@
+<ion-header>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</ion-header>
+
+<ion-content color="primary">
+    <div text-center>
+        <img id="logo" src="assets/images/supersenior-logo.png">
+    </div>
+    <div text-center id='titulo'>Login:</div>
+    <form>
+    <div class="form-row" id="formulario">
+        <div class="form-group col-md-6">
+            <input type="email" class="form-control campos inputs" id="inputEmail4" placeholder="Email">
+        </div>
+        <div class="form-group col-md-6"> 
+              <input type="password" class="form-control campos inputs" id="inputPassword4" placeholder="Senha">
+        </div>  
+    </div>
+    <br>
+    <ion-button type="submit" class="campos botao" color="light" (click)="goInit()">Voltar</ion-button>
+    <ion-button type="submit" class="campos botao entrar" color="light" (click)="goHome()" >Entrar</ion-button>
+  </form>
+
+</ion-content>

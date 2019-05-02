@@ -1,0 +1,36 @@
+/**Id's**/
+#logo{
+    width: 200px;
+    height: 100px;
+    border-radius: 10px;
+    margin-top: 70px;
+    }
+
+#titulo{
+    font-size: 30px;
+    font-family:  Rum Raisin;
+    color: black;
+    margin-top: 50px;
+}
+#formulario{
+    margin-top: 60px;
+}
+
+/**Classes**/
+
+.campos{
+    font-family: Rum Raisin;
+    margin-left: 10px;
+}
+.campos.inputs{
+    width: 340px;
+    height: 50px;
+}
+.campos.botao{
+    margin-top: 20px;
+    font-size: 15px;
+    width: 100px;
+}
+.campos.botao.entrar{
+    margin-left: 138px;
+}

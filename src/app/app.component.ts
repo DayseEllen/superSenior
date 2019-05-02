@@ -19,7 +19,25 @@ export class AppComponent {
       title: 'List',
       url: '/list',
       icon: 'list'
-    }
+    },
+    {
+      title: 'Meu perfil',
+      icon: 'person'
+    },
+    {
+      title: 'Informações',
+      icon: 'information-circle-outline'
+    },
+    {
+      title: 'Meu avanço',
+      icon:'fitness'
+
+    },
+    {
+      title: 'Sair',
+      url: '/cadastrar',
+      icon: 'log-out'
+    }      
   ];
 
   constructor(
