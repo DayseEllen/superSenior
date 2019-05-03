@@ -16,22 +16,19 @@ export class AppComponent {
       icon: 'home'
     },
     {
-      title: 'List',
-      url: '/list',
-      icon: 'list'
-    },
-    {
       title: 'Meu perfil',
-      icon: 'person'
+      icon: 'person',
+      url: "/meu-perfil"
     },
     {
       title: 'Informações',
-      icon: 'information-circle-outline'
+      icon: 'information-circle-outline',
+      url: '/info'
     },
     {
       title: 'Meu avanço',
-      icon:'fitness'
-
+      icon:'fitness',
+      url: "/meu-avanco"
     },
     {
       title: 'Sair',

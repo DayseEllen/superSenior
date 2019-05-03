@@ -13,11 +13,10 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
-  goInit(){
-    this.rota.navigate(['cadastrar']);
- }
- goHome(){
-  this.rota.navigate(['home']);
- }
+  abrirPagina(url:String){
+    this.rota.navigate([url]);
+
+  }
+ 
 
 }

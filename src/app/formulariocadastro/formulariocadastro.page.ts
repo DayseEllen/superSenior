@@ -12,8 +12,8 @@ export class FormulariocadastroPage implements OnInit {
 
   ngOnInit() {
   }
-  goInit(){
-    this.rota.navigate(['cadastrar'])
-  }
+  abrirPagina(url:String){
+    this.rota.navigate([url]);
 
+  }
 }

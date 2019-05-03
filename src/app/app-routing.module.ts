@@ -17,7 +17,10 @@ const routes: Routes = [
   },
   { path: 'cadastrar', loadChildren: './cadastrar/cadastrar.module#CadastrarPageModule' },
   { path: 'formulariocadastro', loadChildren: './formulariocadastro/formulariocadastro.module#FormulariocadastroPageModule' },
-  { path: 'login', loadChildren: './login/login.module#LoginPageModule' }
+  { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
+  { path: 'info', loadChildren: './info/info.module#InfoPageModule' },
+  { path: 'meu-perfil', loadChildren: './meu-perfil/meu-perfil.module#MeuPerfilPageModule' },
+  { path: 'meu-avanco', loadChildren: './meu-avanco/meu-avanco.module#MeuAvancoPageModule' }
 ];
 
 @NgModule({

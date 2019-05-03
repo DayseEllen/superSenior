@@ -7,7 +7,7 @@
     <div id="divlogo">
         <img id="logo" src="assets/images/logosymbol.png">
     </div>
-   <div text-center id="titulo">Cadastre-se:</div>
+   <div text-center id="titulo">Cadastre-se!</div>
    <div>
     <form>
         <div class="form-row formulario">
@@ -21,11 +21,11 @@
               <input type="email" class="form-control campos inputs" id="inputEmail4" placeholder="Email">
             </div>
           <div class="form-group col-md-6"> 
-              <label for="email" for="inputPassword4" class="campos textoformulario">Digite sua senha:</label>
+              <label for="inputPassword4" class="campos textoformulario">Digite sua senha:</label>
               <input type="password" class="form-control campos inputs" id="inputPassword4" placeholder="Senha">
           </div>
           <div class="col-auto my-1">
-              <label for="email" class="campos textoformulario" for="inlineFormCustomSelect">Selecione seu gênero:</label>
+              <label  class="campos textoformulario" for="inlineFormCustomSelect">Selecione seu gênero:</label>
               <select class="custom-select mr-sm-2 campos" id="inlineFormCustomSelect">
                 <option selected>Feminino</option>
                 <option >Masculino</option>   
@@ -33,8 +33,8 @@
             </div>
         </div>
         <br>
-        <ion-button type="submit" class="campos botao" color="light" (click)="goInit()">Voltar</ion-button>
-        <ion-button type="submit" class="campos botao cadastrar" color="light" >Cadastrar</ion-button>
+        <ion-button type="submit" class="campos botao" color="light" (click)="abrirPagina('cadastrar')">Voltar</ion-button>
+        <ion-button type="submit" class="campos botao cadastrar" color="light" (click)="abrirPagina('login')">Cadastrar</ion-button>
       </form>
     </div>
 </ion-content>
