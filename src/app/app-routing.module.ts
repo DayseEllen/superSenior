@@ -11,10 +11,6 @@ const routes: Routes = [
     path: 'home',
     loadChildren: './home/home.module#HomePageModule'
   },
-  {
-    path: 'list',
-    loadChildren: './list/list.module#ListPageModule'
-  },
   { path: 'cadastrar', loadChildren: './cadastrar/cadastrar.module#CadastrarPageModule' },
   { path: 'formulariocadastro', loadChildren: './formulariocadastro/formulariocadastro.module#FormulariocadastroPageModule' },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },

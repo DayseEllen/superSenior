@@ -3,11 +3,13 @@
         <ion-buttons slot="start">
             <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-title>Meu Avanço</ion-title>
+        <ion-title>Meu avanço diário</ion-title>
     </ion-toolbar>
 </ion-header>
       
-<ion-content>
-          
+<ion-content padding>
+        <p id="titleavanco">Avancei:</p>
+
+        <ion-progress-bar value="0.5" [buffer]="0" color="primary" id="barradeprogresso" ></ion-progress-bar>       
 </ion-content>
       
