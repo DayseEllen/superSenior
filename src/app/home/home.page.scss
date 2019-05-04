@@ -2,3 +2,77 @@
   max-height: 35vh;
   overflow: hidden;
 }
+
+ion-button{
+  height: 120px;
+  width: 120px;
+}
+
+.meio{
+  height: 300px;
+  width: 300px;
+}
+.pergunta{
+  background-color: white;
+  color: black;
+  border: 2px solid;
+  border-color:black;
+  text-align: center;
+  height: 110px;
+  width: 110px;
+  margin-left: 40px;
+  float: left;
+}
+
+#Pergunta{ 
+  height: 110px;
+  width: 110px;
+}
+
+.arrasta{
+  background-color: white;
+  color: black;
+  border: 2px solid;
+  border-color:black;
+  text-align: center;
+  height: 110px;
+  width: 110px;
+  margin-left: 200px;
+  margin-top: 40px;
+}
+
+#Arrasta{
+  height: 110px;
+  width: 110px;
+ }
+
+ .memoria{
+  background-color: white;
+  color: black;
+  border: 2px solid;
+  border-color:black;
+  text-align: center;
+  height: 110px;
+  width: 110px;
+  margin-left: 120px;
+  margin-top: 40px;
+}
+
+ #Memoria{
+  height: 110px;
+  width: 110px;
+ }
+
+#logo{
+  width: 200px;
+  height: 100px;
+  border-radius: 10px;
+  margin-top: 50px;
+  }
+
+  #texto{
+    font-size: 35px;
+    font-family:  Rum Raisin;
+    color: black;
+    margin-top: 20px;
+    }

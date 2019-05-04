@@ -3,10 +3,29 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-   <ion-title>Home</ion-title>
+   <ion-title>Super Sênior</ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-content color="primary">
 
-<ion-content>
-    
+    <div text-center>
+        <img id="logo" src="assets/images/supersenior-logo.png" (click)="abrirPagina('cadastrar')">
+    </div> 
+
+    <div text-center id='texto'>Olá, Sr(a). (Nome)</div>
+
+    <div text-center class="meio">
+    <div class="pergunta">
+        <img id="Pergunta" src="assets/images/pergunta1.png" (click)="abrirPagina('cadastrar')">
+        Pergunta
+    </div>
+    <div class="arrasta">
+        <img id="Arrasta" src="assets/images/arrasta3.png" (click)="abrirPagina('cadastrar')">
+        Arrasta&Solta
+    </div>
+    <div class="memoria">
+        <img id="Memoria" src="assets/images/memoria2.png" (click)="abrirPagina('cadastrar')">
+        Memória
+    </div>
+  </div>
 </ion-content>
