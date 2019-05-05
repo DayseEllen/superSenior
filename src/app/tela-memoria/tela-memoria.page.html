@@ -1,9 +1,32 @@
 <ion-header>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <ion-toolbar>
     <ion-title>Jogo da Memória</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content color="primary">
 
-</ion-content>
+    <div text-center>
+      <img id="Memoria" src="assets/images/memoria.png">
+    </div>
+    <h5 text-center id="texto">Jogo da Memória</h5>
+  
+    <div text-center class="meio">
+        
+            <img id="cartaR" src="assets/images/logosymbol.png">
+            <img id="cartaL" src="assets/images/logosymbol.png">
+            <br>
+            <img id="cartaR" src="assets/images/logosymbol.png">
+            <img id="cartaL" src="assets/images/logosymbol.png">
+            <br>
+            <img id="cartaR" src="assets/images/logosymbol.png">
+            <img id="cartaL" src="assets/images/logosymbol.png">
+
+    </div>
+  <br>
+
+  <button type="button" class="btn btn-light" id="voltar" (click)="abrirPagina('home')">Voltar</button>
+  <button type="button" class="btn btn-light" id="proximo" (click)="abrirPagina('tela-memoria')">Próximo</button>
+  
+  </ion-content>

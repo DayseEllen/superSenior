@@ -1,8 +1,61 @@
-.campos.botao{
-    margin-top: 20px;
-    font-size: 15px;
-    width: 100px;
+#voltar{
+    position: relative;
+    left: 15px;
 }
-.campos.botao.entrar{
-    margin-left: 138px;
+
+#proximo{
+    position: relative;
+    left: 195px;
+}
+
+#texto{
+   font-family:  Rum Raisin; 
+   color: black;
+}
+
+#Pergunta{ 
+    height: 50px;
+    width: 50px;
+    border-radius: 10px;
+    border: 2px solid;
+    border-color: darkslategrey;
+    margin-top: 30px;
+    background-color: white;
+}
+
+#iconeApp{ 
+    height: 70px;
+    width: 70px;
+    border-radius: 10px;
+    border: 2px solid;
+    border-color: darkslategrey;
+    margin-top: 20px;
+    background-color: white;
+}
+
+.meio{
+    height: 370px;
+    width: 330px;
+    text-align: center;
+    background: white;
+    margin:auto;
+    margin-top: 30px;
+}
+
+#pergunta1{
+    margin-top: 20px;
+    width: 90%;
+    height: 50px;
+}
+
+#pergunta2{
+    margin-top: 10px;
+    width: 90%;
+    height: 50px;
+}
+
+#pergunta3{
+    margin-top: 10px;
+    width: 90%;
+    height: 50px;
 }

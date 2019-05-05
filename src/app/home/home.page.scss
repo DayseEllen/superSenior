@@ -3,12 +3,7 @@
   overflow: hidden;
 }
 
-ion-button{
-  height: 120px;
-  width: 120px;
-}
-
-#meio{
+.meio{
   height: 350px;
   width: 350px;
   text-align: center;
@@ -18,16 +13,18 @@ ion-button{
 }
 
 .pergunta{
-  position: absolute;
+  position: relative;
+  top: 40px;
+  left: 15%;
   background-color: white;
-  color: black;
-  border: 2px solid;
-  border-color: darkslategrey;
-  text-align: center;
   height: 110px;
   width: 110px;
-  margin-top: 40px;
-  margin-left: 15%;
+  color: black;
+  text-align: center;
+  border-radius: 10px;
+  border: 2px solid;
+  border-color: darkslategrey;
+  float: left;
 }
 
 #Pergunta{ 
@@ -36,15 +33,18 @@ ion-button{
 }
 
 .arrasta{
+  position: relative;
+  left: 22%;
+  top: 40px;
   background-color: white;
-  color: black;
-  border: 2px solid;
-  border-color:darkslategrey;
-  text-align: center;
   height: 110px;
   width: 110px;
-  margin-left: 53%;
-  margin-top: 40px;
+  color: black;
+  text-align: center;
+  border-radius: 10px;
+  border: 2px solid;
+  border-color:darkslategrey;
+  float: left;
 }
 
 #Arrasta{
@@ -53,15 +53,18 @@ ion-button{
  }
 
  .memoria{
+  position: relative;
+  right: 30%;
+  top: 190px;
   background-color: white;
-  color: black;
-  border: 2px solid;
-  border-color:darkslategrey;
-  text-align: center;
   height: 110px;
   width: 110px;
-  margin-left: 35%;
-  margin-top: 40px;
+  color: black;
+  text-align: center;
+  border-radius: 10px;
+  border: 2px solid;
+  border-color:darkslategrey; 
+  float: left;
 }
 
  #Memoria{
@@ -76,9 +79,9 @@ ion-button{
   margin-top: 50px;
   }
 
-  #texto{
-    font-size: 35px;
-    font-family:  Rum Raisin;
-    color: black;
-    margin-top: 20px;
-    }
+#texto{
+  font-size: 35px;
+  font-family:  Rum Raisin;
+  color: black;
+  margin-top: 20px;
+  }

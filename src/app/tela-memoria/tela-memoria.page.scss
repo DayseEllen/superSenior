@@ -1,0 +1,49 @@
+#voltar{
+    position: relative;
+    left: 15px;
+}
+#proximo{
+    position: relative;
+    left: 195px;
+}
+
+#texto{
+   font-family:  Rum Raisin; 
+   color: black;
+}
+#Memoria{ 
+    height: 50px;
+    width: 50px;
+    border-radius: 10px;
+    border: 2px solid;
+    border-color: darkslategrey;
+    margin-top: 30px;
+    background-color: white;
+}
+.meio{
+    height: 370px;
+    width: 330px;
+    text-align: center;
+    background: white;
+    margin:auto;
+    margin-top: 30px;
+}
+#cartaR{
+    height: 100px;
+    width: 100px;
+    border-radius: 10px;
+    border: 2px solid;
+    border-color: darkslategrey;
+    margin-top: 20px;
+    background-color: white;
+}
+#cartaL{
+    height: 100px;
+    width: 100px;
+    border-radius: 10px;
+    border: 2px solid;
+    border-color: darkslategrey;
+    margin-top: 20px;
+    margin-left: 20px;
+    background-color: white;
+}

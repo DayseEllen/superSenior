@@ -1,10 +1,31 @@
 <ion-header>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <ion-toolbar>
     <ion-title>Jogo das Perguntas</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-button type="submit" class="campos botao" color="light" (click)="abrirPagina('home')">Voltar</ion-button>
-  <ion-button type="submit" class="campos botao entrar" color="light" (click)="abrirPagina('home')" >Próximo</ion-button>
+<ion-content color="primary">
+
+  <div text-center>
+    <img id="Pergunta" src="assets/images/pergunta.png">
+  </div>
+  <h5 text-center id="texto">Jogo das Perguntas</h5>
+
+  <div text-center class="meio">
+      <div>
+        <img id="iconeApp" src="assets/images/whatsapp.png" (click)="abrirPagina('tela-pergunta')"> 
+    </div>
+    <br>
+    <h4 id="texto">Qual o nome desse aplicativo?</h4>
+  <div>
+      <button type="button" class="btn btn-outline-dark" id="pergunta1">Instagram</button>
+      <button type="button" class="btn btn-outline-dark" id="pergunta2">Whatsapp</button>
+      <button type="button" class="btn btn-outline-dark" id="pergunta2">Facebook</button>
+  </div>
+</div>
+<br>
+<button type="button" class="btn btn-light" id="voltar" (click)="abrirPagina('home')">Voltar</button>
+<button type="button" class="btn btn-light" id="proximo" (click)="abrirPagina('tela-pergunta')">Próximo</button>
+
 </ion-content>

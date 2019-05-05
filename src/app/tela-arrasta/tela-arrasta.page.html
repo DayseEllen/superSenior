@@ -1,9 +1,38 @@
 <ion-header>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <ion-toolbar>
     <ion-title>Jogo do Arrasta&Solta</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content color="primary">
 
-</ion-content>
+    <div text-center>
+      <img id="Arrasta" src="assets/images/arrasta.png">
+    </div>
+    <h5 text-center id="texto">Jogo do Arrasta&Solta</h5>
+  
+    <div text-center class="meio">
+        <div id="janela1">
+           <ion-label id="label">Whatsapp</ion-label> 
+        </div>
+        <div id="janela2">
+            <ion-label id="label">Instagram</ion-label> 
+        </div>
+        <div id="janela3">
+            <ion-label id="label">Facebook</ion-label> 
+        </div>
+        <div>
+            <img id="img1" src="assets/images/facebook.png">
+            <img id="img2" src="assets/images/telefone.png">
+            <img id="img3" src="assets/images/whatsapp.png">
+            <img id="img4" src="assets/images/instagram.png">
+        </div>
+
+    </div>
+  <br>
+
+  <button type="button" class="btn btn-light" id="voltar" (click)="abrirPagina('home')">Voltar</button>
+  <button type="button" class="btn btn-light" id="proximo" (click)="abrirPagina('tela-arrasta')">Próximo</button>
+  
+  </ion-content>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tela-arrasta',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TelaArrastaPage implements OnInit {
 
-  constructor() { }
+  constructor(private rota: Router) { }
 
   ngOnInit() {
+  }
+
+  abrirPagina(url:String){
+    this.rota.navigate([url]);
+
   }
 
 }
