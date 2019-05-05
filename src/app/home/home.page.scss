@@ -8,20 +8,26 @@ ion-button{
   width: 120px;
 }
 
-.meio{
-  height: 300px;
-  width: 300px;
+#meio{
+  height: 350px;
+  width: 350px;
+  text-align: center;
+  border: 2px solid;
+  border-color: #1dd6cb;
+  margin:auto;
 }
+
 .pergunta{
+  position: absolute;
   background-color: white;
   color: black;
   border: 2px solid;
-  border-color:black;
+  border-color: darkslategrey;
   text-align: center;
   height: 110px;
   width: 110px;
-  margin-left: 40px;
-  float: left;
+  margin-top: 40px;
+  margin-left: 15%;
 }
 
 #Pergunta{ 
@@ -33,11 +39,11 @@ ion-button{
   background-color: white;
   color: black;
   border: 2px solid;
-  border-color:black;
+  border-color:darkslategrey;
   text-align: center;
   height: 110px;
   width: 110px;
-  margin-left: 200px;
+  margin-left: 53%;
   margin-top: 40px;
 }
 
@@ -50,11 +56,11 @@ ion-button{
   background-color: white;
   color: black;
   border: 2px solid;
-  border-color:black;
+  border-color:darkslategrey;
   text-align: center;
   height: 110px;
   width: 110px;
-  margin-left: 120px;
+  margin-left: 35%;
   margin-top: 40px;
 }
 
