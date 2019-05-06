@@ -26,11 +26,6 @@ export class AppComponent {
       url: '/info'
     },
     {
-      title: 'Meu avanço',
-      icon:'fitness',
-      url: "/meu-avanco"
-    },
-    {
       title: 'Sair',
       url: '/cadastrar',
       icon: 'log-out'

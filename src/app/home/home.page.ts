@@ -13,6 +13,5 @@ export class HomePage {
 
   abrirPagina(url:String){
     this.rota.navigate([url]);
-
   }
 }
