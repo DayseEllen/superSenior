@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-   <ion-title>Super Sênior</ion-title>
+   <ion-title id="textostitle">Super Sênior</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content color="primary">
@@ -16,15 +16,15 @@
 <div text-center class="meio">
     <div class="pergunta">
         <img id="Pergunta" src="assets/images/pergunta.png" (click)="abrirPagina('tela-pergunta')">
-        Pergunta
+       <p id="textjogos">Pergunta</p>
     </div>
     <div class="arrasta">
         <img id="Arrasta" src="assets/images/arrasta.png" (click)="abrirPagina('tela-arrasta')">
-        Arrasta&Solta
+       <p id="textjogos">Arrasta&Solta</p>
     </div>
     <div class="memoria">
         <img id="Memoria" src="assets/images/memoria.png" (click)="abrirPagina('tela-memoria')">
-        Memória
+        <p id="textjogos">Memória</p>
     </div>
 </div>
 </ion-content>

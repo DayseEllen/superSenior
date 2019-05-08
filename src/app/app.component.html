@@ -3,7 +3,7 @@
     <ion-menu >
       <ion-header>
         <ion-toolbar>
-          <ion-title id="menu">Menu</ion-title>
+          <ion-title id="textostitle">Menu</ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content>
@@ -11,7 +11,7 @@
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
             <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
               <ion-icon slot="start" [name]="p.icon"></ion-icon>
-              <ion-label id="menu">
+              <ion-label id="textostitle">
                 {{p.title}}
               </ion-label>
             </ion-item>

@@ -5,7 +5,7 @@
         <ion-buttons slot="start">
             <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-title>Meu perfil</ion-title>
+        <ion-title id="textostitle">Meu perfil</ion-title>
     </ion-toolbar>
 </ion-header>
       
@@ -15,25 +15,25 @@
     </div>
     <div id="dados">
     <ion-item >
-        <ion-label>
+        <ion-label id="perfilinfo">
           Fulano de Tal
         </ion-label>
         <ion-icon name="create" (click)="alterarNomeAlert()"></ion-icon>
       </ion-item>
       <ion-item >
-          <ion-label>
+          <ion-label id="perfilinfo">
             fulano.tal@gmail.com
           </ion-label>
           <ion-icon name="create" (click)="alterarEmailAlert()"></ion-icon>
       </ion-item>
       <ion-item >
-          <ion-label>
+          <ion-label id="perfilinfo">
             Masculino
           </ion-label>
           <ion-icon name="create" (click)="alterarGeneroAlert()"></ion-icon>
         </ion-item>
         <ion-item >
-            <ion-label>
+            <ion-label id="perfilinfo">
               ****
             </ion-label>
             <ion-icon name="create" (click)="alterarSenhaAlert()"></ion-icon>
