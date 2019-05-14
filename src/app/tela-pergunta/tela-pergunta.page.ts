@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./tela-pergunta.page.scss'],
 })
 export class TelaPerguntaPage implements OnInit {
+  
 
   constructor(private rota: Router) { }
 

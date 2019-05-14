@@ -1,3 +1,4 @@
+import { environment } from './../environments/environment';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -8,7 +9,8 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-
+import { AngularFireModule} from 'angularfire2';
+import {AngularFireDatabaseModule} from 'angularfire2/database'
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,7 +18,10 @@ import { AppRoutingModule } from './app-routing.module';
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireDatabaseModule
+    
   ],
   providers: [
     StatusBar,
