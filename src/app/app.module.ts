@@ -19,7 +19,15 @@ import {AngularFireDatabaseModule} from 'angularfire2/database'
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireModule.initializeApp({
+      apiKey: "AIzaSyDQDXiKj_LKXtqD35vfVX7WMoLOGjXAsWs",
+      authDomain: "teste-98105.firebaseapp.com",
+      databaseURL: "https://teste-98105.firebaseio.com",
+      projectId: "teste-98105",
+      storageBucket: "teste-98105.appspot.com",
+      messagingSenderId: "613185925596",
+      appId: "1:613185925596:web:c73cb5b1017ea605"
+    }),
     AngularFireDatabaseModule
     
   ],
