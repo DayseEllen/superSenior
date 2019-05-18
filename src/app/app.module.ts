@@ -20,13 +20,13 @@ import {AngularFireDatabaseModule} from 'angularfire2/database'
     IonicModule.forRoot(),
     AppRoutingModule,
     AngularFireModule.initializeApp({
-      apiKey: "AIzaSyDQDXiKj_LKXtqD35vfVX7WMoLOGjXAsWs",
-      authDomain: "teste-98105.firebaseapp.com",
-      databaseURL: "https://teste-98105.firebaseio.com",
-      projectId: "teste-98105",
-      storageBucket: "teste-98105.appspot.com",
-      messagingSenderId: "613185925596",
-      appId: "1:613185925596:web:c73cb5b1017ea605"
+      apiKey: "AIzaSyClXykZn0vVwoW2p5tDONG-LG0sZ_VPf7c",
+      authDomain: "super-senior.firebaseapp.com",
+      databaseURL: "https://super-senior.firebaseio.com",
+      projectId: "super-senior",
+      storageBucket: "super-senior.appspot.com",
+      messagingSenderId: "696535394421",
+      appId: "1:696535394421:web:255d95482e61a520"
     }),
     AngularFireDatabaseModule
     

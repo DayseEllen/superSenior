@@ -1,4 +1,4 @@
-import { BdperguntaService } from './../services/bdpergunta.service';
+import { BdService } from '../services/bd.service';
 
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -12,7 +12,7 @@ import { PerguntaI } from 'src/models/pergunta.interface';
 export class TelaPerguntaPage implements OnInit {
  
   perguntas: PerguntaI[];
-  constructor(private rota: Router, private bdpergunta: BdperguntaService) { }
+  constructor(private rota: Router, private bdpergunta: BdService) { }
 
   ngOnInit() {
     this.bdpergunta.listar<PerguntaI>(this.perguntas)
