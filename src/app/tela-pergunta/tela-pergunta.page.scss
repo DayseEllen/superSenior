@@ -10,18 +10,29 @@
     font-family:  Rum Raisin; 
 }
 
+#topo{
+    height: 60px;
+}
+
 #texto{
    font-family:  Rum Raisin; 
    color: black;
+   margin-top: -37px;
+   margin-left: 60px;
 }
 
-#Pergunta{ 
+#enunciado{
+    font-family:  Rum Raisin; 
+    color: black;   
+}
+
+#PerguntaImagem{ 
     height: 50px;
     width: 50px;
     border-radius: 10px;
     border: 2px solid;
     border-color: darkslategrey;
-    margin-top: 30px;
+    margin-top: 6px;
     background-color: white;
 }
 
@@ -36,31 +47,18 @@
 }
 
 .meio{
-    height: 370px;
+    height: 450px;
     width: 330px;
     text-align: center;
     background: white;
     margin:auto;
-    margin-top: 30px;
+    margin-top: 40px;
 }
 
-#pergunta1{
+#pergunta{
     margin-top: 20px;
     width: 90%;
     height: 50px;
     font-family:  Rum Raisin; 
-}
-
-#pergunta2{
-    margin-top: 10px;
-    width: 90%;
-    height: 50px;
-    font-family:  Rum Raisin; 
-}
-
-#pergunta3{
-    margin-top: 10px;
-    width: 90%;
-    height: 50px;
-    font-family:  Rum Raisin; 
+    font-size: 30px;
 }
