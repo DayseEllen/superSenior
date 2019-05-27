@@ -12,13 +12,13 @@
 
 <ion-content color="primary">
 
-  <div *ngIf="!perguntaAtual">carregando dados...</div>
+  <div *ngIf="!perguntaAtual">Carregando dados... Espere um pouco</div>
 
 <div *ngIf="perguntaAtual" text-center>
 
   <div text-center class="meio">
-      <div>
-        <img id="iconeApp" src="assets/images/whatsapp.png" (click)="abrirPagina('tela-pergunta')"> 
+      <div *ngIf="perguntaAtual.urlDaImagem">
+        <img id="iconeApp" src="{{perguntaAtual.urlDaImagem}}"> 
     </div>
     <br>
     <h4 id="enunciado">{{perguntaAtual.enunciado}}</h4>
