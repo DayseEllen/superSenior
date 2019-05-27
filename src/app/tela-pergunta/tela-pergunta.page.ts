@@ -33,7 +33,7 @@ export class TelaPerguntaPage implements OnInit {
      this.perguntaAtual = this.perguntas[this.indiceAtual];
    }
 
-  /*private async inserirPerguntas() {
+ /* private async inserirPerguntas() {
     const perguntas = 
    [
      { enunciado: 'Qual o nome do aplicativo da imagem acima?', resposta: 'WhatsApp', alternativas: [ 'Telefone', 'WhatsApp', 'Facebook' ], dica: 'Podemos mandar áudios e documentos. Ele é o mais usado atualmente.', urlDaImagem: 'https://firebasestorage.googleapis.com/v0/b/super-senior.appspot.com/o/whatsapp.png?alt=media&token=8a4290f8-9852-4dbb-af39-910d0a600f46' },
@@ -43,10 +43,9 @@ export class TelaPerguntaPage implements OnInit {
      { enunciado: 'Qual o nome do aplicativo da imagem acima?', resposta: 'Messenger', alternativas: [ 'Messenger', 'Youtube', 'Twitter' ], dica: 'Também podemos usá-lo para fazer ligações para os amigos do Facebook.', urlDaImagem: 'https://firebasestorage.googleapis.com/v0/b/super-senior.appspot.com/o/messenger.png?alt=media&token=ccc1673e-c163-410a-86ec-e4c6f744af78' },
      { enunciado: 'Qual o nome da rede social que permite o compartilhamento de vídeos, de mensagens de texto, de fotos, a adição de amigos e bater papo com alguém?', resposta: 'Face/Facebook', alternativas: [ 'Instagram', 'Face/Facebook', 'WhatsApp' ], dica: 'Nela podemos “cutucar um amigo”.', urlDaImagem: '' },
      { enunciado: 'Qual o nome do aplicativo da imagem acima?', resposta: 'Youtube', alternativas: [ 'Messenger', 'Instagram', 'Youtube' ], dica: ' Podemos curtir ou descurtir vídeos.', urlDaImagem: 'https://firebasestorage.googleapis.com/v0/b/super-senior.appspot.com/o/youtube.png?alt=media&token=af5bcfb3-b866-4c52-8ff6-b5dc12e48835' },
-     { enunciado: 'Qual o aplicativo do aplicativo da imagem acima?', resposta: 'PlayStore', alternativas: [ 'Twitter', 'Youtube', 'PlayStore' ], dica: 'Ele é da Google, e já vem em nosso celular Android.', urlDaImagem: 'https://firebasestorage.googleapis.com/v0/b/super-senior.appspot.com/o/playstore.png?alt=media&token=e342dc70-fda9-4f23-af15-4f47c4bbef2f' },
+     { enunciado: 'Qual o nome do aplicativo da imagem acima?', resposta: 'PlayStore', alternativas: [ 'Twitter', 'Youtube', 'PlayStore' ], dica: 'Ele é da Google, e já vem em nosso celular Android.', urlDaImagem: 'https://firebasestorage.googleapis.com/v0/b/super-senior.appspot.com/o/playstore.png?alt=media&token=e342dc70-fda9-4f23-af15-4f47c4bbef2f' },
      { enunciado: 'Qual o aplicativo que serve para mandarmos mensagens, compartilharmos fotos, vídeos e que podemos fazer chamada de voz (ligar) e criar grupos?', resposta: 'WhatsApp', alternativas: [ 'Instagram', 'Twitter', 'WhatsApp' ], dica: 'Podemos mandar áudios e documentos. Ele é o mais usado atualmente.', urlDaImagem: '' },
      { enunciado: 'Qual a rede social que tem como principal uso tirar fotos, aplicar efeitos nessas fotos e compartilhá-las com seus seguidores?', resposta: 'Instagram', alternativas: [ 'Relógio', 'Instagram', 'WhatsApp' ], dica: 'Podemos seguir pessoas famosas e assistir lives.', urlDaImagem: '' },
-     { enunciado: 'Qual o nome do aplicativo da imagem acima?', resposta: ' PlayStore', alternativas: [ 'Twitter', 'Youtube', ' PlayStore' ], dica: 'Ele é da Google, e já vem em nosso celular Android.', urlDaImagem: '' },
      { enunciado: 'Qual o aplicativo que tem como função fazer downloads de outros aplicativos para Android?', resposta: 'PlayStore', alternativas: [ 'Twitter', 'Youtube', 'PlayStore' ], dica: 'Ele é da Google, e já vem em nosso celular Android.', urlDaImagem: '' },
      { enunciado: 'Qual o aplicativo que permite assistir vídeos e se inscrever em canais?', resposta: 'Youtube', alternativas: [ 'Youtube', 'Instagram', 'Facebook' ], dica: ' Podemos curtir ou descurtir vídeos.', urlDaImagem: '' },
      { enunciado: 'Qual navegador que está presente, por padrão, nos Androids?', resposta: 'Google Chrome', alternativas: [ 'Google Chrome', 'PlayStore', 'Lanterna' ], dica: 'Podemos usá-lo para fazer pesquisas na internet.', urlDaImagem: '' },
