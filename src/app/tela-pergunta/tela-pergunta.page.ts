@@ -1,3 +1,4 @@
+import { AlertController } from '@ionic/angular';
 import { BDService } from '../services/bd.service';
 
 
@@ -17,7 +18,7 @@ export class TelaPerguntaPage implements OnInit {
   perguntaAtual: Pergunta;
   indiceAtual: number;
  
-  constructor(private rota: Router, private bdService: BDService) {
+  constructor(private rota: Router, private bdService: BDService, private alert: AlertController) {
     //this.inserirPerguntas();
     this.carregarPerguntas();
    }
@@ -32,6 +33,41 @@ export class TelaPerguntaPage implements OnInit {
      this.indiceAtual++;
      this.perguntaAtual = this.perguntas[this.indiceAtual];
    }
+
+  async conferirPergunta(resposta: String){
+     if(resposta == this.perguntaAtual.resposta){
+       let alert = await this.alert.create({
+         header: 'Parabéns!! Você acertou a pergunta',
+         message: 'E mais! ' + this.perguntaAtual.dica,
+         buttons:[
+           {
+             text: 'Próxima pergunta',
+             handler: ()=> this.exibirProximaPergunta()
+           }
+         ]
+       });
+       await alert.present();
+       /*Lógica de score*/
+     }else{
+      let alert = await this.alert.create({
+        header: 'Que pena! Você errou a pergunta',
+        message: 'A dica é: ' + this.perguntaAtual.dica,
+        buttons:[
+          {
+            text: 'Próxima pergunta',
+            handler: ()=> this.exibirProximaPergunta()
+          },
+          {
+            text: 'Tentar novamente',
+            handler: ()=> this.perguntaAtual
+          }
+        ]
+      });
+      await alert.present();
+     }
+   }
+
+   
 
  /* private async inserirPerguntas() {
     const perguntas = 

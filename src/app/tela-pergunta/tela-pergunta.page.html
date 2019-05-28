@@ -23,12 +23,11 @@
     <br>
     <h4 id="enunciado">{{perguntaAtual.enunciado}}</h4>
   <div>
-      <button *ngFor="let alternativa of perguntaAtual.alternativas" type="button" class="btn btn-outline-dark" id="pergunta">{{alternativa}}</button>
+      <button *ngFor="let alternativa of perguntaAtual.alternativas" type="button" class="btn btn-outline-dark" id="pergunta"  (click)="conferirPergunta(alternativa)">{{alternativa}}</button>
   </div>
 </div>
 <br>
 <button type="button" class="btn btn-light" id="voltar" (click)="abrirPagina('home')">Voltar</button>
-<button type="button" class="btn btn-light" id="proximo" (click)="exibirProximaPergunta()">Próximo</button>
 </div>
 
 
