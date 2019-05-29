@@ -1,8 +1,17 @@
 #voltar{
     font-family:  Rum Raisin; 
+    font-size: 20px;
 }
 
+#botoes{
+    position: fixed;
+    height: 230px;
+    width: 330px;
+    bottom: 95px;
+    margin: auto;
+    text-align: center;
 
+}
 
 #topo{
     height: 60px;
@@ -31,8 +40,8 @@
 }
 
 #iconeApp{ 
-    height: 70px;
-    width: 70px;
+    height: 90px;
+    width: 90px;
     border-radius: 10px;
     border: 2px solid;
     border-color: darkslategrey;
@@ -51,7 +60,7 @@
 
 #pergunta{
     margin-top: 20px;
-    width: 90%;
+    width: 85%;
     height: 50px;
     font-family:  Rum Raisin; 
     font-size: 30px;

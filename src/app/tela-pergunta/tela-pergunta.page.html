@@ -21,8 +21,9 @@
         <img id="iconeApp" src="{{perguntaAtual.urlDaImagem}}"> 
     </div>
     <br>
+    <br>
     <h4 id="enunciado">{{perguntaAtual.enunciado}}</h4>
-  <div>
+  <div id="botoes">
       <button *ngFor="let alternativa of perguntaAtual.alternativas" type="button" class="btn btn-outline-dark" id="pergunta"  (click)="conferirPergunta(alternativa)">{{alternativa}}</button>
   </div>
 </div>
