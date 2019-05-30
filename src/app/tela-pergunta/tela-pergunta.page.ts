@@ -30,6 +30,9 @@ export class TelaPerguntaPage implements OnInit {
    }
 
    exibirProximaPergunta() {
+     if(this.indiceAtual == 49){
+       this.indiceAtual = -1;
+     }
      this.indiceAtual++;
      this.perguntaAtual = this.perguntas[this.indiceAtual];
    }
@@ -100,7 +103,7 @@ export class TelaPerguntaPage implements OnInit {
      { enunciado: 'Qual o nome funcionalidade acima?', resposta: 'Lanterna', alternativas: [ 'WiFi', 'Lanterna', 'Dados móveis' ], dica: 'Usamos quando a energia acaba e precisamos iluminar o local.', urlDaImagem: 'https://firebasestorage.googleapis.com/v0/b/super-senior.appspot.com/o/lanterna.png?alt=media&token=cf6bae69-6d8c-494e-a7e9-857a30e0be29' },
      { enunciado: 'Para qual número ligamos quando estamos em situações de risco, somos vítimas das ações de infratores, há perturbação da Ordem, etc?', resposta: 'Policia Militar - 190', alternativas: [  'Samu - 192', 'Policia Militar - 190', 'Bombeiros - 193' ], dica: 'Esse número é de uma corporação que garante a nossa segurança.', urlDaImagem: '' },
      { enunciado: 'Qual o nome funcionalidade acima?', resposta: 'Bluetooth', alternativas: [ 'Bluetooth', 'YouTube', 'WiFi' ], dica: ' Compartilha dados sem precisar de conexão à internet.', urlDaImagem: 'https://firebasestorage.googleapis.com/v0/b/super-senior.appspot.com/o/bluetooth.png?alt=media&token=18a31869-7670-48ae-b4da-9cd2f767a6eb' },
-     { enunciado: 'Qual o nome da funcionalidade da imagem acima?', resposta: 'Alarme/Relógio', alternativas: [ 'Agenda de Contatos', 'Perfil de som - Vibrar', 'Alarme' ], dica: 'Eu uso ele quando tenho um dia certo para tomar remédios.', urlDaImagem: 'https://firebasestorage.googleapis.com/v0/b/super-senior.appspot.com/o/alarme.png?alt=media&token=8306d8d6-d66b-46e2-90d9-ed0e4f226867' },
+     { enunciado: 'Qual o nome da funcionalidade da imagem acima?', resposta: 'Alarme', alternativas: [ 'Agenda de Contatos', 'Perfil de som - Vibrar', 'Alarme' ], dica: 'Eu uso ele quando tenho um dia certo para tomar remédios.', urlDaImagem: 'https://firebasestorage.googleapis.com/v0/b/super-senior.appspot.com/o/alarme.png?alt=media&token=8306d8d6-d66b-46e2-90d9-ed0e4f226867' },
      { enunciado: 'Qual funcionalidade do celular que desabilita conexões para manter a segurança durante uma viagem de avião?', resposta: 'Modo Avião', alternativas: [ 'Modo Avião', 'WiFi', 'Lanterna' ], dica: 'Quando ele está ativado eu paro de receber mensagens e ligações.', urlDaImagem: '' },
      { enunciado: 'Qual funcionalidade habilita ou desabilita a tela ‘virada’ ou ‘em pé’ do celular?', resposta: 'Rotação de tela', alternativas: [ 'Som', 'Rotação de tela', 'Lanterna' ], dica: 'Eu uso quando quero assistir um vídeo e tenho que rodar a tela para ficar “maior”.', urlDaImagem: '' },
      { enunciado: 'Qual o nome da funcionalidade que me ajuda a marcar o horário para atividades que faço na minha rotina?', resposta: 'Alarme/Relógio', alternativas: [ 'Agenda de Contatos', 'Perfil de som - Vibrar', 'Alarme' ], dica: 'Eu uso ele quando tenho um dia certo para tomar remédios.', urlDaImagem: '' },
