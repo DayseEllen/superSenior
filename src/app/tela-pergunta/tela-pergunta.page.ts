@@ -40,26 +40,16 @@ export class TelaPerguntaPage implements OnInit {
   async conferirPergunta(resposta: String){
      if(resposta == this.perguntaAtual.resposta){
        let alert = await this.alert.create({
-         header: 'Parabéns!! Você acertou a pergunta',
-         message: 'E mais! ' + this.perguntaAtual.dica,
-         buttons:[
-           {
-             text: 'Próxima pergunta',
-             handler: ()=> this.exibirProximaPergunta()
-           }
-         ]
+         header: 'Parabéns!! 😃 Você acertou a pergunta',
+         message: 'E mais! ' + this.perguntaAtual.dica
        });
        await alert.present();
        /*Lógica de score*/
      }else{
       let alert = await this.alert.create({
-        header: 'Que pena! Você errou a pergunta',
+        header: 'Que pena! 😢 Você errou a pergunta',
         message: 'A dica é: ' + this.perguntaAtual.dica,
         buttons:[
-          {
-            text: 'Próxima pergunta',
-            handler: ()=> this.exibirProximaPergunta()
-          },
           {
             text: 'Tentar novamente',
             handler: ()=> this.perguntaAtual

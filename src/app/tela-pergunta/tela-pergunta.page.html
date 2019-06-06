@@ -1,6 +1,7 @@
 <ion-header>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <ion-toolbar>
+    <meta charset="UTF-8">
+    <ion-toolbar>
     <ion-title>
     <div id="topo">
       <img id="PerguntaImagem" src="assets/images/pergunta.png">
@@ -15,7 +16,6 @@
   <div class="loader" *ngIf="!perguntaAtual"></div>
 
 <div *ngIf="perguntaAtual" text-center>
-
   <div text-center class="meio">
       <div *ngIf="perguntaAtual.urlDaImagem">
         <img id="iconeApp" src="{{perguntaAtual.urlDaImagem}}"> 
@@ -29,6 +29,7 @@
 </div>
 <br>
 <button type="button" class="btn btn-light" id="voltar" (click)="abrirPagina('home')">Voltar</button>
+<button type="button" class="btn btn-light" id="proximo" (click)="this.exibirProximaPergunta()">Próximo</button>
 </div>
 
 
