@@ -9,32 +9,32 @@
     </div>
    <div text-center id="titulo">Cadastre-se!</div>
    <div>
-    <form>
+    <form #cadastro="ngForm" (ngSubmit)="cadastrarUsuario(cadastro.value)">
         <div class="form-row formulario">
           <div class="col">
               <label for="nomeinput" class="campos textoformulario">Digite seu nome:</label>
-            <input type="text" class="form-control campos inputs" placeholder="Nome" id="nomeinput">
+            <input type="text" class="form-control campos inputs" placeholder="Nome" id="nomeinput" name="nome" ngModel required>
           </div>
           <div class="form-group col-md-6">
               <br>
               <label for="inputEmail4" class="campos textoformulario">Digite seu e-mail:</label>
-              <input type="email" class="form-control campos inputs" id="inputEmail4" placeholder="Email">
+              <input type="email" class="form-control campos inputs" id="inputEmail4" placeholder="Email" name="email" ngModel required> 
             </div>
           <div class="form-group col-md-6"> 
               <label for="inputPassword4" class="campos textoformulario">Digite sua senha:</label>
-              <input type="password" class="form-control campos inputs" id="inputPassword4" placeholder="Senha">
+            <input type="password" class="form-control campos inputs" id="inputPassword4" placeholder="Senha" name="senha" ngModel required>
           </div>
           <div class="col-auto my-1">
               <label  class="campos textoformulario" for="inlineFormCustomSelect">Selecione seu gênero:</label>
-              <select class="custom-select mr-sm-2 campos" id="inlineFormCustomSelect">
+              <select class="custom-select mr-sm-2 campos" id="inlineFormCustomSelect" name="genero" ngModel required>
                 <option selected>Feminino</option>
                 <option >Masculino</option>   
               </select>
             </div>
         </div>
         <br>
-        <ion-button type="submit" class="campos botao" color="light" (click)="abrirPagina('cadastrar')">Voltar</ion-button>
-        <ion-button type="submit" class="campos botao cadastrar" color="light" (click)="abrirPagina('login')">Cadastrar</ion-button>
+        <ion-button  class="campos botao" color="light" (click)="abrirPagina('cadastrar')">Voltar</ion-button>
+        <ion-button type="submit" class="campos botao cadastrar" color="light" (click)="abrirPagina('login')"  [disabled]="!cadastro.form.valid">Cadastrar</ion-button>
       </form>
     </div>
 </ion-content>

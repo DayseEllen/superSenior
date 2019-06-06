@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { environment } from './../environments/environment';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -17,6 +18,7 @@ import {AngularFireDatabaseModule} from 'angularfire2/database'
   entryComponents: [],
   imports: [
     BrowserModule,
+    FormsModule,
     IonicModule.forRoot(),
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
