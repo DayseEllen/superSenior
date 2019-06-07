@@ -63,7 +63,6 @@ export class FormulariocadastroPage implements OnInit {
   return false;
 
   }
-  
   abrirPagina(url:String){
     this.rota.navigate([url]);
  }
