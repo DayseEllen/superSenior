@@ -5,8 +5,13 @@ export class Usuario{
     senha: String='';
     telefone: String ='';
     genero: String='';
-    perguntasRespondidas: Resposta[];
+    perguntasRespondidas: Resposta[]; 
+    constructor(nome:String, email:String, senha:String, telefone:String, genero: String){
+        this.nome=nome;
+        this.email=email;
+        this.senha=senha;
+        this.telefone=telefone;
+        this.genero=genero;
 
-
-    
+    }
 }
