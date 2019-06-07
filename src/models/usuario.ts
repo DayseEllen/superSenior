@@ -5,8 +5,5 @@ export class Usuario{
     senha: String='';
     telefone: String ='';
     genero: String='';
-    perguntasRespondidas: Resposta[];
-
-
-    
+    perguntasRespondidas: Resposta[];  
 }
