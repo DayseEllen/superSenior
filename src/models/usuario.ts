@@ -5,7 +5,6 @@ export class Usuario{
     senha: String='';
     telefone: String ='';
     genero: String='';
-<<<<<<< HEAD
     perguntasRespondidas: Resposta[]; 
     constructor(nome:String, email:String, senha:String, telefone:String, genero: String){
         this.nome=nome;
@@ -15,7 +14,5 @@ export class Usuario{
         this.genero=genero;
 
     }
-=======
-    perguntasRespondidas: Resposta[];  
->>>>>>> 1db456f9ded7d628bec8aa665af1b5b65623a072
+
 }
