@@ -6,6 +6,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { LoginPage } from './login.page';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 const routes: Routes = [
   {
@@ -19,8 +21,11 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    AngularFireAuthModule
   ],
-  declarations: [LoginPage]
+  declarations: [LoginPage],
+  providers: [AngularFireAuth]
 })
+
 export class LoginPageModule {}

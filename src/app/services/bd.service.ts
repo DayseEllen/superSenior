@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-
 import { AngularFireDatabase } from '@angular/fire/database';
 
 import { Observable } from 'rxjs';
@@ -7,7 +6,8 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class BDService {
 
-    constructor(public bd: AngularFireDatabase) { }
+    constructor(public bd: AngularFireDatabase) { 
+    }
 
     listAndWatch<Type>(entity: string): Observable<Type[]> {
         return this.bd.list<Type>(`/${entity}`).valueChanges();
