@@ -11,32 +11,44 @@
     height: 80px;
     width: 80px;
     margin-top: 20px;
-    margin-left: 10px;
     float: left;
+}
+#mensagem{
+    color: black;
+    font-family: Rum Raisin;
+    font-size: 15px;
 }
 
 /**Classes**/
 .formulario{
-    margin-top: 60px;
+    margin-top: 40px;
 }
 
 .campos{
     font-family: Rum Raisin;
-    margin-left: 10px;
+   
 }
+
 .campos.textoformulario{
     color: black;
     font-size: 20px;
 }
 .campos.inputs{
-    width: 340px;
+    width: 330px;
 }
 .campos.botao{
     margin-top: 20px;
     font-size: 15px;
 }
 .campos.botao.cadastrar{
-    margin-left: 155px;
+    margin-left: 141px;
+}
+
+.ng-invalid.ng-touched:not(form){
+    border: 1px solid red;
+}
+.ng-valid:not(form){
+    border: 1px solid green;
 }
 
 

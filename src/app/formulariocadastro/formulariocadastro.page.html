@@ -3,7 +3,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </ion-header>
 
-<ion-content color="primary">
+<ion-content color="primary" padding>
     <div id="divlogo">
         <img id="logo" src="assets/images/logoProjeto.jpeg">
     </div>
@@ -11,18 +11,19 @@
    <div>
     <form #cadastro="ngForm" (ngSubmit)="cadastrarUsuario(cadastro.value)">
         <div class="form-row formulario">
-          <div class="col">
+          <div class="col" >
               <label for="nomeinput" class="campos textoformulario">Digite seu nome:</label>
-            <input type="text" class="form-control campos inputs" placeholder="Nome" id="nomeinput" name="nome" ngModel required>
+            <input type="text" class="form-control campos inputs" placeholder="Nome" id="nomeinput" name="nome" ngModel required #nome="ngModel" minLength="3">
+            <div *ngIf="!nome.valid && nome.touched" id="mensagem">Nome obrigatório</div>
           </div>
           <div class="form-group col-md-6">
               <br>
               <label for="inputEmail4" class="campos textoformulario">Digite seu e-mail:</label>
-              <input type="email" class="form-control campos inputs" id="inputEmail4" placeholder="Email" name="email" ngModel required> 
+              <input type="email" class="form-control campos inputs" id="inputEmail4" placeholder="Email" name="email" ngModel required email #email="ngModel">
             </div>
           <div class="form-group col-md-6"> 
               <label for="inputPassword4" class="campos textoformulario">Digite sua senha:</label>
-            <input type="password" class="form-control campos inputs" id="inputPassword4" placeholder="Senha" name="senha" ngModel required>
+            <input type="password" class="form-control campos inputs" id="inputPassword4" placeholder="Senha" name="senha" ngModel required minlength="6">
           </div>
           <div class="col-auto my-1">
               <label  class="campos textoformulario" for="inlineFormCustomSelect">Selecione seu gênero:</label>
