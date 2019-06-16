@@ -9,13 +9,8 @@
     </div>
    <div text-center id="titulo">Cadastre-se!</div>
    <div>
-    <form #cadastro="ngForm" (ngSubmit)="cadastrarUsuario(cadastro.value)">
+    <form #cadastro="ngForm" (ngSubmit)="createAccount(cadastro.value)">
         <div class="form-row formulario">
-          <div class="col" >
-              <label for="nomeinput" class="campos textoformulario">Digite seu nome:</label>
-            <input type="text" class="form-control campos inputs" placeholder="Nome" id="nomeinput" name="nome" ngModel required #nome="ngModel" minLength="3">
-            <div *ngIf="!nome.valid && nome.touched" id="mensagem">Nome obrigatório</div>
-          </div>
           <div class="form-group col-md-6">
               <br>
               <label for="inputEmail4" class="campos textoformulario">Digite seu e-mail:</label>
@@ -25,17 +20,10 @@
               <label for="inputPassword4" class="campos textoformulario">Digite sua senha:</label>
             <input type="password" class="form-control campos inputs" id="inputPassword4" placeholder="Senha" name="senha" ngModel required minlength="6">
           </div>
-          <div class="col-auto my-1">
-              <label  class="campos textoformulario" for="inlineFormCustomSelect">Selecione seu gênero:</label>
-              <select class="custom-select mr-sm-2 campos" id="inlineFormCustomSelect" name="genero" ngModel required>
-                <option selected>Feminino</option>
-                <option >Masculino</option>   
-              </select>
-            </div>
         </div>
         <br>
         <ion-button  class="campos botao" color="light" (click)="abrirPagina('cadastrar')">Voltar</ion-button>
-        <ion-button type="submit" class="campos botao cadastrar" color="light"  [disabled]="!cadastro.form.valid">Cadastrar</ion-button>
+        <ion-button type="submit" class="campos botao cadastrar" color="light"  [disabled]="!cadastro.form.valid" (click)="createAccount()">Cadastrar</ion-button>
       </form>
     </div>
 </ion-content>

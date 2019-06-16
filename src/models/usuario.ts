@@ -1,12 +1,12 @@
 import { Resposta } from './resposta';
 export class Usuario{
-    nome: String = '';
-    email: String='';
-    senha: String='';
-    telefone: String ='';
-    genero: String='';
+    nome: string = '';
+    email: string='';
+    senha: string='';
+    telefone: string ='';
+    genero: string='';
     perguntasRespondidas: Resposta[]; 
-    constructor(nome:String, email:String, senha:String, telefone:String, genero: String){
+    constructor(nome:string, email:string, senha:string, telefone:string, genero: string){
         this.nome=nome;
         this.email=email;
         this.senha=senha;
