@@ -26,20 +26,20 @@ export class FormulariocadastroPage implements OnInit {
 
   @ViewChild('cadastro') form: NgForm;
 
-    createAccount(cadastro){
+  async createAccount(cadastro){
       if (this.form.form.valid){
         this.usuario = {
-          nome: "Dayse",
+          nome: null,
           email: cadastro.email,
           senha: cadastro.senha,
           telefone: null,
-          genero: "feminino",
+          genero: null,
           perguntasRespondidas: null
         }
         console.log(this.usuario.email);
-            this.autenticacao.createUser(this.usuario)
+        await this.autenticacao.createUser(this.usuario)
             .then((usuario: any) => {
-              usuario.sendEmailVerification();
+             usuario.sendEmailVerification();
               console.log("Pegou!");
             
             })
@@ -109,6 +109,7 @@ export class FormulariocadastroPage implements OnInit {
  
 
   ngOnInit() {
+
   }
   
 }

@@ -12,7 +12,6 @@ export class Usuario{
         this.senha=senha;
         this.telefone=telefone;
         this.genero=genero;
-
     }
 
 }

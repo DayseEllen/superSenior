@@ -15,4 +15,14 @@ export class Autenticacao {
     createUser(user: Usuario){
        return this.angularFireAuth.auth.createUserWithEmailAndPassword(user.email, user.senha);
     }
+
+    signIn(user: Usuario){
+        return this.angularFireAuth.auth.signInWithEmailAndPassword(user.email, user.senha);
+    }
+
+    signOut(){
+        return this.angularFireAuth.auth.signOut();
+    }
+
+
 }

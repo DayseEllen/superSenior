@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
+import { Autenticacao } from '../services/autenticacao';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-meu-perfil',
@@ -9,11 +11,21 @@ import { AlertController } from '@ionic/angular';
 export class MeuPerfilPage implements OnInit {
   
 
-  constructor(private alertCtlr: AlertController) { }
+  constructor(private alertCtlr: AlertController, private autenticacao : Autenticacao, 
+    private rota: Router) { }
 
   ngOnInit() {
   }
-  
+
+  singOut(){
+    this.autenticacao.signOut()
+    .then(() => {
+      this.rota.navigate(['cadastrar'])
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+ }
 
   async alterarNomeAlert(){
     let alert = await this.alertCtlr.create({

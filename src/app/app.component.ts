@@ -3,6 +3,9 @@ import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Autenticacao } from './services/autenticacao';
+import { Router } from '@angular/router';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 
 @Component({
@@ -25,21 +28,29 @@ export class AppComponent {
       title: 'Informações',
       icon: 'information-circle-outline',
       url: '/info'
-    },
-    {
-      title: 'Sair',
-      url: '/cadastrar',
-      icon: 'log-out'
-    }      
+    }     
   ];
 
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private rota: Router,
+    private afAuth : AngularFireAuth,
   ) {
     this.initializeApp();
+    const authObserver = afAuth.authState.subscribe(usuario => {
+      if(usuario){
+        this.rota.navigate(['home'])
+        authObserver.unsubscribe();
+      }else{
+        this.rota.navigate(['cadastrar'])
+        authObserver.unsubscribe();
+      }
+    })
   }
+
+  
 
   initializeApp() {
     this.platform.ready().then(() => {

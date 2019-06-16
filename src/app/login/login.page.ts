@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
+import { NgForm } from '@angular/forms';
+import { Autenticacao } from '../services/autenticacao';
+import { Usuario } from 'src/models/usuario';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +13,40 @@ import { auth } from 'firebase/app';
 })
 export class LoginPage implements OnInit {
 
-  constructor(private rota: Router, public afAuth: AngularFireAuth) { }
+  usuario: Usuario;
+
+  constructor(private rota: Router, private autenticacao : Autenticacao) { }
+
+  @ViewChild('login') form: NgForm;
+
+ async signIn(login){
+    if (this.form.form.valid){
+      this.usuario = {
+        nome: null,
+        email: login.email,
+        senha: login.senha,
+        telefone: null,
+        genero: null,
+        perguntasRespondidas: null
+      }
+      await  this.autenticacao.signIn(this.usuario)
+        .then(() => {
+          this.rota.navigate(['home'])
+          console.log("PEGOUUUU")
+        })
+        .catch((error: any) => {
+          if(error.code == 'auth/invalid-email'){
+            console.log("O e-mail digitado não é valido");
+          } else if(error.code == 'auth/user-disabled'){
+            console.log("O usuário está desativado");
+          } else if(error.code == 'auth/user-not-found'){
+            console.log("O usuário não foi encontrado");
+          } else if(error.code == 'auth/wrong-password'){
+            console.log("A senha digitada não é valida");
+          }
+        });
+    }
+  }
 
   ngOnInit() {
   }
@@ -20,12 +56,5 @@ export class LoginPage implements OnInit {
 
   }
 
-  login() {
-    this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
-  }
-  
-  logout() {
-    this.afAuth.auth.signOut();
-  }
 
 }
