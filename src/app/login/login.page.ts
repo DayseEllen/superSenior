@@ -6,6 +6,8 @@ import { NgForm } from '@angular/forms';
 import { Autenticacao } from '../services/autenticacao';
 import { Usuario } from 'src/models/usuario';
 import { AlertController, ToastController } from '@ionic/angular';
+import { Location } from '@angular/common';
+
 
 @Component({
   selector: 'app-login',
@@ -16,7 +18,7 @@ export class LoginPage implements OnInit {
 
   usuario: Usuario;
   
-  constructor(private rota: Router, private autenticacao : Autenticacao, private alertCtrl: AlertController) { 
+  constructor(private rota: Router, private autenticacao : Autenticacao, private alertCtrl: AlertController, private location: Location) { 
     //
     this.usuario = new Usuario( null,null, null,null, null);
    }
@@ -37,20 +39,69 @@ export class LoginPage implements OnInit {
       this.usuario = new Usuario( null, login.email, login.senha, null, null)
 
       await  this.autenticacao.signIn(this.usuario)
-        .then(() => {
-          this.rota.navigate(['home'])
-          
+        .then(async () => {
+          let alert = await this.alertCtrl.create({
+            header: 'Ebaa! 😃',
+            message: 'Bem vindo(a)!',
+            buttons:[{
+              text: 'Vamos lá!',
+              handler: ()=> this.rota.navigate(['home'])
+            }]
+          });
+          await alert.present();
           console.log("PEGOUUUU")
         })
-        .catch((error: any) => {
+        .catch(async (error: any) => {
           if(error.code == 'auth/invalid-email'){
             console.log("O e-mail digitado não é valido");
+            let alert = await this.alertCtrl.create({
+              header: 'Falha ao entrar 😢',
+              message: 'O e-mail digitado não é valido',
+              buttons:[
+                {
+                  text: 'Tentar novamente',
+                  handler: ()=>  location.reload()
+                }
+              ]
+            });
+            await alert.present();
           } else if(error.code == 'auth/user-disabled'){
             console.log("O usuário está desativado");
+            let alert = await this.alertCtrl.create({
+              header: 'Falha ao entrar 😢',
+              message: 'O usuário está desativado',
+              buttons:[
+                {
+                  text: 'Tentar novamente',
+                  handler: ()=> this.rota.navigate(['login'])
+                }
+              ]
+            });
+            await alert.present();
           } else if(error.code == 'auth/user-not-found'){
             console.log("O usuário não foi encontrado");
+            let alert = await this.alertCtrl.create({
+              header: 'Falha ao entrar 😢',
+              message: 'O usuário não foi encontrado',
+              buttons:[
+                {
+                  text: 'Tentar novamente',
+                  handler: ()=> this.rota.navigate(['login'])
+                }
+              ]
+            });
+            await alert.present();
           } else if(error.code == 'auth/wrong-password'){
             console.log("A senha digitada não é valida");
+            let alert = await this.alertCtrl.create({
+              header: 'Falha ao entrar 😢',
+              message: 'A senha digitada não é válida',
+              buttons:[{
+                text: 'Tentar novamente',
+                handler: ()=> this.rota.navigate(['login'])
+              }]
+            });
+            await alert.present();
           }
         });
     }

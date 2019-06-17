@@ -86,10 +86,13 @@ export class FormulariocadastroPage implements OnInit {
         let alert = await this.alertCtrl.create({
           header: 'Ebaa! 😃',
           message: 'Você está cadastrado.',
-          buttons:['Ok']
+          buttons:[{
+            text:"Ok",
+            handler: ()=> this.rota.navigate(['login'])
+          }]
         });
         await alert.present();
-        this.rota.navigate(['login']);
+       // this.rota.navigate(['login']);
 
       }
 
