@@ -11,16 +11,16 @@
     <form #login="ngForm" (ngSubmit)="signIn(login.value)">
     <div class="form-row" id="formulario">
         <div class="form-group col-md-6">
-            <input type="email" class="form-control campos inputs" id="inputEmail4" placeholder="Email" name="email">
+            <input type="email" class="form-control campos inputs" id="inputEmail4" placeholder="Email" name="email" ngModel>
         </div>
         <div class="form-group col-md-6"> 
-              <input type="password" class="form-control campos inputs" id="inputPassword4" placeholder="Senha" name="senha">
+              <input type="password" class="form-control campos inputs" id="inputPassword4" placeholder="Senha" name="senha" ngModel>
         </div>
          
     </div>
     <br>
     <ion-button type="submit" class="campos botao" color="light" (click)="abrirPagina('cadastrar')">Voltar</ion-button>
-    <ion-button type="submit" class="campos botao entrar" color="light" (click)="signIn()">Entrar</ion-button>
+    <ion-button type="submit" class="campos botao entrar" color="light" (click)="signIn(login.value)">Entrar</ion-button>
           
 </form>
 </ion-content>

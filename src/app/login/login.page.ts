@@ -14,21 +14,27 @@ import { Usuario } from 'src/models/usuario';
 export class LoginPage implements OnInit {
 
   usuario: Usuario;
-
-  constructor(private rota: Router, private autenticacao : Autenticacao) { }
+  
+  constructor(private rota: Router, private autenticacao : Autenticacao) { 
+    //
+    this.usuario = new Usuario( '', '', '', '', '');
+   }
 
   @ViewChild('login') form: NgForm;
 
  async signIn(login){
-    if (this.form.form.valid){
-      this.usuario = {
-        nome: null,
-        email: login.email,
-        senha: login.senha,
-        telefone: null,
-        genero: null,
-        perguntasRespondidas: null
-      }
+   if (this.form.form.valid){
+    this.usuario = {
+      nome: null,
+      email: login.email,
+      senha: login.senha,
+      telefone: null,
+      genero: null,
+      perguntasRespondidas: null
+    }
+
+      this.usuario = new Usuario( '', login.email, login.senha, '', '')
+
       await  this.autenticacao.signIn(this.usuario)
         .then(() => {
           this.rota.navigate(['home'])
@@ -49,6 +55,7 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
+    this.usuario = new Usuario( '', '', '', '', '');
   }
 
   abrirPagina(url:String){
