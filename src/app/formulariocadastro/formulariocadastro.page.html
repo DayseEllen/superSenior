@@ -11,8 +11,12 @@
    <div>
     <form #cadastro="ngForm" (ngSubmit)="createAccount(cadastro.value)">
         <div class="form-row formulario">
+            <div class="form-group col-md-6">
+                <br>
+                <label for="inputName4" class="campos textoformulario">Digite seu nome:</label>
+                <input type="text" class="form-control campos inputs" id="inputName4" placeholder="Nome" name="nome" ngModel required>
+              </div>
           <div class="form-group col-md-6">
-              <br>
               <label for="inputEmail4" class="campos textoformulario">Digite seu e-mail:</label>
               <input type="email" class="form-control campos inputs" id="inputEmail4" placeholder="Email" name="email" ngModel required email #email="ngModel">
             </div>
@@ -23,7 +27,7 @@
         </div>
         <br>
         <ion-button  class="campos botao" color="light" (click)="abrirPagina('cadastrar')">Voltar</ion-button>
-        <ion-button type="submit" class="campos botao cadastrar" color="light"  [disabled]="!cadastro.form.valid" (click)="createAccount(cadastro.value)">Cadastrar</ion-button>
+        <ion-button type="submit" class="campos botao cadastrar" color="light"  [disabled]="!cadastro.form.valid" (click)="cadastrarUsuario(cadastro.value)">Cadastrar</ion-button>
       </form>
     </div>
 </ion-content>

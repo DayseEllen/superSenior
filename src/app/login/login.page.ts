@@ -5,6 +5,7 @@ import { auth } from 'firebase/app';
 import { NgForm } from '@angular/forms';
 import { Autenticacao } from '../services/autenticacao';
 import { Usuario } from 'src/models/usuario';
+import { AlertController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -15,9 +16,9 @@ export class LoginPage implements OnInit {
 
   usuario: Usuario;
   
-  constructor(private rota: Router, private autenticacao : Autenticacao) { 
+  constructor(private rota: Router, private autenticacao : Autenticacao, private alertCtrl: AlertController) { 
     //
-    this.usuario = new Usuario( '', '', '', '', '');
+    this.usuario = new Usuario( null,null, null,null, null);
    }
 
   @ViewChild('login') form: NgForm;
@@ -33,11 +34,12 @@ export class LoginPage implements OnInit {
       perguntasRespondidas: null
     }
 
-      this.usuario = new Usuario( '', login.email, login.senha, '', '')
+      this.usuario = new Usuario( null, login.email, login.senha, null, null)
 
       await  this.autenticacao.signIn(this.usuario)
         .then(() => {
           this.rota.navigate(['home'])
+          
           console.log("PEGOUUUU")
         })
         .catch((error: any) => {
@@ -55,7 +57,7 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
-    this.usuario = new Usuario( '', '', '', '', '');
+    this.usuario = new Usuario( null, null, null, null, null);
   }
 
   abrirPagina(url:String){

@@ -22,14 +22,17 @@ export class FormulariocadastroPage implements OnInit {
     private bdService: BDService, 
     private alertCtrl: AlertController, 
     private autenticacao : Autenticacao, 
-    ) { }
+    ) { 
+
+    }
 
   @ViewChild('cadastro') form: NgForm;
 
   async createAccount(cadastro){
+    
       if (this.form.form.valid){
         this.usuario = {
-          nome: null,
+          nome: cadastro.nome,
           email: cadastro.email,
           senha: cadastro.senha,
           telefone: null,
@@ -57,7 +60,7 @@ export class FormulariocadastroPage implements OnInit {
       }
   }
 
- /* async cadastrarUsuario(cadastro){
+ async cadastrarUsuario(cadastro){
     this.usuarios = await this.bdService.listWithUIDs<Usuario>('/usuarios');
     if(this.conferirSeExiste(cadastro,this.usuarios)){
       let alert = await this.alertCtrl.create({
@@ -68,15 +71,15 @@ export class FormulariocadastroPage implements OnInit {
         ]
       });
       await alert.present();
-      console.log("Existe")
     }else
       if(!this.conferirSeExiste(cadastro,this.usuarios)){
+        var nome = this.maiuscula(cadastro.nome);
         this.usuario = {
-          nome: cadastro.nome,
+          nome: nome,
           email: cadastro.email,
           senha: cadastro.senha,
           telefone: null,
-          genero: cadastro.genero,
+          genero: null,
           perguntasRespondidas: null
         }
         this.bdService.insertInList<Usuario>('/usuarios',this.usuario);
@@ -86,7 +89,6 @@ export class FormulariocadastroPage implements OnInit {
           buttons:['Ok']
         });
         await alert.present();
-        console.log("Não existe")
         this.rota.navigate(['login']);
 
       }
@@ -102,7 +104,22 @@ export class FormulariocadastroPage implements OnInit {
   return false;
 
   }
-  */
+  
+  maiuscula(palavra){
+    palavra = palavra.split("");
+    var espaco = "";
+    for(var i=0;i<palavra.length;i++){
+      if(palavra[i-1]){
+      if(palavra[i-1]==" "){palavra[i]=palavra[i].replace(palavra[i],palavra[i].toUpperCase());}
+      }
+      else{palavra[i]=palavra[i].replace(palavra[i],palavra[i].toUpperCase());}
+      espaco+=palavra[i];
+      }
+      palavra = espaco;
+      return palavra;
+
+  }
+  
   abrirPagina(url:String){
     this.rota.navigate([url]);
  }
