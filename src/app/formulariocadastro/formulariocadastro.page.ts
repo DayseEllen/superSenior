@@ -29,50 +29,7 @@ export class FormulariocadastroPage implements OnInit {
   @ViewChild('cadastro') form: NgForm;
 
   async createAccount(cadastro){
-    
       if (this.form.form.valid){
-        this.usuario = {
-          nome: cadastro.nome,
-          email: cadastro.email,
-          senha: cadastro.senha,
-          telefone: null,
-          genero: null,
-          perguntasRespondidas: null
-        }
-        console.log(this.usuario.email);
-        await this.autenticacao.createUser(this.usuario)
-            .then((usuario: any) => {
-             usuario.sendEmailVerification();
-              console.log("Pegou!");
-            
-            })
-            .catch((error: any) => {
-              if(error.code == 'auth/email-already-in-use'){
-                console.log("O e-mail digitado já está em uso");
-              } else if(error.code == 'auth/invalid-email'){
-                console.log("O e-mail digitado não é valido");
-              } else if(error.code == 'auth/operation-not-allowed'){
-                console.log("Não está habilitado criar usuários");
-              } else if(error.code == 'auth/weak-password'){
-                console.log("A senha digitada é muito fraca");
-              }
-            });
-      }
-  }
-
- async cadastrarUsuario(cadastro){
-    this.usuarios = await this.bdService.listWithUIDs<Usuario>('/usuarios');
-    if(this.conferirSeExiste(cadastro,this.usuarios)){
-      let alert = await this.alertCtrl.create({
-        header: 'Falha no cadastro 😢',
-        message: 'O usuário já existe.',
-        buttons:[
-          'Ok'
-        ]
-      });
-      await alert.present();
-    }else
-      if(!this.conferirSeExiste(cadastro,this.usuarios)){
         var nome = this.maiuscula(cadastro.nome);
         this.usuario = {
           nome: nome,
@@ -82,30 +39,66 @@ export class FormulariocadastroPage implements OnInit {
           genero: null,
           perguntasRespondidas: null
         }
-        this.bdService.insertInList<Usuario>('/usuarios',this.usuario);
-        let alert = await this.alertCtrl.create({
-          header: 'Ebaa! 😃',
-          message: 'Você está cadastrado.',
-          buttons:[{
-            text:"Ok",
-            handler: ()=> this.rota.navigate(['login'])
-          }]
-        });
-        await alert.present();
-       // this.rota.navigate(['login']);
-
+        console.log(this.usuario.email);
+        await this.autenticacao.createUser(this.usuario)
+            .then(async() => {
+              let alert = await this.alertCtrl.create({
+                header: 'Ebaaa! 😃',
+                message: 'Você está cadastrado.',
+                buttons:[{
+                  text: 'Vamos lá!',
+                  handler: ()=> this.rota.navigate(['login'])
+                }]
+              });
+              await alert.present();
+              console.log("Pegou!");
+              this.bdService.insertInList<Usuario>('/usuarios',this.usuario);
+            
+            })
+            .catch(async(error: any) => {
+              if(error.code == 'auth/email-already-in-use'){
+                console.log("O e-mail digitado já está em uso");
+                let alert = await this.alertCtrl.create({
+                  header: 'Que pena! 😢 ',
+                  message: 'O usuário já existe.',
+                  buttons:[{
+                    text:"Ok"
+                  }]
+                });
+                await alert.present();
+              } else if(error.code == 'auth/invalid-email'){
+                console.log("O e-mail digitado não é valido");
+                let alert = await this.alertCtrl.create({
+                  header: 'Que pena! 😢 ',
+                  message: 'O email digitado não é válido',
+                  buttons:[{
+                    text:"Ok"
+                  }]
+                });
+                await alert.present();
+              } else if(error.code == 'auth/operation-not-allowed'){
+                console.log("Não está habilitado criar usuários");
+                let alert = await this.alertCtrl.create({
+                  header: 'Que pena! 😢 ',
+                  message: 'Você não está habilitado a criar usuários',
+                  buttons:[{
+                    text:"Ok"
+                  }]
+                });
+                await alert.present();
+              } else if(error.code == 'auth/weak-password'){
+                console.log("A senha digitada é muito fraca");
+                let alert = await this.alertCtrl.create({
+                  header: 'Que pena! 😢 ',
+                  message: 'A senha digitada é muito fraca',
+                  buttons:[{
+                    text:"Ok"
+                  }]
+                });
+                await alert.present();
+              }
+            });
       }
-
-  }
-
- private conferirSeExiste(cadastro, usuarios:Usuario[]){
-   for(var i=0;i<usuarios.length;i++){
-   if(usuarios[i].email == cadastro.email){
-     return true;
-   }
-  }
-  return false;
-
   }
   
   maiuscula(palavra){
