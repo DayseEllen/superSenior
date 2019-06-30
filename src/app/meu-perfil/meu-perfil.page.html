@@ -10,9 +10,6 @@
 </ion-header>
       
 <ion-content color="primary" padding>
-    <div text-center>
-        <img id="imagemperfil" >
-    </div>
     <div id="dados">
     <ion-item >
         <ion-label id="perfilinfo">
@@ -41,11 +38,24 @@
     </div>    
 <br>
 
-    <p id="titleavanco">Meu avanço diário:</p>
+    <p id="titleavanco">No Jogo das Perguntas:</p>
   
         <div class="progress">
-                <div id ="barraprogresso" class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                <div id ="barraprogresso1" class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>   
         </div>
+        <p id="titlebarra" text-center>Nível 1</p>
+    <p id="titleavanco">No Jogo do Arrasta&Solta:</p>
+  
+        <div class="progress">
+                <div id ="barraprogresso2" class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">50%</div>
+        </div>
+        <p id="titlebarra" text-center>Nível 2</p>
+    <p id="titleavanco">No Jogo da Memória:</p>
+  
+        <div class="progress">
+                <div id ="barraprogresso3" class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">75%</div>
+        </div>
+        <p id="titlebarra" text-center>Nível 3</p>
         <ion-button id="btnSair" class="campos botao" color="light" (click)="singOut()">Sair</ion-button> 
 </ion-content>
       
