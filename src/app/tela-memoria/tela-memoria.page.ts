@@ -8,9 +8,16 @@ import { Router } from '@angular/router';
 })
 export class TelaMemoriaPage implements OnInit {
 
+  isZeroSelecionada: boolean;
+
   constructor(private rota: Router) { }
 
   ngOnInit() {
+   // this.carregarImagens();
+  }
+
+  modificarSelecaoZero() {
+    this.isZeroSelecionada = !this.isZeroSelecionada;
   }
 
   abrirPagina(url:String){
