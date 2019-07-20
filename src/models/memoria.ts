@@ -1,3 +1,3 @@
 export class Memoria{
-    url: String = '';
+    url: string = '';
 }

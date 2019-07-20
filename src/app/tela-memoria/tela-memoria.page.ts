@@ -55,15 +55,27 @@ export class TelaMemoriaPage implements OnInit {
  }*/
 
   ngOnInit() {
-   // this.carregarImagens();
+   this.carregarImagens();
   }
-
+  private async carregarImagens(){
+    this.memorias = await this.bdService.listWithUIDs<Memoria>('/memorias');
+  }
+   randomImagens(){
+     this.memoriaAtual = this.memorias[Math.floor(this.memorias.length * Math.random())];
+     return this.memoriaAtual.url;
+  }
+  imgSrc(){
+    var img = document.getElementById("cartaR");
+    img.setAttribute('src',this.randomImagens());
+    console.log(img.getAttribute('src'));
+  }
   modificarSelecaoZero() {
     this.isZeroSelecionada = !this.isZeroSelecionada;
   }
-
+ 
   abrirPagina(url:String){
     this.rota.navigate([url]);
 
   }
+ 
 }

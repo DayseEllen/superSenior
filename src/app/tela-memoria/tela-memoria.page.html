@@ -15,7 +15,7 @@
     <div text-center class="meio">
         
             <img (click)="modificarSelecaoZero()" *ngIf="!isZeroSelecionada" id="cartaR" src="assets/images/memoria.png">
-            <img (click)="modificarSelecaoZero()" *ngIf="isZeroSelecionada" id="cartaR" src="https://firebasestorage.googleapis.com/v0/b/super-senior.appspot.com/o/facebook.png?alt=media&token=e4b7a927-5d71-417f-bacc-38b44b055a94">            
+            <img  *ngIf="isZeroSelecionada" id="cartaR" src="" (click)="imgSrc()">            
             <img id="cartaL" src="assets/images/memoria.png">
             <br>
             <img id="cartaR" src="assets/images/memoria.png">
