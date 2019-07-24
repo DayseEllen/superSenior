@@ -65,17 +65,26 @@ export class TelaMemoriaPage implements OnInit {
      return this.memoriaAtual.url;
   }
   imgSrc(){
-    var img = document.getElementById("cartaR");
-    img.setAttribute('src',this.randomImagens());
-    console.log(img.getAttribute('src'));
-  }
+    var img = document.querySelector("#cartaR");
+    this.modificarSelecaoZero();
+    if(img.getAttribute('src')!=""){
+      console.log('imagem com src de memória');
+    }if(img.getAttribute('src')==""){
+      img.setAttribute('src',this.randomImagens());
+      console.log('imagem com src do Random');
+      this.modificarSelecaoZero();
+    }
+   
+  } 
   modificarSelecaoZero() {
     this.isZeroSelecionada = !this.isZeroSelecionada;
+    
   }
  
   abrirPagina(url:String){
     this.rota.navigate([url]);
 
   }
+ 
  
 }

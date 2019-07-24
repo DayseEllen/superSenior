@@ -14,15 +14,15 @@
 <div text-center>
     <div text-center class="meio">
         
-            <img (click)="modificarSelecaoZero()" *ngIf="!isZeroSelecionada" id="cartaR" src="assets/images/memoria.png">
-            <img  *ngIf="isZeroSelecionada" id="cartaR" src="" (click)="imgSrc()">            
-            <img id="cartaL" src="assets/images/memoria.png">
-            <br>
-            <img id="cartaR" src="assets/images/memoria.png">
-            <img id="cartaL" src="assets/images/memoria.png">
-            <br>
-            <img id="cartaR" src="assets/images/memoria.png">
-            <img id="cartaL" src="assets/images/memoria.png">
+      <img (click)="imgSrc()" *ngIf="!isZeroSelecionada" id="cartaR" src="assets/images/memoria.png">
+      <img (click)="imgSrc()" *ngIf="isZeroSelecionada" id="cartaR" src="" >            
+      <img id="cartaL" src="assets/images/memoria.png">
+      <br>
+      <img id="cartaR" src="assets/images/memoria.png">
+      <img id="cartaL" src="assets/images/memoria.png">
+      <br>
+      <img id="cartaR" src="assets/images/memoria.png">
+      <img id="cartaL" src="assets/images/memoria.png">
 
     </div>
   <br>
