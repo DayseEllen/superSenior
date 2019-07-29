@@ -19,6 +19,7 @@ export class TelaMemoriaPage implements OnInit {
 
  constructor(private rota: Router, private bdService: BDService, private alert: AlertController) {
   // this.inserirMemorias();
+  this.isZeroSelecionada = false;
  }
 
 /* private async inserirMemorias() {
@@ -61,19 +62,19 @@ export class TelaMemoriaPage implements OnInit {
     this.memorias = await this.bdService.listWithUIDs<Memoria>('/memorias');
   }
    randomImagens(){
-     this.memoriaAtual = this.memorias[Math.floor(this.memorias.length * Math.random())];
-     return this.memoriaAtual.url;
+     //this.memoriaAtual = this.memorias[Math.floor(this.memorias.length * Math.random())];
+     
+     console.log(this.memorias);
+     return this.memorias[0].url;
   }
   imgSrc(){
     var img = document.querySelector("#cartaR");
-    this.modificarSelecaoZero();
-    if(img.getAttribute('src')!=""){
-      console.log('imagem com src de memória');
-    }if(img.getAttribute('src')==""){
+    if(!this.isZeroSelecionada){
       img.setAttribute('src',this.randomImagens());
-      console.log('imagem com src do Random');
-      this.modificarSelecaoZero();
+    } else {
+      img.setAttribute('src','assets/images/memoria.png');
     }
+    this.modificarSelecaoZero();
    
   } 
   modificarSelecaoZero() {
