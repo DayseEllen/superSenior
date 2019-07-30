@@ -16,6 +16,7 @@ export class TelaMemoriaPage implements OnInit {
  memorias: Memoria[];
  memoriaAtual: Memoria;
  isZeroSelecionada: boolean;
+ urlMemoria: string;
 
  constructor(private rota: Router, private bdService: BDService, private alert: AlertController) {
   // this.inserirMemorias();
@@ -60,23 +61,22 @@ export class TelaMemoriaPage implements OnInit {
   }
   private async carregarImagens(){
     this.memorias = await this.bdService.listWithUIDs<Memoria>('/memorias');
+    this.urlMemoria = this.randomImagens();
   }
    randomImagens(){
-     //this.memoriaAtual = this.memorias[Math.floor(this.memorias.length * Math.random())];
-     
-     console.log(this.memorias);
-     return this.memorias[0].url;
-  }
+     this.memoriaAtual = this.memorias[Math.floor(this.memorias.length * Math.random())];
+     return this.memoriaAtual.url;
+    }
   imgSrc(){
-    var img = document.querySelector("#cartaR");
+    var img = document.querySelector("#carta1");
     if(!this.isZeroSelecionada){
-      img.setAttribute('src',this.randomImagens());
+      img.setAttribute('src',this.urlMemoria);
     } else {
       img.setAttribute('src','assets/images/memoria.png');
     }
     this.modificarSelecaoZero();
-   
   } 
+
   modificarSelecaoZero() {
     this.isZeroSelecionada = !this.isZeroSelecionada;
     
