@@ -16,6 +16,7 @@ export class TelaMemoriaPage implements OnInit {
  memorias: Memoria[];
  memoriaAtual: Memoria;
  isZeroSelecionada: boolean;
+ urlMemoria: string;
 
  constructor(private rota: Router, private bdService: BDService, private alert: AlertController) {
   // this.inserirMemorias();
@@ -58,26 +59,28 @@ export class TelaMemoriaPage implements OnInit {
 
   ngOnInit() {
    this.carregarImagens();
+   
   }
-  private async carregarImagens(){
-    this.memorias = await this.bdService.listWithUIDs<Memoria>('/memorias');
-  }
+    private async carregarImagens(){
+      this.memorias = await this.bdService.listWithUIDs<Memoria>('/memorias');
+      this.urlMemoria = this.randomImagem();
+    }
+  
   randomImagem(){
    this.memoriaAtual = this.memorias[Math.floor(this.memorias.length * Math.random())];
-     
-     for(var i=0;i<this.memorias.length;i++){
-       if(this.memorias[i].url==this.memoriaAtual.url){
-         this.memorias.splice(i,1);
-        }
-      }
-      console.log(this.memorias.length);
+  for(var i=0;i<this.memorias.length;i++){
+    if(this.memorias[i].url==this.memoriaAtual.url){
+      this.memorias.splice(i,1);
+     }
+   }
+   console.log(this.memorias.length);
     return this.memoriaAtual.url;
   }
   imgSrc(id:string){
     
     var img = document.getElementById(id);
     if(!this.isZeroSelecionada){
-      img.setAttribute('src',this.randomImagem());
+      img.setAttribute('src',this.urlMemoria);
       
     } else {
       img.setAttribute('src','assets/images/memoria.png');
