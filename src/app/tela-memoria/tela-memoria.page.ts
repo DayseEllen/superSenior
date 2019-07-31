@@ -16,7 +16,9 @@ export class TelaMemoriaPage implements OnInit {
  memorias: Memoria[];
  memoriaAtual: Memoria;
  isZeroSelecionada: boolean;
- urlMemoria: string;
+ urlMemoria: string[] = [];
+ urlAtual: string;
+ url: string;
 
  constructor(private rota: Router, private bdService: BDService, private alert: AlertController) {
   // this.inserirMemorias();
@@ -59,11 +61,13 @@ export class TelaMemoriaPage implements OnInit {
 
   ngOnInit() {
    this.carregarImagens();
-   
+  
   }
+   
+
     private async carregarImagens(){
-      this.memorias = await this.bdService.listWithUIDs<Memoria>('/memorias');
-      this.urlMemoria = this.randomImagem();
+      this.memorias = await this.bdService.listWithUIDs<Memoria>('/memorias'); 
+      this.selecionaUrl();
     }
   
   randomImagem(){
@@ -74,20 +78,40 @@ export class TelaMemoriaPage implements OnInit {
      }
    }
    console.log(this.memorias.length);
-    return this.memoriaAtual.url;
+    return this.memoriaAtual;
   }
+  selecionaUrl(){
+    for (var i = 0; i < 3; i++) {
+      var url = this.randomImagem().url
+      this.urlMemoria.push(url);
+      this.urlMemoria.push(url);
+    }
+  }
+  randomImagemLocal(){
+    this.urlAtual = this.urlMemoria[Math.floor(this.urlMemoria.length * Math.random())];
+   for(var i=0;i<this.urlMemoria.length;i++){
+     if(this.urlMemoria[i]==this.urlAtual){
+       this.urlMemoria.splice(i,1);
+       break;
+      }
+    }
+    console.log(this.urlMemoria.length);
+     return this.urlAtual;
+   }
+   
   imgSrc(id:string){
-    
+   
     var img = document.getElementById(id);
+
     if(!this.isZeroSelecionada){
-      img.setAttribute('src',this.urlMemoria);
-      
+      img.setAttribute('src', this.randomImagemLocal());
     } else {
       img.setAttribute('src','assets/images/memoria.png');
     }
     this.modificarSelecaoZero();
    
   } 
+
   modificarSelecaoZero() {
     this.isZeroSelecionada = !this.isZeroSelecionada;
     

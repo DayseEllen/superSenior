@@ -23,6 +23,11 @@ export class TelaPerguntaPage implements OnInit {
     this.carregarPerguntas();
    }
 
+   randomPergunta(){
+    this.perguntaAtual = this.perguntas[Math.floor(this.perguntas.length * Math.random())];
+    return this.perguntaAtual;
+   }
+
    private async carregarPerguntas() {
     this.perguntas = await this.bdService.listWithUIDs<Pergunta>('/perguntas');
     this.indiceAtual = -1;
@@ -30,11 +35,7 @@ export class TelaPerguntaPage implements OnInit {
    }
 
    exibirProximaPergunta() {
-     if(this.indiceAtual == 49){
-       this.indiceAtual = -1;
-     }
-     this.indiceAtual++;
-     this.perguntaAtual = this.perguntas[this.indiceAtual];
+     this.randomPergunta();
    }
 
   async conferirPergunta(resposta: String){
