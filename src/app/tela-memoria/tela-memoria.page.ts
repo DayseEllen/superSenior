@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';import { BDService } from '../services/bd.service';
 import { AlertController } from '@ionic/angular';
 import { Memoria } from 'src/models/memoria';
+import { Cartas } from 'src/models/cartas';
  
 
 @Component({
@@ -15,14 +16,17 @@ export class TelaMemoriaPage implements OnInit {
 
  memorias: Memoria[];
  memoriaAtual: Memoria;
- isZeroSelecionada: boolean;
+ 
  urlMemoria: string[] = [];
  urlAtual: string;
  url: string;
 
+ cartas: Cartas[];
+
  constructor(private rota: Router, private bdService: BDService, private alert: AlertController) {
-  // this.inserirMemorias();
-  this.isZeroSelecionada = false;
+ 
+
+  this.cartas = [];
   
  }
 
@@ -83,39 +87,28 @@ export class TelaMemoriaPage implements OnInit {
   selecionaUrl(){
     for (var i = 0; i < 3; i++) {
       var url = this.randomImagem().url
-      this.urlMemoria.push(url);
-      this.urlMemoria.push(url);
-    }
-  }
-  randomImagemLocal(){
-    this.urlAtual = this.urlMemoria[Math.floor(this.urlMemoria.length * Math.random())];
-   for(var i=0;i<this.urlMemoria.length;i++){
-     if(this.urlMemoria[i]==this.urlAtual){
-       this.urlMemoria.splice(i,1);
-       break;
+      this.cartas.push(new Cartas(url));
+      this.cartas.push(new Cartas(url));
       }
-    }
-    console.log(this.urlMemoria.length);
-     return this.urlAtual;
-   }
-   
-  imgSrc(id:string){
-   
-    var img = document.getElementById(id);
-
-    if(!this.isZeroSelecionada){
-      img.setAttribute('src', this.randomImagemLocal());
-    } else {
-      img.setAttribute('src','assets/images/memoria.png');
-    }
-    this.modificarSelecaoZero();
-   
-  } 
-
-  modificarSelecaoZero() {
-    this.isZeroSelecionada = !this.isZeroSelecionada;
-    
   }
+
+  imageClicked(carta) {
+    if (carta.isOpen) {
+      carta.displayUrl = carta.url;
+      //this.checar();
+    } else {
+      carta.displayUrl = 'assets/images/memoria.png';
+    }
+    carta.isOpen = !carta.isOpen;
+
+
+  }
+
+  
+   
+  
+
+ 
  
   abrirPagina(url:String){
     this.rota.navigate([url]);
