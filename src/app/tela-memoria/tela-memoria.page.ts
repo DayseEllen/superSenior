@@ -3,6 +3,8 @@ import { Router } from '@angular/router'; import { BDService } from '../services
 import { AlertController } from '@ionic/angular';
 import { Memoria } from 'src/models/memoria';
 import { Cartas } from 'src/models/cartas';
+import { delay } from 'q';
+import { SelectMultipleControlValueAccessor } from '@angular/forms';
 
 
 @Component({
@@ -20,8 +22,10 @@ export class TelaMemoriaPage implements OnInit {
   urlMemoria: string[] = [];
   urlAtual: string;
   url: string;
-  countOpen: number=0;
   cartas: Cartas[];
+  cartasAuxiliar: Cartas[] = [];
+  cartasComparacao: Cartas[] = [];
+
 
   constructor(private rota: Router, private bdService: BDService, private alert: AlertController) {
 
@@ -71,7 +75,7 @@ export class TelaMemoriaPage implements OnInit {
 
   private async carregarImagens() {
     this.memorias = await this.bdService.listWithUIDs<Memoria>('/memorias');
-    this.selecionaUrl();
+    this.imageSelect();
   }
 
   randomImagem() {
@@ -81,46 +85,63 @@ export class TelaMemoriaPage implements OnInit {
         this.memorias.splice(i, 1);
       }
     }
-    console.log(this.memorias.length);
     return this.memoriaAtual;
   }
-  selecionaUrl() {
+
+  imageSelect() {
     for (var i = 0; i < 3; i++) {
-      var url = this.randomImagem().url
-      this.cartas.push(new Cartas(url));
-      this.cartas.push(new Cartas(url));
+      var url = this.randomImagem().url;
+      this.cartasAuxiliar.push(new Cartas(url));
+      this.cartasAuxiliar.push(new Cartas(url));
+    }
+    this.randomImagesCards();
+  }
+  randomImagesCards() {
+    while(this.cartas.length!=6){
+      var posicionCard = Math.floor(this.cartasAuxiliar.length * Math.random());
+      this.cartas.push(this.cartasAuxiliar[posicionCard]);
+      this.cartasAuxiliar.splice(posicionCard,1);
     }
   }
-  
   imageClicked(carta) {
     if (!carta.isOpen) {
       carta.displayUrl = carta.url;
-    } 
-    carta.isOpen = !carta.isOpen;
-    if(this.countOpen!=0){
-      this.verifyTwoOpen(carta);
+      carta.isOpen = true;
+      this.cartasComparacao.push(carta);
     }
-    this.countOpen++;
+    if (this.cartasComparacao.length == 2) {
+      if (!this.verifyTwoCards()) {
+        setTimeout(() => this.changeDiferentCards(), 1500);
+      }
+    }
   }
-  verifyTwoOpen(carta: Cartas) {
-    
-    var ncartasabertasiguais = 0;
+  changeDiferentCards() {
     for (var i = 0; i < this.cartas.length; i++) {
-      if (this.cartas[i].isOpen && this.cartas[i].url == carta.url) {
-        carta.isDiscovered = true;
-        this.cartas[i].isDiscovered = true;
-        ncartasabertasiguais++;
+      if (!this.cartas[i].isDiscovered) {
+        this.cartas[i].isOpen = false;
+        this.cartas[i].displayUrl = "assets/images/memoria.png";
       }
-    }
-    if (ncartasabertasiguais == 1) {
-      for (var index = 0; index < this.cartas.length; index++) {
-        if(this.cartas[index].isDiscovered==false){
-          this.cartas[index].displayUrl = "assets/images/memoria.png";
-        }
-      }
-      this.countOpen=0;
     }
   }
+  verifyTwoCards() {
+    if (this.cartasComparacao[0].url == this.cartasComparacao[1].url) {
+      var auxiliarUrl = this.cartasComparacao[0].url;
+      this.cartasComparacao = [];
+      return this.changeEqualsCards(auxiliarUrl);
+    }
+    this.cartasComparacao = [];
+    return false;
+  }
+  changeEqualsCards(url: String) {
+    for (var i = 0; i < this.cartas.length; i++) {
+      if (this.cartas[i].url == url) {
+        this.cartas[i].isDiscovered = true;
+      }
+    }
+    return true;
+  }
+
+
   abrirPagina(url: String) {
     this.rota.navigate([url]);
 
