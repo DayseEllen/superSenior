@@ -22,13 +22,14 @@ export class TelaMemoriaPage implements OnInit {
   urlMemoria: string[] = [];
   urlAtual: string;
   url: string;
+  countOpen: number = 0;
   cartas: Cartas[];
-  cartasAuxiliar: Cartas[] = [];
-  cartasComparacao: Cartas[] = [];
-  countCardsOpen: number = 0;
-
+  
 
   constructor(private rota: Router, private bdService: BDService, private alert: AlertController) {
+
+
+    this.cartas = [];
 
   }
 
@@ -73,7 +74,7 @@ export class TelaMemoriaPage implements OnInit {
 
   private async carregarImagens() {
     this.memorias = await this.bdService.listWithUIDs<Memoria>('/memorias');
-    this.imageSelect();
+    this.selecionaUrl();
   }
 
   randomImagem() {
@@ -83,91 +84,56 @@ export class TelaMemoriaPage implements OnInit {
         this.memorias.splice(i, 1);
       }
     }
+    console.log(this.memorias.length);
     return this.memoriaAtual;
   }
-
-  imageSelect() {
-    this.cartas = [];
+  selecionaUrl() {
     for (var i = 0; i < 3; i++) {
-      var url = this.randomImagem().url;
-      this.cartasAuxiliar.push(new Cartas(url));
-      this.cartasAuxiliar.push(new Cartas(url));
-    }
-    this.randomImagesCards();
-    setTimeout(() => this.mostrarCartas(), 600);
-    
-  }
-  mostrarCartas() {
-    for (var i = 0; i < this.cartas.length; i++) {
-      this.cartas[i].displayUrl=this.cartas[i].url;
-      }
-      setTimeout(() => this.changeDiferentCards(), 4000);
-  }
-  randomImagesCards() {
-    while (this.cartas.length != 6) {
-      var posicionCard = Math.floor(this.cartasAuxiliar.length * Math.random());
-      this.cartas.push(this.cartasAuxiliar[posicionCard]);
-      this.cartasAuxiliar.splice(posicionCard, 1);
+      var url = this.randomImagem().url
+      this.cartas.push(new Cartas(url));
+      this.cartas.push(new Cartas(url));
     }
   }
-  imageClicked(carta) {
+
+ imageClicked(carta) {
     if (!carta.isOpen) {
       carta.displayUrl = carta.url;
       carta.isOpen = true;
-      this.cartasComparacao.push(carta);
+      this.countOpen++;
     }
-    if (this.cartasComparacao.length == 2) {
-      if (!this.verifyTwoCards()) {
-        setTimeout(() => this.changeDiferentCards(), 1500);
-      }
-      if (this.countCardsOpen == 6) {
-        this.countCardsOpen = 0;
-        this.exibirMensagem();
-
-      }
+    if (this.countOpen == 2) {
+      this.verifyOpenTwo(carta);
     }
   }
-  async exibirMensagem() {
-    let alert = await this.alert.create({
-      header: 'ParabÃ©ns!! ðŸ˜ƒ VocÃª adivinhou todas as cartas',
-      message: 'E ainda aprendeu vÃ¡rias dicas sobre o smartphone!',
-      buttons: [
-        {
-          text: 'PrÃ³ximo nÃ­vel',
-          handler: () => this.imageSelect()
-
-
+ 
+  verifyOpenTwo(carta: Cartas) {
+   var aux=0;
+    for (var i = 0; i < this.cartas.length; i++) {
+     if(carta.url==this.cartas[i].url && this.cartas[i].isOpen){
+        this.countOpen++;
+        console.log("Aumentou count pra"+this.countOpen);
+        aux+=i;
+       console.log(aux); 
+      }
+      if(this.countOpen==4){
+        this.cartas[i].isDiscovered=true;   
+        console.log("Mudou o da posição"+i);
+        console.log("Mudou o da posição"+(i-aux));
+        this.cartas[aux-i].isDiscovered=true;
+        break;
+      }
+    }
+    this.countOpen=0;
+   
+      for (var i = 0; i < this.cartas.length; i++) {
+        if(!this.cartas[i].isDiscovered){
+          this.cartas[i].isOpen=false;
+          this.cartas[i].displayUrl="assets/images/memoria.png";
         }
-      ]
-    })
-    await alert.present();
-  }
-  changeDiferentCards() {
-    for (var i = 0; i < this.cartas.length; i++) {
-      if (!this.cartas[i].isDiscovered) {
-        this.cartas[i].isOpen = false;
-        this.cartas[i].displayUrl = "assets/images/memoria.png";
       }
-    }
+    
   }
-  verifyTwoCards() {
-    if (this.cartasComparacao[0].url == this.cartasComparacao[1].url) {
-      var auxiliarUrl = this.cartasComparacao[0].url;
-      this.cartasComparacao = [];
-      return this.changeEqualsCards(auxiliarUrl);
-    }
-    this.cartasComparacao = [];
-    return false;
-  }
-  changeEqualsCards(url: String) {
-    for (var i = 0; i < this.cartas.length; i++) {
-      if (this.cartas[i].url == url) {
-        this.cartas[i].isDiscovered = true;
-        this.countCardsOpen++;
-      }
-    }
-    return true;
-  }
+
 
 
   abrirPagina(url: String) {
