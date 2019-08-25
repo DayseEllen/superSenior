@@ -86,7 +86,7 @@ export class TelaMemoriaPage implements OnInit {
     return this.memoriaAtual;
   }
 
-  imageSelect() {
+    imageSelect() {
     this.cartas = [];
     for (var i = 0; i < 3; i++) {
       var url = this.randomImagem().url;
@@ -94,14 +94,17 @@ export class TelaMemoriaPage implements OnInit {
       this.cartasAuxiliar.push(new Cartas(url));
     }
     this.randomImagesCards();
-    setTimeout(() => this.mostrarCartas(), 600);
-    
+    this.exibirMensagemInicio();
   }
   mostrarCartas() {
     for (var i = 0; i < this.cartas.length; i++) {
       this.cartas[i].displayUrl=this.cartas[i].url;
+      this.cartas[i].isOpen=true;
       }
-      setTimeout(() => this.changeDiferentCards(), 4000);
+      setTimeout(() => {
+        this.changeDiferentCards() 
+        this.exibirMensagemJogar()
+      }, 2000);
   }
   randomImagesCards() {
     while (this.cartas.length != 6) {
@@ -111,19 +114,12 @@ export class TelaMemoriaPage implements OnInit {
     }
   }
   imageClicked(carta) {
-    if (!carta.isOpen) {
+    if (!carta.isOpen && this.cartasComparacao.length!=2) {
+      this.cartasComparacao.push(carta);
       carta.displayUrl = carta.url;
       carta.isOpen = true;
-      this.cartasComparacao.push(carta);
-    }
-    if (this.cartasComparacao.length == 2) {
-      if (!this.verifyTwoCards()) {
-        setTimeout(() => this.changeDiferentCards(), 1500);
-      }
-      if (this.countCardsOpen == 6) {
-        this.countCardsOpen = 0;
-        this.exibirMensagem();
-
+      if (this.cartasComparacao.length == 2) {
+        setTimeout(()=>this.verifyTwoCards(),800); 
       }
     }
   }
@@ -135,8 +131,33 @@ export class TelaMemoriaPage implements OnInit {
         {
           text: 'Próximo nível',
           handler: () => this.imageSelect()
+        }
+      ]
+    })
+    await alert.present();
+  }
+  async exibirMensagemInicio() {
+    let alert = await this.alert.create({
+      header: 'O jogo já vai começar',
+      message: 'As cartas ficarão abertas por 2 segundos , por isso preste atenção!',
+      buttons: [
+        {
+          text: 'Entendi',
+          handler: () => this.mostrarCartas()
 
 
+        }
+      ]
+    })
+    await alert.present();
+  }
+  async exibirMensagemJogar() {
+    let alert = await this.alert.create({
+      header: 'Vamos lá!',
+      message: 'Tente encontrar os pares de cada carta. Divirta-se!',
+      buttons: [
+        {
+          text: 'Entendi'
         }
       ]
     })
@@ -149,15 +170,18 @@ export class TelaMemoriaPage implements OnInit {
         this.cartas[i].displayUrl = "assets/images/memoria.png";
       }
     }
+    this.cartasComparacao = [];
   }
   verifyTwoCards() {
-    if (this.cartasComparacao[0].url == this.cartasComparacao[1].url) {
-      var auxiliarUrl = this.cartasComparacao[0].url;
-      this.cartasComparacao = [];
-      return this.changeEqualsCards(auxiliarUrl);
+    if (this.cartasComparacao[0].url==this.cartasComparacao[1].url) {
+      this.changeEqualsCards(this.cartasComparacao[1].url);
+      if (this.countCardsOpen == 6) {
+        this.countCardsOpen = 0;
+        this.exibirMensagem();
+      }
+    }else{
+      this.changeDiferentCards();
     }
-    this.cartasComparacao = [];
-    return false;
   }
   changeEqualsCards(url: String) {
     for (var i = 0; i < this.cartas.length; i++) {
@@ -165,8 +189,8 @@ export class TelaMemoriaPage implements OnInit {
         this.cartas[i].isDiscovered = true;
         this.countCardsOpen++;
       }
-    }
-    return true;
+    } 
+    this.cartasComparacao = [];
   }
 
 
