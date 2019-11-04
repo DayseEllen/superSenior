@@ -51,7 +51,6 @@ export class FormulariocadastroPage implements OnInit {
                 }]
               });
               await alert.present();
-              console.log("Pegou!");
               this.bdService.insertInList<Usuario>('/usuarios',this.usuario);
             
             })
