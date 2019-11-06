@@ -4,7 +4,7 @@
     <ion-title>
       <div id="topo">
         <img id="ArrastaImagem" src="assets/images/arrasta.png">
-        <h5 id="texto">Jogo do Arrasta&Solta</h5>
+        <h5 id="texto">Jogo do Arrasta & Solta</h5>
       </div>
     </ion-title>
   </ion-toolbar>
@@ -14,16 +14,17 @@
 <div text-center>
     <div text-center class="meio">
         <div id="janela1">
-           <ion-label id="label">Whatsapp</ion-label> 
+           <ion-label id="label" dragula="imagem" [(dragulaModel)]="Whatsapp">Whatsapp</ion-label> 
         </div>
+        
         <div id="janela2">
             <ion-label id="label">Instagram</ion-label> 
         </div>
         <div id="janela3">
-            <ion-label id="label">Facebook</ion-label> 
+            <ion-label id="label" dragula="bag">Facebook</ion-label> 
         </div>
         <div>
-            <img id="img1" src="assets/images/facebook.png">
+            <img id="imgFacebook" src="assets/images/facebook.png" dragula="bag">
             <img id="img2" src="assets/images/telefone.png">
             <img id="img3" src="assets/images/whatsapp.png">
             <img id="img4" src="assets/images/instagram.png">

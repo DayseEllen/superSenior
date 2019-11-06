@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DragulaService } from 'ng2-dragula';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tela-arrasta',
@@ -8,8 +10,11 @@ import { Router } from '@angular/router';
 })
 export class TelaArrastaPage implements OnInit {
 
-  constructor(private rota: Router) { }
+  constructor(private rota: Router, private toastController: ToastController, private dragulaService: DragulaService) {
+    
+  }
 
+  
   ngOnInit() {
   }
 
