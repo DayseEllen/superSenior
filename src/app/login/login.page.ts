@@ -43,6 +43,7 @@ export class LoginPage implements OnInit {
           let alert = await this.alertCtrl.create({
             header: 'Ebaa! 😃',
             message: 'Bem vindo(a)!',
+            cssClass:'alertsforms',
             buttons:[{
               text: 'Vamos lá!',
               handler: ()=> this.rota.navigate(['home'])
@@ -57,6 +58,7 @@ export class LoginPage implements OnInit {
             let alert = await this.alertCtrl.create({
               header: 'Falha ao entrar 😢',
               message: 'O e-mail digitado não é valido',
+              cssClass:'alertsforms',
               buttons:[
                 {
                   text: 'Tentar novamente',
@@ -70,6 +72,7 @@ export class LoginPage implements OnInit {
             let alert = await this.alertCtrl.create({
               header: 'Falha ao entrar 😢',
               message: 'O usuário está desativado',
+              cssClass:'alertsforms',
               buttons:[
                 {
                   text: 'Tentar novamente',
@@ -83,6 +86,7 @@ export class LoginPage implements OnInit {
             let alert = await this.alertCtrl.create({
               header: 'Falha ao entrar 😢',
               message: 'O usuário não foi encontrado',
+              cssClass:'alertsforms',
               buttons:[
                 {
                   text: 'Tentar novamente',
@@ -96,6 +100,7 @@ export class LoginPage implements OnInit {
             let alert = await this.alertCtrl.create({
               header: 'Falha ao entrar 😢',
               message: 'A senha digitada não é válida',
+              cssClass:'alertsforms',
               buttons:[{
                 text: 'Tentar novamente',
                 handler: ()=> this.rota.navigate(['login'])
