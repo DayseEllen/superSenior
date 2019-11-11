@@ -12,29 +12,28 @@
     <form #cadastro="ngForm" (ngSubmit)="createAccount(cadastro.value)">
         <div class="form-row formulario">
             <div class="form-group col-md-6">
-                <br>
                 <label for="inputName4" class="campos textoformulario">Digite seu nome:</label>
                 <input type="text" class="form-control campos inputs" id="inputName4" placeholder="Nome" name="nome" ngModel required>
               </div>
-        <div class="form-group row">
-          <label for="example-date-input" class="campos data">Data de nascimento:</label>
-          <div id="divv" class="col-10">
-            <input class="form-control campos inputs" type="date" value="0000-00-00" id="example-date-input" name="data" ngModel required>
-          </div>
+        <div class="form-group col-md-6">
+          <label for="inputName4" class="campos textoformulario">Digite sua idade:</label>
+          <input type="number" class="form-control campos inputs" id="inputName4" placeholder="Idade" name="idade" ngModel required>
         </div>
-          <div class="form-group col-md-6">
-              <label for="inputEmail4" class="campos textoformulario">Digite seu e-mail:</label>
-              <input type="email" class="form-control campos inputs" id="inputEmail4" placeholder="Email" name="email" ngModel required email #email="ngModel">
-          </div>
-          <div class="form-group col-md-6"> 
-              <label for="inputPassword4" class="campos textoformulario">Digite sua senha:</label>
-            <input type="password" class="form-control campos inputs" id="inputPassword4" placeholder="Senha" name="senha" ngModel required minlength="6">
-          </div>
+        <div class="form-group col-md-6">
+          <label class="campos textoformulario" for="exampleFormControlSelect1">Escolha o seu sexo:</label>
+          <select class="form-control campos inputs" id="exampleFormControlSelect1">
+            <option>Feminino</option>
+            <option>Masculino</option>
+          </select>
         </div>
-        
+        <label for="inputName4" class="campos textoformulario">Digite seu telefone:</label>
+            <input type="text" class="form-control campos inputs" id="inputName4" name="telefone" data-mask="(00) 0000-0000" data-mask-selectonfocus="true" ngModel required>
+        </div>
         <br>
+      <div>
         <ion-button  class="campos botao" color="light" (click)="abrirPagina('cadastrar')">Voltar</ion-button>
-        <ion-button type="submit" class="campos botao cadastrar" color="light"  [disabled]="!cadastro.form.valid" >Cadastrar</ion-button>
+        <ion-button type="submit" class="campos botao" id="cadastrar" color="light"  [disabled]="!cadastro.form.valid" >Cadastrar</ion-button>
+     </div>
       </form>
     </div>
 </ion-content>
