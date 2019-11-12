@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { BDService } from '../services/bd.service';
 
 import {Imagem} from 'src/models/imagem';
+
+
+import { DragulaService } from 'ng2-dragula';
+import { ToastController } from '@ionic/angular';
 
 
 @Component({
@@ -12,6 +17,7 @@ import {Imagem} from 'src/models/imagem';
   providers: [BDService]
 })
 export class TelaArrastaPage implements OnInit {
+
 
   imagens: Imagem[];
   imagem: Imagem;

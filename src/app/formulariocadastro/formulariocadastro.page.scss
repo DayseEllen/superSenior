@@ -1,52 +1,52 @@
 /**Id's**/
 #titulo{
-    font-size: 30px;
-    font-family:  Rum Raisin;
+    font-size: 2em;
+    font-family:  Times New Roman;
     color: black;
-    margin-top: 60px;
+    margin-top: 7vh;
 }
 
 #logo{
     border-radius: 20px;
-    height: 80px;
-    width: 80px;
-    margin-top: 20px;
+    height: 13vh;
+    width: 13vh;
+    margin-top: 4vh;
     float: left;
 }
 #mensagem{
     color: black;
-    font-family: Rum Raisin;
-    font-size: 15px;
+    font-family: Times New Roman;
+    font-size: 1em;
 }
 
 /**Classes**/
 .formulario{
-    margin-top: 40px;
+    margin-top: 5vh;
 }
 
 .campos{
-    font-family: Rum Raisin;
+    font-family: Times New Roman;
    
 }
 
 .campos.textoformulario{
     color: black;
-    font-size: 20px;
+    font-size: 1.5em;
 }
 .campos.data{
     color: black;
-    font-size: 20px;
-    margin-left: 19px;
+    font-size: 1.5em;
+    margin-left: 3.4vh;
 }
 .campos.inputs{
-    width: 330px;
+    width: 50vh;
 }
 .campos.botao{
-    margin-top: 20px;
-    font-size: 15px;
+    font-size: 1em;
 }
 .campos.botao.cadastrar{
-    margin-left: 141px;
+    margin-left: 32vh;
+    margin-top: -15vh;
 }
 
 .ng-invalid.ng-touched:not(form){
@@ -56,6 +56,9 @@
     border: 1px solid green;
 }
 
+#divv{
+    margin-left: 1.2vh;
+}
 
 
 

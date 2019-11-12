@@ -3,8 +3,7 @@ import { Router } from '@angular/router'; import { BDService } from '../services
 import { AlertController } from '@ionic/angular';
 import { Memoria } from 'src/models/memoria';
 import { Cartas } from 'src/models/cartas';
-import { delay } from 'q';
-import { SelectMultipleControlValueAccessor } from '@angular/forms';
+
 
 
 @Component({
@@ -74,6 +73,7 @@ export class TelaMemoriaPage implements OnInit {
   private async carregarImagens() {
     this.memorias = await this.bdService.listWithUIDs<Memoria>('/memorias');
     this.imageSelect();
+    setTimeout(()=> {this.exibirMensagemInicio()},800);
   }
 
   randomImagem() {
@@ -94,7 +94,8 @@ export class TelaMemoriaPage implements OnInit {
       this.cartasAuxiliar.push(new Cartas(url));
     }
     this.randomImagesCards();
-    this.exibirMensagemInicio();
+    
+    
   }
   mostrarCartas() {
     for (var i = 0; i < this.cartas.length; i++) {
@@ -103,9 +104,9 @@ export class TelaMemoriaPage implements OnInit {
       }
       setTimeout(() => {
         this.changeDiferentCards() 
-        this.exibirMensagemJogar()
-      }, 2000);
+      }, 2500);
   }
+
   randomImagesCards() {
     while (this.cartas.length != 6) {
       var posicionCard = Math.floor(this.cartasAuxiliar.length * Math.random());
@@ -119,7 +120,7 @@ export class TelaMemoriaPage implements OnInit {
       carta.displayUrl = carta.url;
       carta.isOpen = true;
       if (this.cartasComparacao.length == 2) {
-        setTimeout(()=>this.verifyTwoCards(),800); 
+        setTimeout(()=>this.verifyTwoCards(),500); 
       }
     }
   }
@@ -130,8 +131,10 @@ export class TelaMemoriaPage implements OnInit {
       cssClass:'alertsm',
       buttons: [
         {
-          text: 'Clique aqui para continuar',
-          handler: () => this.imageSelect()
+          text: 'Próximo fase',
+          handler: () => {this.imageSelect()
+                         setTimeout(()=> this.mostrarCartas(),1000)}
+
         }
       ]
     })
@@ -140,6 +143,7 @@ export class TelaMemoriaPage implements OnInit {
   async exibirMensagemInicio() {
     let alert = await this.alert.create({
       header: 'O jogo já vai começar',
+
       message: 'As cartas ficarão abertas por 2 segundos , por isso preste atenção!',
       cssClass:'alertsm',
       buttons: [
@@ -153,7 +157,7 @@ export class TelaMemoriaPage implements OnInit {
     })
     await alert.present();
   }
-  async exibirMensagemJogar() {
+  /*async exibirMensagemJogar() {
     let alert = await this.alert.create({
       header: 'Vamos lá!',
       message: 'Tente encontrar os pares de cada carta. Divirta-se!',
@@ -165,7 +169,7 @@ export class TelaMemoriaPage implements OnInit {
       ]
     })
     await alert.present();
-  }
+  }*/ 
   changeDiferentCards() {
     for (var i = 0; i < this.cartas.length; i++) {
       if (!this.cartas[i].isDiscovered) {

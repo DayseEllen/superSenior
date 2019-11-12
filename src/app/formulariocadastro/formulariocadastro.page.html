@@ -18,14 +18,14 @@
               </div>
         <div class="form-group row">
           <label for="example-date-input" class="campos data">Data de nascimento:</label>
-          <div class="col-10">
-            <input class="form-control campos inputs" type="date" value="2011-08-19" id="example-date-input" placeholder="00/00/0000" name="data" ngModel required>
+          <div id="divv" class="col-10">
+            <input class="form-control campos inputs" type="date" value="0000-00-00" id="example-date-input" name="data" ngModel required>
           </div>
         </div>
           <div class="form-group col-md-6">
               <label for="inputEmail4" class="campos textoformulario">Digite seu e-mail:</label>
               <input type="email" class="form-control campos inputs" id="inputEmail4" placeholder="Email" name="email" ngModel required email #email="ngModel">
-            </div>
+          </div>
           <div class="form-group col-md-6"> 
               <label for="inputPassword4" class="campos textoformulario">Digite sua senha:</label>
             <input type="password" class="form-control campos inputs" id="inputPassword4" placeholder="Senha" name="senha" ngModel required minlength="6">
