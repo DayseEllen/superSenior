@@ -2,30 +2,20 @@
     //position: absolute;
     //left: 4%;
     position: center;
-    font-family:  Rum Raisin; 
-    font-size: 20px;
-    color: black;
+    font-family:  Times New Roman; 
+    font-size: 1.5em;
     
 }
 
-
-
-#proximo{
-    position: absolute;
-    font-family:  Rum Raisin; 
-    font-size: 20px;
-    left: 73%;
-}
-
 #botoes{
-    position: fixed;
-    height: 230px;
-    width: 330px;
-    bottom: 95px;
+    height: 20vh;
+    
     margin: auto;
     text-align: center;
 }
-
+buttom{
+    width: 90vw;
+}
 .loader {
     border: 8px solid #f3f3f3; 
     border-top: 8px solid darkslategrey; 
@@ -46,54 +36,60 @@
   }
 
 #topo{
-    height: 60px;
+    height: 8vh;
 }
 
 #texto{
-   font-family:  Rum Raisin; 
+   font-family:  Times New Roman; 
+   font-size: 1.3em;
    color: black;
-   margin-top: -37px;
-   margin-left: 60px;
+   margin-top: -6vh;
+   margin-left: 8vh;
 }
 
 #enunciado{
-    font-family:  Rum Raisin; 
+    font-family:  Times New Roman; 
     color: black;   
+    margin:auto;
+    text-align: center;
+    margin-left: 1vh;
+    margin-right: 1vh;
 }
 
 #PerguntaImagem{ 
-    height: 50px;
-    width: 50px;
-    border-radius: 10px;
+    height: 7vh;
+    width: 7vh;
+    border-radius: 2vh;
     border: 2px solid;
     border-color: darkslategrey;
-    margin-top: 6px;
+    margin-top: 1vh;
     background-color: white;
 }
 
 #iconeApp{ 
-    height: 90px;
-    width: 90px;
-    border-radius: 10px;
+    height: 17vh;
+    width: 17vh;
+    border-radius: 3vh;
     border: 2px solid;
     border-color: darkslategrey;
-    margin-top: 20px;
+    margin-top: 4vh;
     background-color: white;
 }
 
 .meio{
-    height: 450px;
-    width: 330px;
+    height: 70vh;
+    width: 90vw;
     text-align: center;
     background: white;
+    border-radius: 2vh;
     margin:auto;
-    margin-top: 40px;
+    margin-top: 7vh;
 }
 
 #pergunta{
-    margin-top: 20px;
-    width: 85%;
-    height: 50px;
-    font-family:  Rum Raisin; 
-    font-size: 30px;
+    margin-top: 2vh;
+    width: 80vw;
+    height: 8vh;
+    font-family: 'Times New Roman', Times, serif; 
+    font-size: 1.5em;
 }

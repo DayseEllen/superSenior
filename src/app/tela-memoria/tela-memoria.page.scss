@@ -1,62 +1,66 @@
 #voltar{
     position: center;
-    //right: 90px;
+    font-family:  Times New Roman; 
+    font-size: 1.5em;
 }
-
 #proximo{
     position: relative;
     left: 90px;
 }
 
 #topo{
-    height: 60px;
+    height: 8vh;
 }
 
 #texto{
-   font-family:  Rum Raisin; 
+    font-family:  Times New Roman; 
+   font-size: 1.3em;
    color: black;
-   margin-top: -37px;
-   margin-left: 60px;
+   margin-top: -6vh;
+   margin-left: 8vh;
 }
 
 #MemoriaImagem{ 
-    height: 50px;
-    width: 50px;
-    border-radius: 10px;
+    height: 7vh;
+    width: 7vh;
+    border-radius: 2vh;
     border: 2px solid;
     border-color: darkslategrey;
-    margin-top: 6px;
+    margin-top: 1vh;
     background-color: white;
 }
 
 .meio{
-    height: 450px;
-    width: 330px;
+    height: 70vh;
+    width: 90vw;
     text-align: center;
     background: white;
-    margin:auto;
-    margin-top: 40px;
+    border-radius: 2vh;
+    margin: auto;
+    
+    margin-top: 7vh;
 }
 .cartaR{
-    height: 120px;
-    width: 120px;
+    height: 20vh;
+    width: 40vw;
     border-radius: 10px;
     border: 2px solid;
     border-color: darkslategrey;
-    margin-top: 20px;
+    margin-top: 2.5vh;
     background-color: white;
-    margin-left: 8px;
-    margin-right: 8px;
+    margin-left: 1vw;
+    margin-right: 1vw;
 }
 .cartaL{
-    height: 120px;
-    width: 120px;
+    height: 20vh;
+    width: 40vw;
     border-radius: 10px;
     border: 2px solid;
     border-color: darkslategrey;
-    margin-top: 20px;
-    margin-left: 20px;
+    margin-top: 2.5vh;
     background-color: white;
+    margin-left: 1vw;
+    margin-right: 1vw;
 }
 #front{
     border-color: black;
