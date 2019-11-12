@@ -1,135 +1,120 @@
-#pergunta{
-    height: 50vh;
-    width: 80vw;
-}
-#imagens{
-    height: 50vh;
-    width: 80vw;
-}
 
 #voltar{
-    position: relative;
-    right: 90px;
-    font-family:  Rum Raisin; 
-}
-
-#proximo{
-    position: relative;
-    left: 90px;
-    font-family:  Rum Raisin; 
+    position: center;
+    font-family:  Times New Roman; 
+    font-size: 1.5em;
 }
 
 #topo{
-    height: 60px;
+    height: 9vh;
 }
 
 #texto{
-   font-family:  Rum Raisin; 
-   color: black;
-   margin-top: -37px;
-   margin-left: 60px;
+    font-family:  Times New Roman; 
+    font-size: 1.3em;
+    color: black;
+    margin-top: -6vh;
+    margin-left: 15vw;
 }
 
 #ArrastaImagem{ 
-    height: 50px;
-    width: 50px;
-    border-radius: 10px;
+    height: 7vh;
+    width: 11vw;
+    border-radius: 2vh;
     border: 2px solid;
     border-color: darkslategrey;
-    margin-top: 6px;
+    margin-top: 1vh;
     background-color: white;
 }
 
 .meio{
-    height: 450px;
-    width: 330px;
+    height: 70vh;
+    width: 90vw;
     text-align: center;
     background: white;
-    margin:auto;
-    margin-top: 40px;
+    border-radius: 2vh;
+    margin: auto;
+    margin-top: 7vh;
 }
 
 #label{
     position: relative;
-    font-family:  Rum Raisin; 
-    font-size: 20px;
+    font-family:  'Times New Roman', Times, serif; 
+    font-size: 1.2em;
     color: black;
-    top: 30px;
+    top: 1%;
 }
 
 #janela1{
     position: relative;
     text-align: center;
-    height: 90px;
-    width: 90px;
+    height: 14vh;
+    width: 25vw;
     border: 2px solid;
     border-color: darkslategrey;
-    top: 70px;
-    left: 50px;
+    top: 11vh;
+    left: 13.5vw;
     float: left;
 }
 #janela2{
     position: relative;
     text-align: center;
-    height: 90px;
-    width: 90px;
+    height: 14vh;
+    width: 25vw;
     border: 2px solid;
     border-color: darkslategrey;
-    top: 70px;
-    left: 100px;
+    top: 11vh;
+    left: 27vw;
     float: left;
 }
 #janela3{
     position: relative;
     text-align: center;
-    height: 90px;
-    width: 90px;
+    height: 14vh;
+    width: 25vw;
     border: 2px solid;
     border-color: darkslategrey;
-    top: 190px;
-    right: 60px;
+    top: 30vh;
+    right: 17vw;
     float: left;
 }
 #img1{
     position: relative;
-    height: 70px;
-    width: 70px;
+    height: 10vh;
+    width: 20vw;
     border-radius: 10px;
     border: 2px solid;
     border-color: darkslategrey;
-    top: 250px;
+    top: 40vh;
     background-color:white;
 }
 #img2{
     position: relative;
-    height: 70px;
-    width: 70px;
+    height: 10vh;
+    width: 20vw;
     border-radius: 10px;
     border: 2px solid;
     border-color: darkslategrey;
-    top: 250px;
-    margin-left: 10px;
+    top: 40vh;
     background-color: white;
 }
 #img3{
     position: relative;
-    height: 70px;
-    width: 70px;
+    height: 10vh;
+    width: 20vw;
     border-radius: 10px;
     border: 2px solid;
     border-color: darkslategrey;
-    top: 250px;
-    margin-left: 10px;
+    top: 40vh;
     background-color: white;
 }
 #img4{
     position: relative;
-    height: 70px;
-    width: 70px;
+    height: 10vh;
+    width: 20vw;
     border-radius: 10px;
     border: 2px solid;
     border-color: darkslategrey;
-    top: 250px;
-    margin-left: 10px;
+    top: 40vh;
     background-color: white;
 }

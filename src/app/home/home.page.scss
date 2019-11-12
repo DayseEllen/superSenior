@@ -4,15 +4,15 @@
 }
 
 .meio{
-  height: 350px;
-  width: 350px;
+  height: 55vh;
+  width: 95vw;
   text-align: center;
   margin:auto;
 }
 
 .pergunta{
   position: relative;
-  top: 40px;
+  top: 6vh;
   left: 15%;
   background-color: white;
   height: 32%;
@@ -26,14 +26,14 @@
 }
 
 #Pergunta{ 
-  height: 110px;
-  width: 110px;
+  height: 17vh;
+  width: 27vw;
 }
 
 .arrasta{
   position: relative;
   left: 22%;
-  top: 40px;
+  top: 6vh;
   background-color: white;
   height: 32%;
   width: 32%;
@@ -46,14 +46,14 @@
 }
 
 #Arrasta{
-  height: 110px;
-  width: 110px;
+  height: 17vh;
+  width: 27vw;
  }
 
  .memoria{
   position: relative;
   right: 30%;
-  top: 190px;
+  top: 30vh;
   background-color: white;
   height: 32%;
   width: 32%;
@@ -66,24 +66,25 @@
 }
 
  #Memoria{
-  height: 110px;
-  width: 110px;
+  height: 17vh;
+  width: 27vw;
  }
 
 #logo{
-  width: 120px;
-  height: 120px;
+  width: 35vw;
+  height: 20vh;
   border-radius: 10px;
-  margin-top: 30px;
+  margin-top: 5vh;
   }
 
 #texto{
-  font-size: 35px;
-  font-family:  Rum Raisin;
+  font-size: 2em;
+  font-family:  'Times New Roman', Times, serif;
   color: black;
-  margin-top: 20px;
+  margin-top: 4vh;
   }
 #textjogos{
-  font-family:  Rum Raisin;
-  margin-top: -3px;
+  font-family:  'Times New Roman', Times, serif;
+  font-size: 1.1em;
+  margin-top: 0.5vh;
 }

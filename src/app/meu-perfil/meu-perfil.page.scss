@@ -1,71 +1,56 @@
 /**Classes**/
-
-
 .campos{
-    font-family: Rum Raisin;
-    margin-left: 10px;
+    font-family: 'Times New Roman', Times, serif;
 }
 .campos.texto{
     color: black;
 }
-.campos.titulo{
-    font-size: 20px;
-}
-.campos.inputs{
-    width: 340px;
-}
 .campos.botao{
-    margin-top: 20px;
-    font-size: 15px;
+    margin-top: 2vh;
+    font-size: 1em;
 }
 
 
 /**Id's**/
-#imagemperfil{
-    margin-top: 10px;
-    width: 350px;
-    height: 200px;
-}
-
 #dados{
-    margin-top: 10px;
+    margin-top: 1vh;
 }
 
 #barraprogresso1{
     border: 2px solid #cdfcd3;
     background-color: #cdfcd3;
     color: black;
-    font-family: Rum Raisin;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 #barraprogresso2{
     border: 2px solid #fccdf7;
     background-color: #fccdf7;
     color: black;
-    font-family:Rum Raisin;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 #barraprogresso3{
     border: 2px solid #fceacd;
     background-color: #fceacd;
     color: black;
-    font-family: Rum Raisin;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 #titleavanco{
-    font-family: Rum Raisin;
-    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.5em;
     color: black;
 }
 
 #titlebarra{
-    font-family: Rum Raisin;
-    font-size: 15px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1em;
     color: black;
 }
 
 #perfilinfo{
-    font-family: Rum Raisin;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 #btnSair{

@@ -131,7 +131,7 @@ export class TelaMemoriaPage implements OnInit {
       cssClass:'alertsm',
       buttons: [
         {
-          text: 'Próximo fase',
+          text: 'Clique aqui para ir para a próxima fase',
           handler: () => {this.imageSelect()
                          setTimeout(()=> this.mostrarCartas(),1000)}
 
@@ -144,7 +144,7 @@ export class TelaMemoriaPage implements OnInit {
     let alert = await this.alert.create({
       header: 'O jogo já vai começar',
 
-      message: 'As cartas ficarão abertas por 2 segundos , por isso preste atenção!',
+      message: 'As cartas ficarão abertas por 2 segundos, por isso preste atenção!',
       cssClass:'alertsm',
       buttons: [
         {

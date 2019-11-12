@@ -13,7 +13,7 @@
     margin: auto;
     text-align: center;
 }
-buttom{
+.buttom{
     width: 90vw;
 }
 .loader {
@@ -44,7 +44,7 @@ buttom{
    font-size: 1.3em;
    color: black;
    margin-top: -6vh;
-   margin-left: 8vh;
+   margin-left: 15vw;
 }
 
 #enunciado{
@@ -53,12 +53,12 @@ buttom{
     margin:auto;
     text-align: center;
     margin-left: 1vh;
-    margin-right: 1vh;
+    margin-right: 2vw;
 }
 
 #PerguntaImagem{ 
     height: 7vh;
-    width: 7vh;
+    width: 11vw;
     border-radius: 2vh;
     border: 2px solid;
     border-color: darkslategrey;
@@ -67,8 +67,8 @@ buttom{
 }
 
 #iconeApp{ 
-    height: 17vh;
-    width: 17vh;
+    height: 15vh;
+    width: 25vw;
     border-radius: 3vh;
     border: 2px solid;
     border-color: darkslategrey;
