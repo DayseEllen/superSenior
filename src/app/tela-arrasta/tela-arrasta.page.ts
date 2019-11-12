@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+//import { DragulaService } from 'ng2-dragula/components/dragula.provider';
 
 import { BDService } from '../services/bd.service';
 
@@ -7,7 +8,7 @@ import {Imagem} from 'src/models/imagem';
 
 
 import { DragulaService } from 'ng2-dragula';
-import { ToastController } from '@ionic/angular';
+
 
 
 @Component({
@@ -27,8 +28,9 @@ export class TelaArrastaPage implements OnInit {
   nome1: string;
   nome2: string;
   nome3: string;
+  nomes=[];
 
-  constructor(private rota: Router, private bdService: BDService) {
+  constructor(private rota: Router, private bdService: BDService, private dragulaService: DragulaService) {
    // this.inserirImagens();
    this.carregarImagens();
   
@@ -37,6 +39,7 @@ export class TelaArrastaPage implements OnInit {
    private async carregarImagens(){
      this.imagens = await this.bdService.listWithUIDs<Imagem>('/imagens');
      this.imagensSelecionadas();
+     this.randomNomes();
    }
 
    randomImagem(){
@@ -51,16 +54,29 @@ export class TelaArrastaPage implements OnInit {
 
    imagensSelecionadas(){
      this.carregadas=[];
-     var nomes=[];
+     this.nomes=[];
      for(var i = 0;i < 4;i++){
        this.imagem = this.randomImagem();
        this.carregadas.push(new Imagem(this.imagem.url));
-       nomes.push(this.imagem.nome);
+       this.nomes.push(this.imagem.nome);
     }
-    this.nome1=nomes.pop();
-    this.nome2=nomes.pop();
-    this.nome3=nomes.pop();
    }
+
+   randomNomes(){
+    var ind_atual = this.nomes.length, val_tempo, ind_al;
+    while (0 !== ind_atual) {
+ 
+      ind_al = Math.floor(Math.random() * ind_atual);
+      ind_atual -= 1;
+
+      val_tempo = this.nomes[ind_atual];
+      this.nomes[ind_atual] = this.nomes[ind_al];
+      this.nomes[ind_al] = val_tempo;
+  }
+  return this.nomes;
+ }
+
+  
  
   ngOnInit() {
   }
