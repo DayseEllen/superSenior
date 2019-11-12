@@ -15,18 +15,18 @@
     <div text-center class="meio">
         <div id="janela1">
 
-           <div id="label" ><p>{{nome1}}</p></div> 
+           <div id="label" ><p>{{nomes[1]}}</p></div> 
         </div>
         
         <div id="janela2">
-          <div id="label" ><p>{{nome2}}</p></div> 
+          <div id="label" ><p>{{nomes[2]}}</p></div> 
         </div>
         <div id="janela3">
 
-          <div id="label" ngFor="let imagem of carregadas" ><p>{{nome3}}</p></div> 
+          <div id="label" ngFor="let imagem of carregadas" ><p>{{nomes[3]}}</p></div> 
         </div>
         <div>
-            <img id="img1" *ngFor="let imagem of carregadas" [src]="imagem.url">
+            <img id="img1" *ngFor="let imagem of carregadas" [src]="imagem.url" [dragula]="'bag-task1'">
         </div>
         
         
