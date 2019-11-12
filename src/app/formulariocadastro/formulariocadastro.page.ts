@@ -45,6 +45,7 @@ export class FormulariocadastroPage implements OnInit {
               let alert = await this.alertCtrl.create({
                 header: 'Ebaaa! 😃',
                 message: 'Você está cadastrado.',
+                cssClass:'alertsforms',
                 buttons:[{
                   text: 'Vamos lá!',
                   handler: ()=> this.rota.navigate(['login'])
@@ -60,6 +61,7 @@ export class FormulariocadastroPage implements OnInit {
                 let alert = await this.alertCtrl.create({
                   header: 'Que pena! 😢 ',
                   message: 'O usuário já existe.',
+                  cssClass:'alertsforms',
                   buttons:[{
                     text:"Ok"
                   }]
@@ -70,6 +72,7 @@ export class FormulariocadastroPage implements OnInit {
                 let alert = await this.alertCtrl.create({
                   header: 'Que pena! 😢 ',
                   message: 'O email digitado não é válido',
+                  cssClass:'alertsforms',
                   buttons:[{
                     text:"Ok"
                   }]
@@ -80,6 +83,7 @@ export class FormulariocadastroPage implements OnInit {
                 let alert = await this.alertCtrl.create({
                   header: 'Que pena! 😢 ',
                   message: 'Você não está habilitado a criar usuários',
+                  cssClass:'alertsforms',
                   buttons:[{
                     text:"Ok"
                   }]
@@ -90,6 +94,7 @@ export class FormulariocadastroPage implements OnInit {
                 let alert = await this.alertCtrl.create({
                   header: 'Que pena! 😢 ',
                   message: 'A senha digitada é muito fraca',
+                  cssClass:'alertsforms',
                   buttons:[{
                     text:"Ok"
                   }]

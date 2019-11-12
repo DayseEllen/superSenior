@@ -3,6 +3,7 @@ import { AlertController } from '@ionic/angular';
 import { Autenticacao } from '../services/autenticacao';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-meu-perfil',
   templateUrl: './meu-perfil.page.html',
@@ -16,6 +17,7 @@ export class MeuPerfilPage implements OnInit {
 
   ngOnInit() {
   }
+  
 
   singOut(){
     this.autenticacao.signOut()
@@ -26,10 +28,15 @@ export class MeuPerfilPage implements OnInit {
       console.error(error);
     });
  }
-
+ 
+ 
+  //FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+  
+ 
   async alterarNomeAlert(){
     let alert = await this.alertCtlr.create({
       header: "Nome do usuário:",
+      cssClass:'alertsperfil',
       inputs:[
         {
           name: 'nome',
@@ -39,7 +46,6 @@ export class MeuPerfilPage implements OnInit {
       buttons:[
         {
           text: 'Cancelar',
-          cssClass: 'secondary',
           role: 'cancel',
           handler: ()=> console.log("aqui vai abrir cancelar a ação de alterar")
         },
@@ -55,6 +61,7 @@ export class MeuPerfilPage implements OnInit {
   async alterarEmailAlert(){
     let alert = await this.alertCtlr.create({
       header: "Email do usuário:",
+      cssClass:'alertsperfil',
       inputs:[
         {
           name: 'email',
@@ -64,7 +71,6 @@ export class MeuPerfilPage implements OnInit {
       buttons:[
         {
           text: 'Cancelar',
-          cssClass: 'secondary',
           role: 'cancel',
           handler: ()=> console.log("aqui vai abrir cancelar a ação de alterar")
         },
@@ -80,6 +86,7 @@ export class MeuPerfilPage implements OnInit {
   async alterarGeneroAlert(){
     let alert = await this.alertCtlr.create({
       header: "Gênero do usuário:",
+      cssClass:'alertsperfil',
       inputs:[
         {
           name: 'genero',
@@ -89,7 +96,6 @@ export class MeuPerfilPage implements OnInit {
       buttons:[
         {
           text: 'Cancelar',
-          cssClass: 'secondary',
           role: 'cancel',
           handler: ()=> console.log("aqui vai abrir cancelar a ação de alterar")
         },
@@ -104,6 +110,7 @@ export class MeuPerfilPage implements OnInit {
   async alterarSenhaAlert(){
     let alert = await this.alertCtlr.create({
       header: "Sua senha:",
+      cssClass:'alertsperfil',
       inputs:[
         {
           name: 'senha',
@@ -124,7 +131,6 @@ export class MeuPerfilPage implements OnInit {
       buttons:[
         {
           text: 'Cancelar',
-          cssClass: 'secondary',
           role: 'cancel',
           handler: ()=> console.log("aqui vai abrir cancelar a ação de alterar")
         },

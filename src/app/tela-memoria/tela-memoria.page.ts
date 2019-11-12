@@ -127,9 +127,10 @@ export class TelaMemoriaPage implements OnInit {
     let alert = await this.alert.create({
       header: 'Parabéns!! 😃 Você adivinhou todas as cartas',
       message: 'E ainda aprendeu várias dicas sobre o smartphone!',
+      cssClass:'alertsm',
       buttons: [
         {
-          text: 'Próximo nível',
+          text: 'Clique aqui para continuar',
           handler: () => this.imageSelect()
         }
       ]
@@ -140,6 +141,7 @@ export class TelaMemoriaPage implements OnInit {
     let alert = await this.alert.create({
       header: 'O jogo já vai começar',
       message: 'As cartas ficarão abertas por 2 segundos , por isso preste atenção!',
+      cssClass:'alertsm',
       buttons: [
         {
           text: 'Entendi',
@@ -155,6 +157,7 @@ export class TelaMemoriaPage implements OnInit {
     let alert = await this.alert.create({
       header: 'Vamos lá!',
       message: 'Tente encontrar os pares de cada carta. Divirta-se!',
+      cssClass:'alertsm',
       buttons: [
         {
           text: 'Entendi'

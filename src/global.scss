@@ -10,12 +10,92 @@
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
 @font-face{
-    font-family: 'Rum Raisin';
+ font-family: 'Rum Raisin';
     src: url(./fonts/rum-raisin/RumRaisin-Regular.ttf)
+    
+}
+@font-face{
+    font-family: 'Oswald-Regular';
+    src: url(./fonts/oswald/Oswald-Regular.ttf)
 }
 
 /**id's**/
 #textostitle{
     font-family: Rum Raisin;
 }
+
+.alertsp .alert-message{
+    font-size: 170%;
+    color: black;
+    margin-top:10% ;
+}
+.alertsp .alert-button{
+    font-size: 120%;
+    color:black;
+   margin-top:40% ;
+}
+
+.alertsp .alert-title{
+    font-size: 170%;
+}
+
+.alertsm .alert-message{
+    font-size: 160%;
+    color:black;
+    margin-top: 10%;
+}
+
+.alertsm .alert-title{
+    font-size: 170%;
+}
+
+.alertsm .alert-button{
+    font-size: 140%;
+    color: black;
+}
+
+.alertsperfil .alert-title{
+    font-size: 190%;
+}
+
+.alertsperfil .alert-button{
+    font-size:120%;
+    color: black;
+    margin-top: 40%;
+}
+
+.alertsperfil .alert-input{
+    font-size: 135%;
+}
+
+.alertsformcad .alert-title{
+    font-size: 190%;
+}
+
+.alertsformcad .alert-message{
+    font-size: 170%;
+    color: black;
+    margin-top: 10%;
+}
+.alertsformcad .alert-button{
+    font-size: 120%;
+    color: black;
+    margin-top: 70%;
+}
+
+.alertsformlog .alert-title{
+    font-size: 190%;
+}
+
+.alertsformlog .alert-message{
+    font-size: 170%;
+    color: black;
+    margin-top: 20%;
+}
+.alertsformlog .alert-button{
+    font-size: 120%;
+    color: black;
+    margin-top: 70%;
+}
+
 

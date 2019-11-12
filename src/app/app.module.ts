@@ -17,6 +17,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { Autenticacao } from '../app/services/autenticacao';
 
 
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
