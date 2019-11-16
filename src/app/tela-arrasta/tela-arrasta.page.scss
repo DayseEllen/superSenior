@@ -3,6 +3,7 @@
     position: center;
     font-family:  Times New Roman; 
     font-size: 1.5em;
+    margin-top: 22vh;
 }
 
 #topo{
@@ -28,7 +29,7 @@
 }
 
 .meio{
-    height: 70vh;
+    height: 50vh;
     width: 90vw;
     text-align: center;
     background: white;
@@ -43,78 +44,120 @@
     font-size: 1.2em;
     color: black;
     top: 1%;
-}
-
-#janela1{
-    position: relative;
-    text-align: center;
-    height: 14vh;
-    width: 25vw;
     border: 2px solid;
     border-color: darkslategrey;
-    top: 11vh;
-    left: 13.5vw;
+}
+#fundo1{
+    position: fixed;
+    height: 13vh;
+    width: 22vw;
+    top: 28.4vh;
+    left: 18.8vw;
+    z-index:1;
+ 
+}
+#fundo2{
+    position: fixed;
+    height: 13vh;
+    width: 22vw;
+    top: 28.4vh;
+    left: 60.2vw;
+    z-index:1;
+  
+}
+#fundo3{
+    position: fixed;
+    height: 13vh;
+    width: 22vw;
+    top: 50vh;
+    left: 39.2vw;
+    z-index:1;
+    
+}
+h6{
+    color: black;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    font-family:  Times New Roman; 
+    font-size: 1em;
+    text-align: center;
+}
+#janela1{
+    position: relative;
+    height: 13.5vh;
+    width: 22.5vw;
+    border: 3px solid;
+    border-radius: 2vh;
+    border-color: darkslategrey;
+    margin-top: 11vh;
+    margin-left: 13.5vw;
     float: left;
+    z-index:2;
 }
 #janela2{
     position: relative;
-    text-align: center;
-    height: 14vh;
-    width: 25vw;
-    border: 2px solid;
+    height: 13.5vh;
+    width: 22.5vw;
+    border: 3px solid;
+    border-radius: 2vh;
     border-color: darkslategrey;
-    top: 11vh;
-    left: 27vw;
+    margin-top: 11vh;
+    margin-left: 19vw;
     float: left;
+    z-index:2;
 }
 #janela3{
     position: relative;
-    text-align: center;
-    height: 14vh;
-    width: 25vw;
-    border: 2px solid;
+    height: 13.5vh;
+    width: 22.5vw;
+    border: 3px solid;
+    border-radius: 2vh;
     border-color: darkslategrey;
-    top: 30vh;
-    right: 17vw;
+    margin-top: 8vh;
+    margin-left: 33.75vw;
     float: left;
+    z-index:2;
 }
-#img1{
-    position: relative;
-    height: 10vh;
-    width: 20vw;
-    border-radius: 10px;
-    border: 2px solid;
-    border-color: darkslategrey;
-    top: 40vh;
-    background-color:white;
-}
-#img2{
-    position: relative;
-    height: 10vh;
-    width: 20vw;
-    border-radius: 10px;
-    border: 2px solid;
-    border-color: darkslategrey;
-    top: 40vh;
-    background-color: white;
-}
-#img3{
-    position: relative;
-    height: 10vh;
-    width: 20vw;
-    border-radius: 10px;
-    border: 2px solid;
-    border-color: darkslategrey;
-    top: 40vh;
-    background-color: white;
-}
-#img4{
-    position: relative;
-    height: 10vh;
-    width: 20vw;
-    border-radius: 10px;
-    border: 2px solid;
-    border-color: darkslategrey;
-    top: 40vh;
-    background-color: white;
-}
+
+#painel{
+    position: absolute;
+    height: 13vh;
+    width: 100vw;
+    margin-top: 5vh;
+    margin-left: 1.5vw;
+}   
+#imgPainel{
+    position: relative; 
+    height: 12vh;
+    width: 22vw;
+    border-radius: 2vh;
+    background: white;
+}  
+
+/* in-flight clone */
+.gu-mirror {
+    position: fixed !important;
+    margin: 0 !important;
+    z-index: 9999 !important;
+    opacity: 0.8;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+    filter: alpha(opacity=80);
+    pointer-events: none;
+  }
+  /* high-performance display:none; helper */
+  .gu-hide {
+    left: -9999px !important;
+  }
+  /* added to mirrorContainer (default = body) while dragging */
+  .gu-unselectable {
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+  }
+  /* added to the source element while its mirror is dragged */
+  .gu-transit {
+    opacity: 0.2;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+    filter: alpha(opacity=20);
+  }

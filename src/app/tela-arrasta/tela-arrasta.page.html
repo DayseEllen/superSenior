@@ -1,5 +1,6 @@
 <ion-header>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <ion-toolbar>
     <ion-title>
       <div id="topo">
@@ -11,27 +12,31 @@
 </ion-header>
 
 <ion-content color="primary">
-<div text-center>
+  <div text-center>
     <div text-center class="meio">
-        <div id="janela1">
+      <div id="janela1" dragula="bag" [dragulaModel]="bag">
+        
+      </div>
+      <div id="fundo1">
+        <h6>{{nomes[1]}}</h6>
+      </div>
+      
 
-           <div id="label" ><p>{{nomes[1]}}</p></div> 
-        </div>
-        
-        <div id="janela2">
-          <div id="label" ><p>{{nomes[2]}}</p></div> 
-        </div>
-        <div id="janela3">
+      <div id="janela2" dragula="bag" [dragulaModel]="bag"></div>
+      <div id="fundo2">
+        <h6>{{nomes[2]}}</h6>
+      </div>
 
-          <div id="label" ngFor="let imagem of carregadas" ><p>{{nomes[3]}}</p></div> 
-        </div>
-        <div>
-            <img id="img1" *ngFor="let imagem of carregadas" [src]="imagem.url" [dragula]="'bag-task1'">
-        </div>
-        
-        
+      <div id="janela3" dragula="bag" [dragulaModel]="bag"></div>
+      <div id="fundo3">
+        <h6>{{nomes[3]}}</h6>
+      </div>
+
     </div>
-  <br>
-  <button type="button" class="btn btn-light" id="voltar" (click)="abrirPagina('home')">Voltar</button>
-</div>
-  </ion-content>
+    <div id="painel" dragula="bag" [dragulaModel]="bag" >
+      <img id="imgPainel" *ngFor="let imagem of carregadas" [src]="imagem.url">
+    </div>
+    
+    <button type="button" class="btn btn-light" id="voltar" (click)="abrirPagina('home')">Voltar</button>
+  </div>
+</ion-content>
