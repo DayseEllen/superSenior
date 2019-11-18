@@ -12,25 +12,18 @@
     color: black;
     margin-top: 10%;
 }
-#formulario{
-    margin-top: 60px;
-}
+
 
 /**Classes**/
 
-.campos{
-    font-family: Rum Raisin;
-    margin-left: 10px;
-}
-.campos.inputs{
-    width: 340px;
-    height: 50px;
-}
-.campos.botao{
-    margin-top: 20px;
-    font-size: 15px;
-    width: 100px;
-}
-.campos.botao.entrar{
-    margin-left: 138px;
+
+
+#botao{
+    font-family: Times New Roman;
+    font-size: 1.2em;
+    height: 10vh;
+    margin-top: 17vh;
+    margin-left: 6vh;
+    background: white;
+    color: black;
 }

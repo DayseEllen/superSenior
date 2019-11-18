@@ -1,3 +1,4 @@
+import { Autenticacao } from '../services/autenticacao';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -9,7 +10,11 @@ import { Router } from '@angular/router';
 
 export class HomePage {
 
-  constructor(private rota:Router) { }
+  constructor(private rota:Router,  private autenticacao : Autenticacao) { 
+  }
+
+  ngOnInit(){
+  }
 
   abrirPagina(url:String){
     this.rota.navigate([url]);

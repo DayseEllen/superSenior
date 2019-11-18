@@ -26,10 +26,6 @@ export class TelaArrastaPage implements OnInit, OnDestroy{
   imagem: Imagem;
   carregadas: Imagem[];
   imagemEscolhida: Imagem;
-  imgsUtilizadas: Imagem[];
-  nome1: string;
-  nome2: string;
-  nome3: string;
   nomes = [];
   subs = new Subscription();
 
@@ -37,7 +33,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy{
     // this.inserirImagens();
     this.carregarImagens();
     this.dragulaService.createGroup('bag',{
-      removeOnSpill: false
+      revertOnSpill: true
     });
     this.subs.add(dragulaService.drop('bag')
       .subscribe(({el})=> {
@@ -45,12 +41,6 @@ export class TelaArrastaPage implements OnInit, OnDestroy{
       }));
   }
   
-  
-
-
-  private newMethod() {
-    return this;
-  }
 
   private async carregarImagens() {
     this.imagens = await this.bdService.listWithUIDs<Imagem>('/imagens');
@@ -73,7 +63,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy{
     this.nomes = [];
     for (var i = 0; i < 4; i++) {
       this.imagem = this.randomImagem();
-      this.carregadas.push(new Imagem(this.imagem.url));
+      this.carregadas.push(this.imagem);
       this.nomes.push(this.imagem.nome);
     }
   }
@@ -90,6 +80,17 @@ export class TelaArrastaPage implements OnInit, OnDestroy{
       this.nomes[ind_al] = val_tempo;
     }
     return this.nomes;
+  }
+
+  conferirImagem(id){
+     var imagemElemento = document.getElementById(id);
+    for(var i=0;i<4;i++){
+      if(imagemElemento==this.nomes[i]){
+        console.log(this.nomes[i])
+      }
+
+    }
+   
   }
 
 

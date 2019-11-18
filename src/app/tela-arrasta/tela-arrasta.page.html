@@ -34,7 +34,7 @@
 
     </div>
     <div id="painel" dragula="bag" [dragulaModel]="bag" >
-      <img id="imgPainel" *ngFor="let imagem of carregadas" [src]="imagem.url">
+      <img id="imgPainel" *ngFor="let imagem of carregadas" [src]="imagem.url" (mousemove)="conferirImagem(id)">
     </div>
     
     <button type="button" class="btn btn-light" id="voltar" (click)="abrirPagina('home')">Voltar</button>
