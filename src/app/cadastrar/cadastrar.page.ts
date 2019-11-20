@@ -13,10 +13,6 @@ export class CadastrarPage implements OnInit {
 
   ngOnInit() {
   }
-
-  goForms(){
-    this.rota.navigate(['formulariocadastro'])
-  }
   
   goLogin(){
     this.rota.navigate(['login'])
