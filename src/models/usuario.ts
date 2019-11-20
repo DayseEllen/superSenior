@@ -3,15 +3,14 @@ export class Usuario{
     uid: string;
     nome: string;
     email: string;
-    genero: string;
-   dataNasc: Date;
+    //genero: string;
+   //dataNasc: Date;
 
    perguntasRespondidas: Resposta[]; 
-   /* constructor(nome:string, email:string, genero: string, dataNasc: Date){
+    constructor(uid: string,nome:string, email:string){
         this.nome=nome;
         this.email=email;
-        this.genero=genero;
-        this.dataNasc=dataNasc;
-    }*/
+       this.uid=uid;
+    }
 
 }

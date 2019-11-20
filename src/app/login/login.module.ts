@@ -1,3 +1,4 @@
+import { BDService } from './../services/bd.service';
 import { Autenticacao } from './../services/autenticacao';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -27,7 +28,8 @@ const routes: Routes = [
   ],
   declarations: [LoginPage],
   providers: [AngularFireAuth,
-  Autenticacao]
+  Autenticacao,
+BDService]
 })
 
 export class LoginPageModule {}

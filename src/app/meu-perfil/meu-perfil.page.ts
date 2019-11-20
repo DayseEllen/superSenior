@@ -10,13 +10,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./meu-perfil.page.scss'],
 })
 export class MeuPerfilPage implements OnInit {
-  private nomeUsuario=null;
-  private emailUsuario=null;
+ 
 
   constructor(private alertCtlr: AlertController, private autenticacao : Autenticacao, 
     private rota: Router) {
-      this.nomeUsuario=autenticacao.getDisplayName();
-      this.emailUsuario=autenticacao.getEmail();
+      
      }
 
   ngOnInit() {

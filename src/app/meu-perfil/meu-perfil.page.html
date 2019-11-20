@@ -13,13 +13,13 @@
     <div id="dados">
     <ion-item >
         <ion-label id="perfilinfo">
-          {{nomeUsuario}}
+          {{autenticacao.getDisplayName()}}
         </ion-label>
         <ion-icon name="create" (click)="alterarNomeAlert()"></ion-icon>
       </ion-item>
       <ion-item >
           <ion-label id="perfilinfo">
-              {{emailUsuario}}
+              {{autenticacao.getEmail()}}
           </ion-label>
           <ion-icon name="create" (click)="alterarEmailAlert()"></ion-icon>
       </ion-item>

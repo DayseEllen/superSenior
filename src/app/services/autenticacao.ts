@@ -10,7 +10,7 @@ import {auth} from 'firebase/app';
 @Injectable()
 export class Autenticacao {
      private usuario: Observable<firebase.User>;
-     private userDetails: firebase.User = null;
+     private userDetails: firebase.User;
 
     constructor(private angularFireAuth : AngularFireAuth, private router: Router, private angularFirestore: AngularFirestore){
       this.usuario = angularFireAuth.authState;
@@ -46,9 +46,19 @@ export class Autenticacao {
     }
 
     getDisplayName(){
-      return this.userDetails.displayName;
+      if(this.isLoggedIn()){
+        return this.userDetails.displayName;
+      }
+      
     }
    getEmail(){
+    if(this.isLoggedIn()){
       return this.userDetails.email;
+    }
+    }
+    getUid(){
+      if(this.isLoggedIn()){
+        return this.userDetails.uid;
+      }
     }
   }
