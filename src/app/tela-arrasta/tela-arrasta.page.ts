@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 //import { DragulaService } from 'ng2-dragula/components/dragula.provider';
 
@@ -22,48 +22,68 @@ export class TelaArrastaPage implements OnInit, OnDestroy{
   
 
 
-  imagens: Imagem[];
+  imagensCarregadas: Imagem[];
   imagem: Imagem;
-  carregadas: Imagem[];
+  imagens: Imagem[];
+  imagens2:Imagem[];
   imagemEscolhida: Imagem;
   nomes = [];
+  isOk: boolean;
   subs = new Subscription();
 
-  constructor(private rota: Router, private bdService: BDService, private dragulaService: DragulaService) {
+  constructor(private rota: Router, private bdService: BDService, private dragulaService: DragulaService, private elementRef: ElementRef) {
     // this.inserirImagens();
     this.carregarImagens();
     this.dragulaService.createGroup('bag',{
       revertOnSpill: true
     });
-    this.subs.add(dragulaService.drop('bag')
-      .subscribe(({el})=> {
-        console.log(el);
-      }));
+    this.subs.add(this.dragulaService.drop('bag')
+    .subscribe(({el})=> {
+     
+     
+    }));
+  
+  }
+
+  ngAfterViewInit() {
+    this.elementRef.nativeElement.querySelector('fundo1')
+     .addEventListener('change', this.onClick.bind(this));
+  }
+
+  
+onClick(event) {
+  console.log("dfdfdf");
+}
+
+   conferirImagem(){
+    document.getElementById('fundo1').addEventListener('change', (el)=> {
+     
+    })
   }
   
 
   private async carregarImagens() {
-    this.imagens = await this.bdService.listWithUIDs<Imagem>('/imagens');
+    this.imagensCarregadas = await this.bdService.listWithUIDs<Imagem>('/imagens');
     this.imagensSelecionadas();
     this.randomNomes();
   }
 
   randomImagem() {
-    this.imagemEscolhida = this.imagens[Math.floor(this.imagens.length * Math.random())];
-    for (var i = 0; i < this.imagens.length; i++) {
-      if (this.imagens[i].url == this.imagemEscolhida.url) {
-        this.imagens.splice(i, 1);
+    this.imagemEscolhida = this.imagensCarregadas[Math.floor(this.imagensCarregadas.length * Math.random())];
+    for (var i = 0; i < this.imagensCarregadas.length; i++) {
+      if (this.imagensCarregadas[i].url == this.imagemEscolhida.url) {
+        this.imagensCarregadas.splice(i, 1);
       }
     }
     return this.imagemEscolhida;
   }
 
   imagensSelecionadas() {
-    this.carregadas = [];
+    this.imagens = [];
     this.nomes = [];
     for (var i = 0; i < 4; i++) {
       this.imagem = this.randomImagem();
-      this.carregadas.push(this.imagem);
+      this.imagens.push(this.imagem);
       this.nomes.push(this.imagem.nome);
     }
   }
@@ -82,15 +102,8 @@ export class TelaArrastaPage implements OnInit, OnDestroy{
     return this.nomes;
   }
 
-  conferirImagem(id){
-     var imagemElemento = document.getElementById(id);
-    for(var i=0;i<4;i++){
-      if(imagemElemento==this.nomes[i]){
-        console.log(this.nomes[i])
-      }
-
-    }
-   
+  selecaoOk() {
+    alert(this.imagens.length);
   }
 
 

@@ -17,6 +17,9 @@ export class CadastrarPage implements OnInit {
   goLogin(){
     this.rota.navigate(['login'])
   }
+  goCadastrar(){
+    this.rota.navigate(['formulariocadastro']);
+  }
 
 
 

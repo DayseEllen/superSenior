@@ -28,43 +28,19 @@ export class LoginPage implements OnInit {
 
   @ViewChild('login') form: NgForm;
 
-  private async carregarUsuarios(){
-    this.usuarios = await this.bdService.listWithUIDs<Usuario>('/usuarios');
-
-  }
-
-
 
   async loginGoogle(){
      await this.autenticacao.signInWithGoogle();
-     if(this.verificaSeExiste()==false){
-      this.usuario = new Usuario(
-        this.autenticacao.getUid(),this.autenticacao.getDisplayName(),this.autenticacao.getEmail());
-         this.inserirUsuario(this.usuario);
-     }else{
-       console.log("User já castrado antes")
-     }
-      
-     
-  }
-
-  verificaSeExiste(){
-    for(var i=0;i<this.usuarios.length;i++){
-      if(this.usuarios[i].email===this.autenticacao.getEmail()){
-        return true;
-      }
-    }
-    return false;
-  }
-
- private async inserirUsuario(usuario){
-   await this.bdService.insertInList<Usuario>('/usuarios',usuario);
+    
   }
 
  
 
+ 
+ 
+
   ngOnInit() {
-    this.carregarUsuarios();
+    
   }
 
   abrirPagina(url:String){

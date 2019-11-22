@@ -12,13 +12,13 @@
 </ion-header>
 
 <ion-content color="primary">
-  <div text-center>
+ <div text-center>
     <div text-center class="meio">
-      <div id="janela1" dragula="bag" [dragulaModel]="bag">
+      <div id="janela1" dragula="bag" [dragulaModel]="bag" >
         
       </div>
       <div id="fundo1">
-        <h6>{{nomes[1]}}</h6>
+        <h6 id="nome1">{{nomes[1]}}</h6>
       </div>
       
 
@@ -33,8 +33,9 @@
       </div>
 
     </div>
-    <div id="painel" dragula="bag" [dragulaModel]="bag" >
-      <img id="imgPainel" *ngFor="let imagem of carregadas" [src]="imagem.url" (mousemove)="conferirImagem(id)">
+    <div id="painel"  dragula="bag" [(dragulaModel)]="bag">
+     <!--<img id="imgPainel" *ngFor="let imagem of imagens" [src]="imagem.url" >--> 
+     <img id="imgPainel" *ngIf="imagens"  [src]="imagens[0].url"/>
     </div>
     
     <button type="button" class="btn btn-light" id="voltar" (click)="abrirPagina('home')">Voltar</button>

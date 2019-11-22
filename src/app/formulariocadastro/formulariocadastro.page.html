@@ -9,25 +9,21 @@
     </div>
    <div text-center id="titulo">Cadastre-se!</div>
    <div>
-    <form #cadastro="ngForm" (ngSubmit)="createAccount(cadastro.value)">
+    <form #cadastro="ngForm" (ngSubmit)="cadastrarComGoogle(cadastro.value)">
         <div class="form-row formulario">
-            <div class="form-group col-md-6">
-                <label for="inputName4" class="campos textoformulario">Digite seu nome:</label>
-                <input type="text" class="form-control campos inputs" id="inputName4" placeholder="Nome" name="nome" ngModel required>
-              </div>
         <div class="form-group col-md-6">
           <label for="inputName4" class="campos textoformulario">Digite sua idade:</label>
           <input type="number" class="form-control campos inputs" id="inputName4" placeholder="Idade" name="idade" ngModel required>
         </div>
         <div class="form-group col-md-6">
-          <label class="campos textoformulario" for="exampleFormControlSelect1">Escolha o seu sexo:</label>
-          <select class="form-control campos inputs" id="exampleFormControlSelect1">
+          <label class="campos textoformulario" for="exampleFormControlSelect1" >Escolha o seu sexo:</label>
+          <select class="form-control campos inputs" id="exampleFormControlSelect1" name="genero" ngModel required >
             <option>Feminino</option>
             <option>Masculino</option>
           </select>
         </div>
-        <label for="inputName4" class="campos textoformulario">Digite seu telefone:</label>
-            <input type="text" class="form-control campos inputs" id="inputName4" name="telefone" data-mask="(00) 0000-0000" data-mask-selectonfocus="true" ngModel required>
+        
+           
         </div>
         <br>
       <div>
