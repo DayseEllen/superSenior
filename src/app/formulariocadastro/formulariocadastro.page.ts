@@ -37,7 +37,8 @@ this.carregarUsuarios();
     await this.autenticacao.signInWithGoogle();
     if(this.verificaSeExiste()==false){
       this.usuario = new Usuario(
-        this.autenticacao.getUid(),this.autenticacao.getDisplayName(),this.autenticacao.getEmail(),cadastro.genero,cadastro.idade,null,null,null,null);
+        this.autenticacao.getUid(),this.autenticacao.getDisplayName(),
+        this.autenticacao.getEmail(),cadastro.genero,cadastro.idade,0,0,0);
          this.inserirUsuario(this.usuario);
      }else{
        console.log("User já castrado antes")
