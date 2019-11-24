@@ -20,18 +20,21 @@ export class TelaPerguntaPage implements OnInit {
   perguntaAtual: Pergunta;
   indiceAtual: number;
   usuario: Usuario;
+  user: Usuario;
   usuarios: Usuario[]=[];
+  pontosP: number;
 
   constructor(private rota: Router, private bdService: BDService, private alert: AlertController, private autenticacao : Autenticacao) {
   //this.inserirPerguntas();
     this.carregarUsuarios();
     this.carregarPerguntas();
+    
   }
 
   private async carregarUsuarios(){
     this.usuarios = await this.bdService.listWithUIDs<Usuario>('/usuarios');
       this.getUser();
-    
+    this.pontosP = this.usuario.pontosPerguntas;
   }
     private getUser(){
        this.usuario=null;
@@ -47,15 +50,15 @@ export class TelaPerguntaPage implements OnInit {
   
 
   randomPergunta() {
-    if(this.usuario.pontosPerguntas >=0 && this.usuario.pontosPerguntas <8){
+    if(this.pontosP >=0 && this.pontosP <6){
     var perguntasFaceis = this.perguntas.filter(pergunta => pergunta.nivel == 1);
     this.perguntaAtual = perguntasFaceis[Math.floor(perguntasFaceis.length * Math.random())];
     }
-    if(this.usuario.pontosPerguntas >=8 && this.usuario.pontosPerguntas <15){
+    if(this.pontosP >=6 && this.pontosP <12){
       var perguntasMedias = this.perguntas.filter(pergunta => pergunta.nivel == 2);
       this.perguntaAtual = perguntasMedias[Math.floor(perguntasMedias.length * Math.random())];
     }
-    if(this.usuario.pontosPerguntas >=15 && this.usuario.pontosPerguntas <19){
+    if(this.pontosP >=12 && this.pontosP <18){
       var perguntasDificeis = this.perguntas.filter(pergunta => pergunta.nivel == 3);
       this.perguntaAtual = perguntasDificeis[Math.floor(perguntasDificeis.length * Math.random())];
     }
@@ -74,10 +77,27 @@ export class TelaPerguntaPage implements OnInit {
   }
 
   async conferirPergunta(resposta: String) {
-    if (resposta == this.perguntaAtual.resposta) {
+    if (this.pontosP == 6) {
+      this.pontosP ++;
       let alerta = await this.alert.create({
-        header: 'Parabéns! Você acertou a pergunta. 😃',
-        message: ""+ this.perguntaAtual.dica,
+        header: 'Parabéns!!! Você agora está no nível 2. 😃',
+        message: "Continue jogando para passar de nível.",
+        cssClass:'alertsp',
+        buttons: [
+          {
+            text: 'Clique aqui para a próxima pergunta',
+            handler: () => this.exibirProximaPergunta()
+          }
+        ]
+      });
+      await alerta.present();  
+      
+    }
+    if (this.pontosP == 12) { 
+      this.pontosP ++; 
+      let alerta = await this.alert.create({
+        header: 'Parabéns!!! Você agora está no nível 3. 😃',
+        message: "Continue jogando para passar para o próximo nível.",
         cssClass:'alertsp',
         buttons: [
           {
@@ -87,11 +107,24 @@ export class TelaPerguntaPage implements OnInit {
         ]
       });
       await alerta.present();
-
-      /*Lógica de score*/
-      this.usuario.pontosPerguntas ++; 
-
-    } else {
+      
+    }
+    if (this.pontosP == 18) {  
+      let alerta = await this.alert.create({
+        header: 'Parabéns!!! Você zerou o jogos das Perguntas. 😃',
+        message: "",
+        cssClass:'alertsp',
+        buttons: [
+          {
+            text: 'Clique aqui reiniciar o jogo',
+            handler: () => this.igualaZero()
+          }
+        ]
+      });
+      await alerta.present();
+      
+    }
+    if (resposta != this.perguntaAtual.resposta) {     
       let alert = await this.alert.create({
         header: 'Que pena! 😢 Você errou a pergunta',
         message: 'Preste atenção na dica: ' + this.perguntaAtual.dica,
@@ -104,7 +137,28 @@ export class TelaPerguntaPage implements OnInit {
         ]
       });
       await alert.present();
+
+    } else if(this.pontosP != 6 && this.pontosP != 12 && this.pontosP != 18){
+      this.pontosP ++;  
+     let alerta = await this.alert.create({
+        header: 'Parabéns! Você acertou a pergunta. 😃 Continue assim e você logo passará de nível.',
+        message: ""+ this.perguntaAtual.dica,
+        cssClass:'alertsp',
+        buttons: [
+          {
+            text: 'Clique aqui para a próxima pergunta',
+            handler: () => this.exibirProximaPergunta()
+          }
+        ]
+      });
+      await alerta.present();
     }
+
+  }
+
+  igualaZero(){
+    this.pontosP = 0;
+    this.exibirProximaPergunta();
   }
 
 
@@ -177,8 +231,12 @@ export class TelaPerguntaPage implements OnInit {
 
 
   abrirPagina(url: String) {
+    console.log(this.pontosP);
+      this.user = new Usuario(
+      this.autenticacao.getUid(),this.autenticacao.getDisplayName(),
+      this.autenticacao.getEmail(),this.usuario.genero,this.usuario.idade,this.pontosP,0,0);
     this.rota.navigate([url]);
-
+    this.bdService.update('/usuarios', this.usuario.uid, this.user);
   }
 
 }

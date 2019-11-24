@@ -5,12 +5,12 @@ import { Router } from '@angular/router';
 import { Usuario } from 'src/models/usuario';
 import { BDService } from '../services/bd.service';
 
-
 @Component({
   selector: 'app-meu-perfil',
   templateUrl: './meu-perfil.page.html',
   styleUrls: ['./meu-perfil.page.scss'],
 })
+
 export class MeuPerfilPage implements OnInit {
   usuario: Usuario;
   usuarios: Usuario[]=[];
