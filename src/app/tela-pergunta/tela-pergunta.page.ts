@@ -97,7 +97,7 @@ export class TelaPerguntaPage implements OnInit {
       this.pontosP ++; 
       let alerta = await this.alert.create({
         header: 'Parabéns!!! Você agora está no nível 3. 😃',
-        message: "Continue jogando para passar para o próximo nível.",
+        message: "Continue jogando para passar de nível.",
         cssClass:'alertsp',
         buttons: [
           {
@@ -111,7 +111,7 @@ export class TelaPerguntaPage implements OnInit {
     }
     if (this.pontosP == 18) {  
       let alerta = await this.alert.create({
-        header: 'Parabéns!!! Você zerou o jogos das Perguntas. 😃',
+        header: 'Parabéns!!! Você zerou o jogos das Perguntas.😃',
         message: "",
         cssClass:'alertsp',
         buttons: [
@@ -141,7 +141,7 @@ export class TelaPerguntaPage implements OnInit {
     } else if(this.pontosP != 6 && this.pontosP != 12 && this.pontosP != 18){
       this.pontosP ++;  
      let alerta = await this.alert.create({
-        header: 'Parabéns! Você acertou a pergunta. 😃 Continue assim e você logo passará de nível.',
+        header: 'Parabéns! Você acertou a pergunta.😃 Continue assim e você logo passará de nível.',
         message: ""+ this.perguntaAtual.dica,
         cssClass:'alertsp',
         buttons: [
