@@ -40,6 +40,7 @@ export class Autenticacao {
         return true;
       }
     }
+    
   logout() {
       this.angularFireAuth.auth.signOut()
       .then((res) => this.router.navigate(['/cadastrar']));

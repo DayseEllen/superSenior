@@ -23,22 +23,21 @@ export class LoginPage implements OnInit {
   
   constructor(private rota: Router, private autenticacao : Autenticacao, private alertCtrl: AlertController, private location: Location, private bdService: BDService) { 
   
-    
+    this.carregarUsuarios();
    }
 
   @ViewChild('login') form: NgForm;
 
+  private async carregarUsuarios(){
+    this.usuarios = await this.bdService.listWithUIDs<Usuario>('/usuarios');
 
+  }
   async loginGoogle(){
      await this.autenticacao.signInWithGoogle();
-    
+     
   }
 
  
-
- 
- 
-
   ngOnInit() {
     
   }

@@ -30,6 +30,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy{
   nomes = [];
   isOk: boolean;
   subs = new Subscription();
+  janela = [];
 
   constructor(private rota: Router, private bdService: BDService, private dragulaService: DragulaService, private elementRef: ElementRef) {
     // this.inserirImagens();
@@ -45,16 +46,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy{
   
   }
 
-  ngAfterViewInit() {
-    this.elementRef.nativeElement.querySelector('fundo1')
-     .addEventListener('change', this.onClick.bind(this));
-  }
-
-  
-onClick(event) {
-  console.log("dfdfdf");
-}
-
+ 
    conferirImagem(){
     document.getElementById('fundo1').addEventListener('change', (el)=> {
      
