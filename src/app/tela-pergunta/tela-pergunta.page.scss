@@ -4,7 +4,23 @@
     position: center;
     font-family:  Times New Roman; 
     font-size: 1.5em;
-    
+    margin-top: -2.5%;
+}
+
+#barraprogresso1{
+    border: 2px solid #fccdf7;
+    background-color: #fccdf7;
+   // border: 2px solid #fceacd;
+   // background-color: #fceacd;
+    color: black;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+#titlebarra{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1em;
+    color: black;
+    margin-top: 2%;
 }
 
 #botoes{
@@ -72,18 +88,18 @@
     border-radius: 3vh;
     border: 2px solid;
     border-color: darkslategrey;
-    margin-top: 4vh;
+    margin-top: 1.5vh;
     background-color: white;
 }
 
 .meio{
-    height: 70vh;
+    height: 65vh;
     width: 90vw;
     text-align: center;
     background: white;
     border-radius: 2vh;
     margin:auto;
-    margin-top: 7vh;
+    margin-top: 2vh;
 }
 
 #pergunta{
