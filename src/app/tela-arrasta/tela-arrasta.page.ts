@@ -18,38 +18,44 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./tela-arrasta.page.scss'],
   providers: [BDService]
 })
-export class TelaArrastaPage implements OnInit, OnDestroy{
-  
+export class TelaArrastaPage implements OnInit, OnDestroy {
+
 
 
   imagens: Imagem[];
   imagem: Imagem;
   carregadas: Imagem[];
   imagemEscolhida: Imagem;
-  imgsUtilizadas: Imagem[];
-  nome1: string;
-  nome2: string;
-  nome3: string;
   nomes = [];
   subs = new Subscription();
-
+  janela1: string;
+  janela2: string;
+  janela3: string;
+  barra: string;
+  imagemJanela1: [] = [];
+  imagemJanela2: Imagem[] = [];
+  imagemJanela3: Imagem[] = [];
+  imagensBarra: Imagem[] = [];
+  vamps = {name:'BOta'};
   constructor(private rota: Router, private bdService: BDService, private dragulaService: DragulaService) {
     // this.inserirImagens();
     this.carregarImagens();
-    this.dragulaService.createGroup('bag',{
-      removeOnSpill: false
-    });
-    this.subs.add(dragulaService.drop('bag')
-      .subscribe(({el})=> {
-        console.log(el);
-      }));
+    this.janela1 = "bag";
+    this.janela2 = "bag";
+    this.janela3 = "bag";
+    this.barra = "bag";
+
+
+    if (!dragulaService.find('bag')) {
+      this.dragulaService.createGroup(this.barra, {
+        revertOnSpill: true
+      }
+      );
+    }
+    
   }
-  
-  
-
-
-  private newMethod() {
-    return this;
+  verifica() {
+    alert('pegou');
   }
 
   private async carregarImagens() {
@@ -73,9 +79,10 @@ export class TelaArrastaPage implements OnInit, OnDestroy{
     this.nomes = [];
     for (var i = 0; i < 4; i++) {
       this.imagem = this.randomImagem();
-      this.carregadas.push(new Imagem(this.imagem.url));
+      this.carregadas.push(this.imagem);
       this.nomes.push(this.imagem.nome);
     }
+
   }
 
   randomNomes() {
@@ -92,16 +99,19 @@ export class TelaArrastaPage implements OnInit, OnDestroy{
     return this.nomes;
   }
 
+  verificaImg() {
 
+  }
 
   ngOnInit() {
   }
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.subs.unsubscribe();
   }
   abrirPagina(url: String) {
     this.rota.navigate([url]);
   }
+
   /* inserirImagens(){
      const imagens =
      [
