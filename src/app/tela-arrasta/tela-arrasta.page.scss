@@ -54,6 +54,7 @@
     top: 28.4vh;
     left: 18.8vw;
     z-index:1;
+    color: black;
  
 }
 #fundo2{
@@ -82,7 +83,7 @@ h6{
     font-size: 1em;
     text-align: center;
 }
-.janela1{
+#janela1{
     position: relative;
     height: 13.5vh;
     width: 22.5vw;
@@ -94,7 +95,7 @@ h6{
     float: left;
     z-index:2;
 }
-.janela2{
+#janela2{
     position: relative;
     height: 13.5vh;
     width: 22.5vw;
@@ -106,7 +107,7 @@ h6{
     float: left;
     z-index:2;
 }
-.janela3{
+#janela3{
     position: relative;
     height: 13.5vh;
     width: 22.5vw;
@@ -133,6 +134,12 @@ h6{
     border-radius: 2vh;
     background: white;
 }  
+#imgDrop{
+    height: 12vh;
+    width: 22vw;
+    border-radius: 2vh;
+    background: white;
+}
 
 /* in-flight clone */
 .gu-mirror {
@@ -161,3 +168,4 @@ h6{
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
     filter: alpha(opacity=20);
   }
+  

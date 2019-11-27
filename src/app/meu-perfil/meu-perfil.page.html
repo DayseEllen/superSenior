@@ -13,27 +13,23 @@
     <div id="dados">
     <ion-item >
         <ion-label id="perfilinfo">
-          Fulano de Tal
+          {{autenticacao.getDisplayName()}}
         </ion-label>
-        <ion-icon name="create" (click)="alterarNomeAlert()"></ion-icon>
       </ion-item>
       <ion-item >
           <ion-label id="perfilinfo">
-            fulano.tal@gmail.com
+              {{autenticacao.getEmail()}}
           </ion-label>
-          <ion-icon name="create" (click)="alterarEmailAlert()"></ion-icon>
       </ion-item>
       <ion-item >
           <ion-label id="perfilinfo">
-            Masculino
+            {{usuario?.genero}}
           </ion-label>
-          <ion-icon name="create" (click)="alterarGeneroAlert()"></ion-icon>
         </ion-item>
         <ion-item >
-            <ion-label id="perfilinfo">
-              ****
+            <ion-label id="perfilinfo" >
+                {{usuario?.idade}}
             </ion-label>
-            <ion-icon name="create" (click)="alterarSenhaAlert()"></ion-icon>
           </ion-item>
     </div>    
 <br>

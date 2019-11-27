@@ -1,17 +1,22 @@
-import { Resposta } from './resposta';
+
 export class Usuario{
-    nome: string = '';
-    email: string='';
-    senha: string='';
-    telefone: string ='';
-    genero: string='';
-    perguntasRespondidas: Resposta[]; 
-    constructor(nome:string, email:string, senha:string, telefone:string, genero: string){
+    uid: string;
+    nome: string;
+    email: string;
+    genero: string;
+   idade: number;
+   pontosPerguntas: number;
+   pontosMemoria:number;
+   pontosArrasta:number;
+    constructor(uid: string,nome:string, email:string, genero:string, idade: number, pontosP:number,pontosM:number,pontosA:number){
         this.nome=nome;
         this.email=email;
-        this.senha=senha;
-        this.telefone=telefone;
-        this.genero=genero;
+       this.uid=uid;
+       this.genero=genero;
+       this.idade=idade;
+       this.pontosPerguntas=pontosP;
+       this.pontosMemoria=pontosM;
+       this.pontosArrasta=pontosA;
     }
 
 }

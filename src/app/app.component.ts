@@ -36,7 +36,7 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private rota: Router,
-    private afAuth : AngularFireAuth,
+    private afAuth : AngularFireAuth
   ) {
     this.initializeApp();
     const authObserver = afAuth.authState.subscribe(usuario => {

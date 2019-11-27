@@ -7,20 +7,13 @@
     <div text-center>
         <img id="logo" src="assets/images/logoProjeto.jpeg">
     </div>
-    <div text-center id='titulo'>Login</div>
-    <form #login="ngForm" (ngSubmit)="signIn(login.value)">
-    <div class="form-row" id="formulario">
-        <div class="form-group col-md-6">
-            <input type="email" class="form-control campos inputs" id="inputEmail4" placeholder="Email" name="email" ngModel>
-        </div>
-        <div class="form-group col-md-6"> 
-              <input type="password" class="form-control campos inputs" id="inputPassword4" placeholder="Senha" name="senha" ngModel>
-        </div>
-         
+
+
+    <div id="botao" (click)="loginGoogle()"> 
+    <img id="google" src="https://imagepng.org/wp-content/uploads/2019/08/google-icon-1.png">
+            <p id="TextoGoogle">Entrar com o Google</p>
     </div>
-    <br>
-    <ion-button  class="campos botao" color="light" (click)="abrirPagina('cadastrar')">Voltar</ion-button>
-    <ion-button type="submit" class="campos botao entrar" color="light">Entrar</ion-button>
-          
-</form>
+
+    <button type="button" class="btn btn-light" id="voltar" (click)="abrirPagina('cadastrar')">Voltar</button>
+      
 </ion-content>

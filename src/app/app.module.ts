@@ -15,6 +15,7 @@ import {AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { DragulaModule } from 'ng2-dragula';
 import { Autenticacao } from '../app/services/autenticacao';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 
 
@@ -26,7 +27,7 @@ import { Autenticacao } from '../app/services/autenticacao';
     FormsModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireModule.initializeApp(environment.firebase, 'angular-auth-firebase'),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     DragulaModule.forRoot()
@@ -35,7 +36,8 @@ import { Autenticacao } from '../app/services/autenticacao';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    Autenticacao
+    Autenticacao,
+    AngularFirestore 
   ],
   bootstrap: [AppComponent]
 })

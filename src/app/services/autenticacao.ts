@@ -1,28 +1,65 @@
 import { Injectable } from '@angular/core';
 import { Observable } from "rxjs";
+import { Router } from '@angular/router';
 import { AngularFireAuth } from "angularfire2/auth";
 import { Usuario } from './../../models/usuario';
+import {AngularFirestore} from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
+import {auth} from 'firebase/app';
 
 @Injectable()
 export class Autenticacao {
-    usuario: Observable<firebase.User>;
+     private usuario: Observable<firebase.User>;
+     private userDetails: firebase.User;
 
-    constructor(private angularFireAuth : AngularFireAuth){
-         this.usuario = angularFireAuth.authState;
+    constructor(private angularFireAuth : AngularFireAuth, private router: Router, private angularFirestore: AngularFirestore){
+      this.usuario = angularFireAuth.authState;
+      this.usuario.subscribe(
+              (user) => {
+                if (user) {
+                  this.userDetails = user;
+                }
+                else {
+                  this.userDetails = null;
+                }
+              }
+            );
     }
 
-    createUser(user: Usuario){
-       return this.angularFireAuth.auth.createUserWithEmailAndPassword(user.email, user.senha);
+ 
+    signInWithGoogle() {
+      return this.angularFireAuth.auth.signInWithPopup(
+        new firebase.auth.GoogleAuthProvider()
+      ).then((res) => this.router.navigate(['/home']));
     }
 
-    signIn(user: Usuario){
-        return this.angularFireAuth.auth.signInWithEmailAndPassword(user.email, user.senha);
+  isLoggedIn() {
+    if (this.userDetails == null ) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+    
+  logout() {
+      this.angularFireAuth.auth.signOut()
+      .then((res) => this.router.navigate(['/cadastrar']));
     }
 
-    signOut(){
-        return this.angularFireAuth.auth.signOut();
+    getDisplayName(){
+      if(this.isLoggedIn()){
+        return this.userDetails.displayName;
+      }
+      
     }
-
-
-}
+   getEmail(){
+    if(this.isLoggedIn()){
+      return this.userDetails.email;
+    }
+    }
+    getUid(){
+      if(this.isLoggedIn()){
+        return this.userDetails.uid;
+      }
+    }
+  }

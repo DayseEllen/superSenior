@@ -1,36 +1,46 @@
 /**Id's**/
+
 #logo{
-    width: 20vh;
+    width: 33vw;
     height: 20vh;
     border-radius: 10px;
     margin-top: 20%;
     }
 
-#titulo{
-    font-size: 2em;
-    font-family:  Rum Raisin;
-    color: black;
-    margin-top: 10%;
-}
-#formulario{
-    margin-top: 60px;
+ #voltar{
+    position: center;
+    font-family:  Times New Roman; 
+    font-size: 1.5em;
+    margin-top: 40%;
+    margin-left: 38.5%;
+        
 }
 
 /**Classes**/
 
-.campos{
-    font-family: Rum Raisin;
-    margin-left: 10px;
+#botao{
+    height: 10vh;
+    width: 85vw;
+    margin-top: 20vh;
+    margin-left: 7.5%;
+    background: rgb(250, 248, 248);
+    color: black;
+    border-radius: 10px;
+    border: 2px solid;
+    border-color: rgb(196, 195, 195);
+
 }
-.campos.inputs{
-    width: 340px;
-    height: 50px;
+
+#google{
+    height: 6vh;
+    width: 16vw;
+    margin-left: 3.5%;
+    margin-top: 4%;
 }
-.campos.botao{
-    margin-top: 20px;
-    font-size: 15px;
-    width: 100px;
-}
-.campos.botao.entrar{
-    margin-left: 138px;
+
+#TextoGoogle{
+    font-family: 'Times New Roman', Times, serif;
+    margin-left: 27.5%;
+    margin-top: -12.5%;
+    font-size: 1.5em;
 }

@@ -11,7 +11,7 @@
         <img id="logo" src="assets/images/logoProjeto.jpeg">
     </div> 
 
-    <div text-center id='texto'>Olá, Sr(a). Maria</div>
+    <div text-center id='texto'><p>Olá, {{autenticacao.getDisplayName()}}</p></div>
 
 <div text-center class="meio">
     <div class="pergunta">
@@ -20,11 +20,11 @@
     </div>
     <div class="arrasta">
         <img id="Arrasta" src="assets/images/arrasta.png" (click)="abrirPagina('tela-arrasta')">
-       <p id="textjogos">Arrasta & Solta</p>
+       <p id="textjogos">Arrasta&Solta</p>
     </div>
     <div class="memoria">
         <img id="Memoria" src="assets/images/memoria.png" (click)="abrirPagina('tela-memoria')">
         <p id="textjogos">Memória</p>
     </div>
 </div>
-</ion-content>
+</ion-content>d

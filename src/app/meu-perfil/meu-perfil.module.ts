@@ -1,3 +1,5 @@
+import { Autenticacao } from './../services/autenticacao';
+import { BDService } from './../services/bd.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -21,6 +23,7 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [MeuPerfilPage]
+  declarations: [MeuPerfilPage],
+  providers:[BDService,Autenticacao]
 })
 export class MeuPerfilPageModule {}
