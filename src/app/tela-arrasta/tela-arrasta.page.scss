@@ -134,6 +134,12 @@ h6{
     border-radius: 2vh;
     background: white;
 }  
+#imgDrop{
+    height: 12vh;
+    width: 22vw;
+    border-radius: 2vh;
+    background: white;
+}
 
 /* in-flight clone */
 .gu-mirror {
@@ -162,3 +168,4 @@ h6{
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
     filter: alpha(opacity=20);
   }
+  

@@ -9,6 +9,7 @@ import { Imagem } from 'src/models/imagem';
 
 import { DragulaService } from 'ng2-dragula';
 import { Subscription } from 'rxjs';
+import { AlertController } from '@ionic/angular';
 
 
 
@@ -18,46 +19,87 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./tela-arrasta.page.scss'],
   providers: [BDService]
 })
-export class TelaArrastaPage implements OnInit, OnDestroy{
-  
+export class TelaArrastaPage implements OnInit, OnDestroy {
+
 
 
   imagensCarregadas: Imagem[];
   imagem: Imagem;
   imagens: Imagem[];
-  imagens2:Imagem[];
+  imagens2: Imagem[];
   imagemEscolhida: Imagem;
   nomes = [];
   isOk: boolean;
   subs = new Subscription();
   janela = [];
+  janelaUmOk: boolean = false;
+  janela2 = [];
+  janela3 = [];
+  janelaDoisOk: boolean = false;
+  janelaTresOk: boolean = false;
+  allImagesSelect: Imagem[] = [];
+  pontos: number = 0;
 
-  constructor(private rota: Router, private bdService: BDService, private dragulaService: DragulaService, private elementRef: ElementRef) {
-    // this.inserirImagens();
+  constructor(private rota: Router, private alert: AlertController, private bdService: BDService, private dragulaService: DragulaService, private elementRef: ElementRef) {
     this.carregarImagens();
-    this.dragulaService.createGroup('bag',{
-      revertOnSpill: true
-    });
-    this.subs.add(this.dragulaService.drop('bag')
-    .subscribe(({el})=> {
-     
-     
-    }));
-  
+
+    /*this.test = [
+      {
+        name: 'IFPE',
+        url: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Instituto_Federal_de_Pernambuco_-_Marca_Vertical_2015.svg/1024px-Instituto_Federal_de_Pernambuco_-_Marca_Vertical_2015.svg.png"
+      }
+    ];*/
+
+
   }
 
- 
-   conferirImagem(){
-    document.getElementById('fundo1').addEventListener('change', (el)=> {
-     
-    })
+  containerUmModificado() {
+    if (this.nomes[0] === this.janela[0].nome) {
+      this.janelaUmOk = true;
+      this.pontos++;
+      this.verificaPontos();
+    } else {
+      this.janelaUmOk = true;
+      setTimeout(() => {
+        this.exibirMensagemErro();
+      }, 400);
+    }
   }
-  
 
+  containerDoisModificado() {
+    if (this.nomes[1] === this.janela2[0].nome) {
+      this.janelaDoisOk = true;
+      this.pontos++;
+      this.verificaPontos();
+    } else {
+      this.janelaDoisOk = true;
+      setTimeout(() => {
+        this.exibirMensagemErro();
+      }, 400);
+    }
+  }
+  containerTresModificado() {
+    if (this.nomes[2] === this.janela3[0].nome) {
+      this.janelaTresOk = true;
+      this.pontos++;
+      this.verificaPontos();
+    } else {
+      this.janelaTresOk = true;
+      setTimeout(() => {
+        this.exibirMensagemErro();
+      }, 400);
+    }
+  }
   private async carregarImagens() {
     this.imagensCarregadas = await this.bdService.listWithUIDs<Imagem>('/imagens');
     this.imagensSelecionadas();
     this.randomNomes();
+    if (!this.dragulaService.find("bag")) {
+      this.dragulaService.createGroup("bag", {
+        revertOnSpill: true,
+        removeOnSpill: false
+      });
+    }
   }
 
   randomImagem() {
@@ -78,6 +120,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy{
       this.imagens.push(this.imagem);
       this.nomes.push(this.imagem.nome);
     }
+    this.allImagesSelect = this.imagens;
   }
 
   randomNomes() {
@@ -94,15 +137,66 @@ export class TelaArrastaPage implements OnInit, OnDestroy{
     return this.nomes;
   }
 
-  selecaoOk() {
-    alert(this.imagens.length);
+  async exibirMensagemErro() {
+    let alert = await this.alert.create({
+      header: 'Que pena! 😢 Você errou',
+      message: 'Está quase lá, preste mais atenção na próxima!',
+      cssClass: 'alertsp',
+      buttons: [
+        {
+          text: 'Clique aqui para tentar novamente.',
+          handler: () => this.zerarJogo()
+        }
+      ]
+    });
+    await alert.present();
   }
-
-
-
+  async exibirMensagemGanhou() {
+    let alert = await this.alert.create({
+      header: 'Parabéns!!! Você conquistou essa fase. 😃',
+      message: 'Continue assim e você logo subirá de nível',
+      cssClass: 'alertsp',
+      buttons: [
+        {
+          text: 'Clique aqui avançar de fase.',
+          handler: () => this.proximaFase()
+        }
+      ]
+    });
+    await alert.present();
+  }
+  zerarJogo() {
+    this.pontos = 0;
+    this.janelaUmOk = false;
+    this.janelaDoisOk = false;
+    this.janelaTresOk = false;
+    this.janela = [];
+    this.janela2 = [];
+    this.janela3 = [];
+    this.imagens = this.allImagesSelect;
+  }
+  proximaFase() {
+    this.imagensSelecionadas();
+    this.randomNomes();
+    this.zerarJogo();
+    if (!this.dragulaService.find("bag")) {
+      this.dragulaService.createGroup("bag", {
+        revertOnSpill: true,
+        removeOnSpill: false
+      });
+    }
+  }
+  verificaPontos() {
+    if (this.pontos === 3) {
+      this.exibirMensagemGanhou();
+    }
+  }
   ngOnInit() {
+
   }
-  ngOnDestroy(){
+
+  ngOnDestroy() {
+    this.dragulaService.destroy("bag");
     this.subs.unsubscribe();
   }
   abrirPagina(url: String) {
