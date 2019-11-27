@@ -41,7 +41,7 @@ export class AppComponent {
     this.initializeApp();
     const authObserver = afAuth.authState.subscribe(usuario => {
       if(usuario){
-        this.rota.navigate(['home'])
+        this.rota.navigate(['/home'])
         authObserver.unsubscribe();
       }else{
         this.rota.navigate(['cadastrar'])

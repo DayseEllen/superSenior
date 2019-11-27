@@ -30,7 +30,7 @@
     background-color: white;
 }
 
-.meio{
+#meio{
     height: 70vh;
     width: 90vw;
     text-align: center;
@@ -38,6 +38,15 @@
     border-radius: 2vh;
     margin: auto;
     margin-top: 7vh;
+}
+#meio2{
+    height: 75vh;
+    width: 90vw;
+    text-align: center;
+    background: white;
+    border-radius: 2vh;
+    margin: auto;
+    margin-top: 5vh;
 }
 .cartaR{
     height: 20vh;
@@ -50,13 +59,16 @@
     margin-left: 1vw;
     margin-right: 1vw;
 }
+#teste{
+    color: black;
+}
 .cartaL{
-    height: 20vh;
-    width: 40vw;
+    height: 16vh;
+    width: 36vw;
     border-radius: 10px;
     border: 2px solid;
     border-color: darkslategrey;
-    margin-top: 2.5vh;
+    margin-top: 2.2vh;
     background-color: white;
     margin-left: 1vw;
     margin-right: 1vw;

@@ -234,7 +234,7 @@ export class TelaPerguntaPage implements OnInit {
     console.log(this.pontosP);
       this.user = new Usuario(
       this.autenticacao.getUid(),this.autenticacao.getDisplayName(),
-      this.autenticacao.getEmail(),this.usuario.genero,this.usuario.idade,this.pontosP,0,0);
+      this.autenticacao.getEmail(),this.usuario.genero,this.usuario.idade,this.pontosP,this.usuario.pontosMemoria,this.usuario.pontosArrasta);
     this.rota.navigate([url]);
     this.bdService.update('/usuarios', this.usuario.uid, this.user);
   }

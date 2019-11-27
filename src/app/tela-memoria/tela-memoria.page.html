@@ -12,14 +12,19 @@
 
 <ion-content color="primary">
 <div text-center>
-    <div text-center class="meio">
-        
-      <img *ngFor="let carta of cartas" (click)="imageClicked(carta)" class="cartaR" [src]="carta.displayUrl">
-
+    <div text-center id="meio"  *ngIf="cartas.length==6">
+       <div>
+        <img *ngFor="let carta of cartas" (click)="imageClicked(carta)" class="cartaR" [src]="carta.displayUrl">
+      </div>
     </div>
+
+    <div text-center id="meio2"  *ngIf="cartas.length==8">
+      <div>
+       <img *ngFor="let carta of cartas" (click)="imageClicked(carta)" class="cartaL" [src]="carta.displayUrl">
+     </div>
+   </div>
   <br>
 
   <button type="button" class="btn btn-light" id="voltar" (click)="abrirPagina('home')">Voltar</button>
-  <!--<button type="button" class="btn btn-light" id="proximo" (click)="abrirPagina('tela-memoria')">Próximo</button>-->
 </div>
   </ion-content>
