@@ -16,6 +16,11 @@
   <div class="loader" *ngIf="!perguntaAtual"></div>
 
 <div *ngIf="perguntaAtual" text-center>
+  <br>
+    <div class="progress">
+        <div id ="barraprogresso1" class="progress-bar" role="progressbar" [style.width]="porcentagem + '%'" [attr.aria-valuenow]="porcentagem" aria-valuemin="0" aria-valuemax="100">{{porcentagem}}%</div>   
+      </div>
+      <p id="titlebarra" text-center>{{calcularNivelPergunta()}}</p>
   <div text-center class="meio">
       <div *ngIf="perguntaAtual.urlDaImagem">
         <img id="iconeApp" src="{{perguntaAtual.urlDaImagem}}"> 
@@ -29,8 +34,7 @@
 </div>
 <br>
 <button type="button" class="btn btn-light" id="voltar" (click)="abrirPagina('home')">Voltar</button>
-<!-- <button type="button" class="btn btn-light" id="proximo" (click)="this.exibirProximaPergunta()">Próximo</button>-->
-  </div>
+</div>
 
 
 </ion-content>

@@ -23,9 +23,11 @@ export class TelaPerguntaPage implements OnInit {
   user: Usuario;
   usuarios: Usuario[]=[];
   pontosP: number;
+  porcentagem: string;
+  nivel: string;
 
   constructor(private rota: Router, private bdService: BDService, private alert: AlertController, private autenticacao : Autenticacao) {
-  //this.inserirPerguntas();
+    //this.inserirPerguntas();
     this.carregarUsuarios();
     this.carregarPerguntas();
     
@@ -36,6 +38,7 @@ export class TelaPerguntaPage implements OnInit {
       this.getUser();
     this.pontosP = this.usuario.pontosPerguntas;
   }
+
     private getUser(){
        this.usuario=null;
          if(this.autenticacao.isLoggedIn()){
@@ -47,7 +50,6 @@ export class TelaPerguntaPage implements OnInit {
          }
          return this.usuario;
        }
-  
 
   randomPergunta() {
     if(this.pontosP >=0 && this.pontosP <6){
@@ -77,8 +79,9 @@ export class TelaPerguntaPage implements OnInit {
   }
 
   async conferirPergunta(resposta: String) {
-    if (this.pontosP == 6) {
+    if (this.pontosP == 5) {
       this.pontosP ++;
+      this.calcularPorcentagem();
       let alerta = await this.alert.create({
         header: 'Parabéns!!! Você agora está no nível 2. 😃',
         message: "Continue jogando para passar de nível.",
@@ -93,8 +96,9 @@ export class TelaPerguntaPage implements OnInit {
       await alerta.present();  
       
     }
-    if (this.pontosP == 12) { 
+    if (this.pontosP == 11) { 
       this.pontosP ++; 
+      this.calcularPorcentagem();
       let alerta = await this.alert.create({
         header: 'Parabéns!!! Você agora está no nível 3. 😃',
         message: "Continue jogando para passar de nível.",
@@ -109,7 +113,8 @@ export class TelaPerguntaPage implements OnInit {
       await alerta.present();
       
     }
-    if (this.pontosP == 18) {  
+    if (this.pontosP == 17) {  
+      this.calcularPorcentagem();
       let alerta = await this.alert.create({
         header: 'Parabéns!!! Você zerou o jogos das Perguntas.😃',
         message: "",
@@ -124,7 +129,7 @@ export class TelaPerguntaPage implements OnInit {
       await alerta.present();
       
     }
-    if (resposta != this.perguntaAtual.resposta) {     
+    if (resposta != this.perguntaAtual.resposta) {    
       let alert = await this.alert.create({
         header: 'Que pena! 😢 Você errou a pergunta',
         message: 'Preste atenção na dica: ' + this.perguntaAtual.dica,
@@ -138,8 +143,9 @@ export class TelaPerguntaPage implements OnInit {
       });
       await alert.present();
 
-    } else if(this.pontosP != 6 && this.pontosP != 12 && this.pontosP != 18){
-      this.pontosP ++;  
+    } else if(this.pontosP != 5 && this.pontosP != 11 && this.pontosP != 17){
+      this.pontosP ++; 
+      this.calcularPorcentagem(); 
      let alerta = await this.alert.create({
         header: 'Parabéns! Você acertou a pergunta.😃 Continue assim e você logo passará de nível.',
         message: ""+ this.perguntaAtual.dica,
@@ -197,7 +203,7 @@ export class TelaPerguntaPage implements OnInit {
       { enunciado: 'Qual o nome da funcionalidade da imagem acima?', nivel: 1, resposta: 'Alarme', alternativas: [ 'Agenda de contatos', 'Perfil de som - Vibrar', 'Alarme' ], dica: 'Eu uso ele quando tenho um dia certo para tomar remédios.', urlDaImagem: 'https://firebasestorage.googleapis.com/v0/b/super-senior.appspot.com/o/alarme.png?alt=media&token=8306d8d6-d66b-46e2-90d9-ed0e4f226867' },
       { enunciado: 'Qual funcionalidade do celular que desabilita conexões para manter a segurança durante uma viagem de avião?', nivel: 2, resposta: 'Modo Avião', alternativas: [ 'Modo Avião', 'WiFi', 'Lanterna' ], dica: 'Quando ele está ativado eu paro de receber mensagens e ligações.', urlDaImagem: '' },
       { enunciado: 'Qual funcionalidade habilita ou desabilita a tela ‘virada’ ou ‘em pé’ do celular?', nivel: 3, resposta: 'Rotação de tela', alternativas: [ 'Som', 'Rotação de tela', 'Lanterna' ], dica: 'Eu uso quando quero assistir um vídeo e tenho que rodar a tela para ficar “maior”.', urlDaImagem: '' },
-      { enunciado: 'Qual o nome da funcionalidade que me ajuda a marcar o horário para atividades que faço na minha rotina?', nivel: 3, resposta: 'Alarme/Relógio', alternativas: [ 'Agenda de contatos', 'Perfil de som - Vibrar', 'Alarme' ], dica: 'Eu uso ele quando tenho um dia certo para tomar remédios.', urlDaImagem: '' },
+      { enunciado: 'Qual o nome da funcionalidade que me ajuda a marcar o horário para atividades que faço na minha rotina?', nivel: 3, resposta: 'Alarme', alternativas: [ 'Agenda de contatos', 'Perfil de som - Vibrar', 'Alarme' ], dica: 'Eu uso ele quando tenho um dia certo para tomar remédios.', urlDaImagem: '' },
       { enunciado: 'Qual o nome da funcionalidade da imagem acima?', nivel: 1, resposta: 'Agenda de contatos', alternativas: [ 'Som', 'Lanterna', 'Agenda de contatos' ], dica: 'Existe uma lista com os nomes de todos os números salvos.', urlDaImagem: 'https://firebasestorage.googleapis.com/v0/b/super-senior.appspot.com/o/contatos.jpg?alt=media&token=7806ee21-9e90-4843-8330-73e2bdd86a37' },
       { enunciado: 'Qual o nome da funcionalidade do meu celular que uso quando vou fazer ligações para alguém?', nivel: 2, resposta: 'Telefone', alternativas: [ 'Telefone', 'Agenda de contatos', 'Alarme' ], dica: 'Quando vou usá-lo aparece um teclado com números.', urlDaImagem: '' },
       { enunciado: 'Para qual número ligamos quando precisamos resgatar um animal ou uma pessoa, ou quando há um incêndio ou um acidente doméstico?', nivel: 3, resposta: 'Bombeiros - 193', alternativas: [  'Samu - 192', 'Policia Militar - 190', 'Bombeiros - 193' ], dica: 'Esse número também serve para ligar quando há afogamento, acidente com animal peçonhento, choque elétrico.', urlDaImagem: '' },
@@ -234,9 +240,30 @@ export class TelaPerguntaPage implements OnInit {
     console.log(this.pontosP);
       this.user = new Usuario(
       this.autenticacao.getUid(),this.autenticacao.getDisplayName(),
-      this.autenticacao.getEmail(),this.usuario.genero,this.usuario.idade,this.pontosP,0,0);
+      this.autenticacao.getEmail(),this.usuario.genero,this.usuario.idade,this.pontosP,this.usuario.pontosMemoria,this.usuario.pontosArrasta);
     this.rota.navigate([url]);
     this.bdService.update('/usuarios', this.usuario.uid, this.user);
   }
+
+  calcularPorcentagem(){
+    this.porcentagem = String(((100 * this.pontosP) / 6).toFixed(0));
+  }
+
+  calcularNivelPergunta(){
+    if (!this.usuario) {
+      this.usuario = <Usuario> {};
+      this.usuario.pontosPerguntas = 0;
+    }
+
+    if(this.usuario.pontosPerguntas >=0 && this.usuario.pontosPerguntas <6){
+        return "Nível 1";
+      }
+      if(this.usuario.pontosPerguntas >=6 && this.usuario.pontosPerguntas <12){
+        return "Nível 2";
+      }
+      if(this.usuario.pontosPerguntas >=12 && this.usuario.pontosPerguntas <18){
+        return "Nível 3";
+      }
+ }
 
 }
