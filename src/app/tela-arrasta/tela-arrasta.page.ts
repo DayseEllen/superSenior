@@ -38,7 +38,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
   janelaDoisOk: boolean = false;
   janelaTresOk: boolean = false;
   allImagesSelect: Imagem[] = [];
-  pontos: number = 0;
+  pontosTotal: number = 0;
 
   constructor(private rota: Router, private alert: AlertController, private bdService: BDService, private dragulaService: DragulaService, private elementRef: ElementRef) {
     this.carregarImagens();
@@ -56,8 +56,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
   containerUmModificado() {
     if (this.nomes[0] === this.janela[0].nome) {
       this.janelaUmOk = true;
-      this.pontos++;
-      this.verificaPontos();
+      this.pontosTotal++;
     } else {
       this.janelaUmOk = true;
       setTimeout(() => {
@@ -69,8 +68,8 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
   containerDoisModificado() {
     if (this.nomes[1] === this.janela2[0].nome) {
       this.janelaDoisOk = true;
-      this.pontos++;
-      this.verificaPontos();
+      this.pontosTotal++;
+      
     } else {
       this.janelaDoisOk = true;
       setTimeout(() => {
@@ -81,8 +80,8 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
   containerTresModificado() {
     if (this.nomes[2] === this.janela3[0].nome) {
       this.janelaTresOk = true;
-      this.pontos++;
-      this.verificaPontos();
+      this.pontosTotal++;
+     
     } else {
       this.janelaTresOk = true;
       setTimeout(() => {
@@ -92,6 +91,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
   }
   private async carregarImagens() {
     this.imagensCarregadas = await this.bdService.listWithUIDs<Imagem>('/imagens');
+    console.log(this.imagensCarregadas.length);
     this.imagensSelecionadas();
     this.randomNomes();
     if (!this.dragulaService.find("bag")) {
@@ -165,8 +165,21 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
     });
     await alert.present();
   }
+  async exibirMensagemProximoNivel() {
+    let alert = await this.alert.create({
+      header: 'Parabéns!!! Você conquistou essa  e avançou de nível. 😃',
+      message: 'Agora você está no nível 2!',
+      cssClass: 'alertsp',
+      buttons: [
+        {
+          text: 'Clique aqui para avançar de nível.',
+          handler: () => this.exibirNivel2()
+        }
+      ]
+    });
+    await alert.present();
+  }
   zerarJogo() {
-    this.pontos = 0;
     this.janelaUmOk = false;
     this.janelaDoisOk = false;
     this.janelaTresOk = false;
@@ -186,9 +199,16 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
       });
     }
   }
-  verificaPontos() {
-    if (this.pontos === 3) {
+
+  exibirNivel2() {
+
+  }
+
+  verificaPontosNivel1() {
+    if (this.pontosTotal === 3 || this.pontosTotal === 6) {
       this.exibirMensagemGanhou();
+    } else if (this.pontosTotal === 9) {
+      this.exibirMensagemProximoNivel();
     }
   }
   ngOnInit() {

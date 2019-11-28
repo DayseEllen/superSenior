@@ -3,6 +3,8 @@ import { Router } from '@angular/router'; import { BDService } from '../services
 import { AlertController } from '@ionic/angular';
 import { Memoria } from 'src/models/memoria';
 import { Cartas } from 'src/models/cartas';
+import { Usuario } from 'src/models/usuario';
+import { Autenticacao } from '../services/autenticacao';
 
 
 
@@ -25,11 +27,35 @@ export class TelaMemoriaPage implements OnInit {
   cartasAuxiliar: Cartas[] = [];
   cartasComparacao: Cartas[] = [];
   countCardsOpen: number = 0;
+  user: Usuario;
+  usuario: Usuario;
+  usuarios: Usuario[]=[];
+  pontosM: number;
+  cartaCoringa: string;
 
 
-  constructor(private rota: Router, private bdService: BDService, private alert: AlertController) {
+  constructor(private rota: Router, private bdService: BDService, private alert: AlertController, private autenticacao: Autenticacao) {
+    this.carregarUsuarios();
 
   }
+  private async carregarUsuarios(){
+    this.usuarios = await this.bdService.listWithUIDs<Usuario>('/usuarios');
+      this.getUser();
+    this.pontosM = this.usuario.pontosMemoria;
+  }
+
+    private getUser(){
+       this.usuario=null;
+         if(this.autenticacao.isLoggedIn()){
+         for(var i=0;i<this.usuarios.length;i++){
+           if(this.autenticacao.getEmail()===this.usuarios[i].email){
+             this.usuario=this.usuarios[i];
+           }
+         }
+         }
+         return this.usuario;
+       }
+
 
   /* private async inserirMemorias() {
      const memorias =
@@ -88,11 +114,30 @@ export class TelaMemoriaPage implements OnInit {
 
     imageSelect() {
     this.cartas = [];
-    for (var i = 0; i < 3; i++) {
-      var url = this.randomImagem().url;
-      this.cartasAuxiliar.push(new Cartas(url));
-      this.cartasAuxiliar.push(new Cartas(url));
+    this.cartaCoringa='assets/images/cartaCoringa.png'
+    if(this.pontosM>=0 && this.pontosM<8){
+      for (var i = 0; i < 3; i++) {
+        var url = this.randomImagem().url;
+        this.cartasAuxiliar.push(new Cartas(url));
+        this.cartasAuxiliar.push(new Cartas(url));
+      }
+    }if(this.pontosM>=8 && this.pontosM<14){
+      for (var i = 0; i < 4; i++) {
+        var url = this.randomImagem().url;
+        this.cartasAuxiliar.push(new Cartas(url));
+        this.cartasAuxiliar.push(new Cartas(url));
+      }
     }
+    if(this.pontosM>=14 && this.pontosM<20){
+      for (var i = 0; i < 3; i++) {
+        var url = this.randomImagem().url;
+        this.cartasAuxiliar.push(new Cartas(url));
+        this.cartasAuxiliar.push(new Cartas(url));
+      }
+     this.cartasAuxiliar.push(new Cartas(this.cartaCoringa));
+     this.cartasAuxiliar.push(new Cartas(this.cartaCoringa));
+    }
+   
     this.randomImagesCards();
     
     
@@ -108,12 +153,33 @@ export class TelaMemoriaPage implements OnInit {
   }
 
   randomImagesCards() {
-    while (this.cartas.length != 6) {
-      var posicionCard = Math.floor(this.cartasAuxiliar.length * Math.random());
-      this.cartas.push(this.cartasAuxiliar[posicionCard]);
-      this.cartasAuxiliar.splice(posicionCard, 1);
+    if(this.pontosM>=0 && this.pontosM<8){
+      while (this.cartas.length != 6) {
+        var posicionCard = Math.floor(this.cartasAuxiliar.length * Math.random());
+        this.cartas.push(this.cartasAuxiliar[posicionCard]);
+        this.cartasAuxiliar.splice(posicionCard, 1);
+      }
     }
-  }
+      if(this.pontosM>=8 && this.pontosM<14){
+        while (this.cartas.length !=  8) {
+          var posicionCard = Math.floor(this.cartasAuxiliar.length * Math.random());
+          this.cartas.push(this.cartasAuxiliar[posicionCard]);
+          this.cartasAuxiliar.splice(posicionCard, 1);
+        }
+      }
+      if(this.pontosM>=14 && this.pontosM<20){
+        while (this.cartas.length !=  8) {
+          var posicionCard = Math.floor(this.cartasAuxiliar.length * Math.random());
+          this.cartas.push(this.cartasAuxiliar[posicionCard]);
+          this.cartasAuxiliar.splice(posicionCard, 1);
+        }
+      }
+      
+      
+      }
+    
+    
+  
   imageClicked(carta) {
     if (!carta.isOpen && this.cartasComparacao.length!=2) {
       this.cartasComparacao.push(carta);
@@ -182,7 +248,18 @@ export class TelaMemoriaPage implements OnInit {
   verifyTwoCards() {
     if (this.cartasComparacao[0].url==this.cartasComparacao[1].url) {
       this.changeEqualsCards(this.cartasComparacao[1].url);
-      if (this.countCardsOpen == 6) {
+      if (this.countCardsOpen == 6 && this.pontosM>=0 && this.pontosM<8) {
+        this.pontosM++;
+        this.countCardsOpen = 0;
+        this.exibirMensagem();
+      }
+      if (this.countCardsOpen == 8 && this.pontosM>=8 && this.pontosM<14) {
+        this.pontosM++;
+        this.countCardsOpen = 0;
+        this.exibirMensagem();
+      }
+      if (this.countCardsOpen == 6 && this.pontosM>=14 && this.pontosM<20) {
+        this.pontosM++;
         this.countCardsOpen = 0;
         this.exibirMensagem();
       }
@@ -202,8 +279,12 @@ export class TelaMemoriaPage implements OnInit {
 
 
   abrirPagina(url: String) {
+    console.log(this.pontosM);
+      this.user = new Usuario(
+      this.autenticacao.getUid(),this.autenticacao.getDisplayName(),
+      this.autenticacao.getEmail(),this.usuario.genero,this.usuario.idade,this.usuario.pontosPerguntas,this.pontosM,this.usuario.pontosArrasta);
     this.rota.navigate([url]);
-
+    this.bdService.update('/usuarios', this.usuario.uid, this.user);
   }
 
 
