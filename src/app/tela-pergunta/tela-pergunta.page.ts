@@ -94,9 +94,15 @@ export class TelaPerguntaPage implements OnInit {
     this.randomPergunta();
   }
 
+  passarNivel(){
+    this.pontosP ++;
+    this.calcularNivelPergunta();
+    this.calcularPorcentagem();
+    this.exibirProximaPergunta();
+  }
+
   async conferirPergunta(resposta: String) {
     if (this.pontosP == 5) {
-      this.pontosP ++;
       this.calcularNivelPergunta();
       this.calcularPorcentagem();
       let alerta = await this.alert.create({
@@ -106,7 +112,7 @@ export class TelaPerguntaPage implements OnInit {
         buttons: [
           {
             text: 'Clique aqui para a próxima pergunta',
-            handler: () => this.exibirProximaPergunta()
+            handler: () => this.passarNivel()
           }
         ]
       });
@@ -114,7 +120,6 @@ export class TelaPerguntaPage implements OnInit {
       
     }
     if (this.pontosP == 11) { 
-      this.pontosP ++; 
       this.calcularNivelPergunta();
       this.calcularPorcentagem();
       let alerta = await this.alert.create({
@@ -124,7 +129,7 @@ export class TelaPerguntaPage implements OnInit {
         buttons: [
           {
             text: 'Clique aqui para a próxima pergunta',
-            handler: () => this.exibirProximaPergunta()
+            handler: () => this.passarNivel()
           }
         ]
       });
