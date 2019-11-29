@@ -73,7 +73,11 @@ export class TelaPerguntaPage implements OnInit {
         }
       }
     }
+<<<<<<< HEAD
     if (this.pontosP >= 12 && this.pontosP < 18) {
+=======
+    if(this.pontosP >=12 && this.pontosP <19){
+>>>>>>> 9026f39ac566f5de38bb3cf58970ffe5c344dba2
       var perguntasDificeis = this.perguntas.filter(pergunta => pergunta.nivel == 3);
       this.perguntaAtual = perguntasDificeis[Math.floor(perguntasDificeis.length * Math.random())];
       for (var i = 0; i < this.perguntas.length; i++) {
@@ -97,13 +101,12 @@ export class TelaPerguntaPage implements OnInit {
   }
 
   passarNivel(){
-    this.pontosP ++;
     this.calcularNivelPergunta();
     this.calcularPorcentagem();
     this.exibirProximaPergunta();
   }
 
-  async conferirPergunta(resposta: String) {
+  async verificaPassarNivel(){
     if (this.pontosP == 5) {
       this.calcularNivelPergunta();
       this.calcularPorcentagem();
@@ -141,8 +144,10 @@ export class TelaPerguntaPage implements OnInit {
     }
 
     if (this.pontosP == 17) {  
+      this.pontosP ++; 
       this.calcularNivelPergunta();
       this.calcularPorcentagem();
+
       let alerta = await this.alert.create({
         header: 'Parabéns!!! Você zerou o jogos das Perguntas.😃',
         message: "",
@@ -155,8 +160,20 @@ export class TelaPerguntaPage implements OnInit {
         ]
       });
       await alerta.present();
+<<<<<<< HEAD
 
+=======
+      
+    }else{
+      this.pontosP ++; 
+      this.calcularPorcentagem();
+      this.exibirProximaPergunta();
+>>>>>>> 9026f39ac566f5de38bb3cf58970ffe5c344dba2
     }
+  }
+
+  async conferirPergunta(resposta: String) {
+  
     if (resposta != this.perguntaAtual.resposta) { 
       this.calcularPorcentagem();   
       let alert = await this.alert.create({
@@ -172,10 +189,14 @@ export class TelaPerguntaPage implements OnInit {
       });
       await alert.present();
 
+<<<<<<< HEAD
 
     } else if(this.pontosP != 5 && this.pontosP != 11 && this.pontosP != 17){
       this.pontosP ++; 
       this.calcularPorcentagem();
+=======
+    }else if(resposta == this.perguntaAtual.resposta){
+>>>>>>> 9026f39ac566f5de38bb3cf58970ffe5c344dba2
      let alerta = await this.alert.create({
         header: 'Parabéns! Você acertou a pergunta.😃',
         message: ""+ this.perguntaAtual.dica,
@@ -183,7 +204,7 @@ export class TelaPerguntaPage implements OnInit {
         buttons: [
           {
             text: 'Clique aqui para a próxima pergunta',
-            handler: () => this.exibirProximaPergunta()
+            handler: () => this.verificaPassarNivel()
           }
         ]
       });
@@ -298,7 +319,7 @@ export class TelaPerguntaPage implements OnInit {
       if(this.pontosP >=6 && this.pontosP <12){
         this.nivel = "Nível 2";
       }
-      if(this.pontosP >=12 && this.pontosP <18){
+      if(this.pontosP >=12 && this.pontosP <19){
         this.nivel  = "Nível 3";
       }
  }
