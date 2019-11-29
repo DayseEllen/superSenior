@@ -12,9 +12,14 @@
 
 <ion-content color="primary">
 <div text-center>
+  <br>
+    <div class="progress">
+        <div id ="barraprogresso3" class="progress-bar" role="progressbar" [style.width]="porcentagem + '%'" [attr.aria-valuenow]="porcentagem" aria-valuemin="0" aria-valuemax="100">{{porcentagem}}%</div>   
+      </div>
+      <p id="titlebarra" text-center>{{calcularNivelMemoria()}}</p>
     <div text-center id="meio"  *ngIf="cartas.length==6">
        <div>
-        <img *ngFor="let carta of cartas" (click)="imageClicked(carta)" class="cartaR" [src]="carta.displayUrl">
+        <img *ngFor="let carta of cartas" (click)="imageClicked(carta)" class="cartaR" [src]="carta?.displayUrl">
       </div>
     </div>
 
