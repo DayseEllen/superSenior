@@ -35,16 +35,20 @@ export class TelaMemoriaPage implements OnInit {
   user: Usuario;
   pontosM: number;
   porcentagem: string;
+  nivel: string;
 
 
   constructor(private rota: Router, private bdService: BDService, private alert: AlertController, private autenticacao: Autenticacao) {
     this.carregarUsuarios();
+    this.carregarImagens();
   }
 
   private async carregarUsuarios() {
     this.usuarios = await this.bdService.listWithUIDs<Usuario>('/usuarios');
     this.getUser();
     this.pontosM = this.usuario.pontosMemoria;
+    this.calcularNivelMemoria();
+    this.calcularPorcentagem();
   }
   private getUser() {
     this.usuario = null;
@@ -92,7 +96,6 @@ export class TelaMemoriaPage implements OnInit {
    }*/
 
   ngOnInit() {
-    this.carregarImagens();
   }
 
 
@@ -178,8 +181,8 @@ export class TelaMemoriaPage implements OnInit {
       carta.isOpen = true;
       if (this.cartasComparacao.length == 2) {
         if (this.cartasComparacao[0].url == this.cartaCoringaUrl && this.cartasComparacao[0].url === this.cartasComparacao[1].url) {
-          console.log('Carta coringa');
-          setTimeout(() => this.cartaCoringaEncontrada(), 500);
+          console.log('Pares de cartas coringa');
+          setTimeout(() => this.msgCartaCoringaEncontrada(), 500);
           setTimeout(() => this.mostrarCartas(), 2000)
         } else {
           console.log('Carta ñ coringa');
@@ -190,8 +193,8 @@ export class TelaMemoriaPage implements OnInit {
   }
   async exibirMensagem() {
     
-    if(this.pontosM===6){
-      this.pontosM++;
+    if(this.pontosM===5){
+      this.calcularNivelMemoria();
       this.calcularPorcentagem();
       let alert = await this.alert.create({
         header: 'Parabéns!!! Você agora está no nível 2. 😃',
@@ -201,33 +204,39 @@ export class TelaMemoriaPage implements OnInit {
           {
             text: 'Clique aqui para ir para a próxima fase',
             handler: () => {
-              this.imageSelect()
-              setTimeout(() => this.mostrarCartas(), 1000)
+              this.pontosM ++;
+              this.calcularNivelMemoria();
+              this.calcularPorcentagem();
+              this.imageSelect();
+              setTimeout(() =>  this.mostrarCartas(), 1000)
             }
           }
         ]
       });
       await alert.present();
-    } if(this.pontosM===12){
-      this.pontosM++;
+    } if(this.pontosM===11){
+      this.calcularNivelMemoria();
       this.calcularPorcentagem();
       let alert = await this.alert.create({
         header: 'Parabéns!!! Você agora está no nível 3. 😃',
-        message: "Continue jogando para passar de nível.",
+        message: "PRESTE ATENÇÃO NA CARTA COM O 'X' VERMELHO. EVITE ABRIR AS DUAS, OU SEU JOGO RENICIARÁ",
         cssClass: 'alertsm',
         buttons: [
           {
             text: 'Clique aqui para ir para a próxima fase',
             handler: () => {
-              this.imageSelect()
-              setTimeout(() => this.mostrarCartas(), 1000)
+              this.pontosM ++;
+              this.calcularNivelMemoria();
+              this.calcularPorcentagem();
+              this.imageSelect();
+              setTimeout(() =>  this.mostrarCartas(), 1000)
             }
           }
         ]
       });
       await alert.present();
-    }if(this.pontosM===18){
-      this.pontosM++;
+    }if(this.pontosM===17){
+      this.calcularNivelMemoria();
       this.calcularPorcentagem();
       let alert = await this.alert.create({
         header: 'Parabéns!!! Você zerou o jogos da Memória.😃',
@@ -239,6 +248,8 @@ export class TelaMemoriaPage implements OnInit {
             handler: () => {
              this.pontosM=0;
              this.imageSelect()
+             this.calcularNivelMemoria();
+             this.calcularPorcentagem();
              setTimeout(() => this.mostrarCartas(), 1000)
             }
           }
@@ -246,7 +257,7 @@ export class TelaMemoriaPage implements OnInit {
       });
       await alert.present();
     } if(this.pontosMensagem(this.pontosM)){
-      this.pontosM++;
+      this.pontosM ++; 
       this.calcularPorcentagem();
       let alert = await this.alert.create({
         header: 'Parabéns!! 😃 Você adivinhou todas as cartas',
@@ -267,7 +278,7 @@ export class TelaMemoriaPage implements OnInit {
   }
 
   private pontosMensagem(pontos){
-    if(pontos!=6 || pontos!=12 || pontos!=18){
+    if(pontos!=5|| pontos!=11 || pontos!=17){
       return true;
     }
     return false;
@@ -289,13 +300,23 @@ export class TelaMemoriaPage implements OnInit {
     await alert.present();
   }
 
-  cartaCoringaEncontrada() {
-    for (var i = 0, j = 0; i < this.cartas.length; i++ , j++) {
-      if (!this.cartas[i].isDiscovered) {
-        console.log("Reniciando jogo")
-        this.punicaoCartaCoringa();
-      }
-    }
+  async msgCartaCoringaEncontrada() {
+    let alert = await this.alert.create({
+      header: 'PAR DE CARTA CORINGA ENCONTRADO',
+
+      message: 'As cartas se fecharam novamente. Tente outra vez!',
+      cssClass: 'alertsm',
+      buttons: [
+        {
+          text: 'Entendi',
+          handler: () => {
+            this.punicaoCartaCoringa();
+          setTimeout(() => this.mostrarCartas(), 10000)
+        }
+        }
+      ]
+    })
+    await alert.present();
   }
 
   punicaoCartaCoringa() {
@@ -358,26 +379,33 @@ export class TelaMemoriaPage implements OnInit {
     this.bdService.update('/usuarios', this.usuario.uid, this.user);
   }
 
-  calcularPorcentagem() {
-    this.porcentagem = String(((100 * this.pontosM) / 6).toFixed(0));
+  calcularPorcentagem(){
+    if(this.nivel == "Nível 1"){
+       this.porcentagem = String(((100 * (this.pontosM)) / 6).toFixed(0));
+    }
+    if(this.nivel == "Nível 2"){
+      this.porcentagem = String(((100 * (this.pontosM-6)) / 6).toFixed(0));
+    }
+    if(this.nivel == "Nível 3"){
+      this.porcentagem = String(((100 * (this.pontosM-12)) / 6).toFixed(0));
+    }
   }
 
-  calcularNivelMemoria() {
+  calcularNivelMemoria(){
     if (!this.usuario) {
-      this.usuario = <Usuario>{};
-      this.usuario.pontosMemoria = 0;
+     this.usuario = <Usuario> {};
+     this.usuario.pontosMemoria = this.pontosM;
     }
-
-    if (this.usuario.pontosMemoria >= 0 && this.usuario.pontosMemoria < 6) {
-      return "Nível 1";
-    }
-    if (this.usuario.pontosMemoria  >= 6 && this.usuario.pontosMemoria  < 12) {
-      return "Nível 2";
-    }
-    if (this.usuario.pontosMemoria  >= 12 && this.usuario.pontosMemoria  < 18) {
-      return "Nível 3";
-    }
+ 
+     if(this.pontosM >=0 && this.pontosM <6){
+         this.nivel = "Nível 1";
+       }
+       if(this.pontosM >=6 && this.pontosM <12){
+         this.nivel = "Nível 2";
+       }
+       if(this.pontosM >=12 && this.pontosM <18){
+         this.nivel  = "Nível 3";
+       }
   }
-
 
 }

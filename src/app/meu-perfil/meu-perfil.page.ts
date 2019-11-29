@@ -14,18 +14,26 @@ import { BDService } from '../services/bd.service';
 export class MeuPerfilPage implements OnInit {
   usuario: Usuario;
   usuarios: Usuario[]=[];
-  porcentagemP: string;
-  porcentagemM: string;
+  porcentagem: string;
+  porcentagemM:string;
+  nivel: string;
+  nivelM: string;
+  pontosP: number;
+  pontosM: number;
   
   constructor( private autenticacao : Autenticacao, 
     private rota: Router, private bdService: BDService,) {
-      this.porcentagemP='50'
-      this.porcentagemM='50'
+      this.carregarUsuarios();
 }
 private async carregarUsuarios(){
   this.usuarios = await this.bdService.listWithUIDs<Usuario>('/usuarios');
     this.getUser();
-  
+    this.pontosP = this.usuario.pontosPerguntas;
+    this.pontosM=this.usuario.pontosMemoria;
+    this.calcularNivelPergunta();
+    this.calcularPorcentagem();
+    this.calcularNivelMemoria();
+    this.calcularPorcentagemM();
 }
   private getUser(){
      this.usuario=null;
@@ -42,7 +50,6 @@ private async carregarUsuarios(){
      
 
   ngOnInit() {
-    this.carregarUsuarios();
     
   }
   
@@ -50,82 +57,61 @@ private async carregarUsuarios(){
    this.autenticacao.logout();
  }
 
-  calcularNivelPergunta(){
-    if (!this.usuario) {
-      this.usuario = <Usuario> {};
-      this.usuario.pontosPerguntas = 50;
+ calcularPorcentagem(){
+  if(this.nivel == "Nível 1"){
+     this.porcentagem = String(((100 * this.usuario.pontosPerguntas) / 6).toFixed(0));
+  }
+  if(this.nivel == "Nível 2"){
+    this.porcentagem = String(((100 * (this.usuario.pontosPerguntas-6)) / 6).toFixed(0));
+  }
+  if(this.nivel == "Nível 3"){
+    this.porcentagem = String(((100 * (this.usuario.pontosPerguntas-12)) / 6).toFixed(0));
+  }
+}
+
+calcularNivelPergunta(){
+  if (!this.usuario) {
+    this.usuario = <Usuario> {};
+    this.usuario.pontosPerguntas = this.pontosP;
+   }
+
+  if(this.usuario.pontosPerguntas >=0 && this.usuario.pontosPerguntas <6){
+      this.nivel = "Nível 1";
     }
+    if(this.usuario.pontosPerguntas >=6 && this.usuario.pontosPerguntas <12){
+      this.nivel = "Nível 2";
+    }
+    if(this.usuario.pontosPerguntas >=12 && this.usuario.pontosPerguntas <18){
+      this.nivel  = "Nível 3";
+    }
+}
 
-    if(this.usuario.pontosPerguntas >=0 && this.usuario.pontosPerguntas <6){
-        return "Nível 1";
-      }
-      if(this.usuario.pontosPerguntas >=6 && this.usuario.pontosPerguntas <12){
-        return "Nível 2";
-      }
-      if(this.usuario.pontosPerguntas >=12 && this.usuario.pontosPerguntas <18){
-        return "Nível 3";
-      }
- }
-
-  calcularPorcentagem(){
-   if(this.usuario.pontosPerguntas == 0 || this.usuario.pontosPerguntas == 6 || this.usuario.pontosPerguntas == 12){
-    return 0;
-   }
-   if(this.usuario.pontosPerguntas == 1 || this.usuario.pontosPerguntas == 7 || this.usuario.pontosPerguntas == 13){
-    return 20;
-   }
-   if(this.usuario.pontosPerguntas == 2 || this.usuario.pontosPerguntas == 8 || this.usuario.pontosPerguntas == 14){
-    return '35%';
+calcularPorcentagemM(){
+  if(this.nivelM == "Nível 1"){
+     this.porcentagemM = String(((100 * this.usuario.pontosMemoria) / 6).toFixed(0));
   }
-  if(this.usuario.pontosPerguntas == 3 || this.usuario.pontosPerguntas == 9 || this.usuario.pontosPerguntas == 15){
-    return '50%';
+  if(this.nivelM == "Nível 2"){
+    this.porcentagemM = String(((100 * (this.usuario.pontosMemoria-6)) / 6).toFixed(0));
   }
-  if(this.usuario.pontosPerguntas == 4 || this.usuario.pontosPerguntas == 10 || this.usuario.pontosPerguntas == 16){
-    return '70%';
+  if(this.nivelM == "Nível 3"){
+    this.porcentagemM = String(((100 * (this.usuario.pontosMemoria-12)) / 6).toFixed(0));
   }
-  if(this.usuario.pontosPerguntas == 5 || this.usuario.pontosPerguntas == 11 || this.usuario.pontosPerguntas == 17){
-    return '85%';
- }
-  
 }
 
 calcularNivelMemoria(){
   if (!this.usuario) {
     this.usuario = <Usuario> {};
-    this.usuario.pontosPerguntas = 50;
-  }
+    this.usuario.pontosMemoria = this.pontosM;
+   }
 
   if(this.usuario.pontosMemoria >=0 && this.usuario.pontosMemoria <6){
-      return "Nível 1";
+      this.nivelM = "Nível 1";
     }
     if(this.usuario.pontosMemoria >=6 && this.usuario.pontosMemoria <12){
-      return "Nível 2";
+      this.nivelM = "Nível 2";
     }
     if(this.usuario.pontosMemoria >=12 && this.usuario.pontosMemoria <18){
-      return "Nível 3";
+      this.nivelM  = "Nível 3";
     }
 }
-
-calcularPorcentagemMemoria(){
-  if(this.usuario.pontosMemoria == 0 || this.usuario.pontosMemoria == 6 || this.usuario.pontosMemoria == 12){
-   return '0';
-  }
-  if(this.usuario.pontosMemoria == 1 || this.usuario.pontosMemoria == 7 || this.usuario.pontosMemoria == 13){
-   return '20';
-  }
-  if(this.usuario.pontosMemoria == 2 || this.usuario.pontosMemoria == 8 || this.usuario.pontosMemoria == 14){
-   return '35%';
- }
- if(this.usuario.pontosMemoria == 3 || this.usuario.pontosMemoria == 9 || this.usuario.pontosMemoria == 15){
-   return '50%';
- }
- if(this.usuario.pontosMemoria == 4 || this.usuario.pontosMemoria == 10 || this.usuario.pontosMemoria == 16){
-   return '70%';
- }
- if(this.usuario.pontosMemoria == 5 || this.usuario.pontosMemoria == 11 || this.usuario.pontosMemoria == 17){
-   return '85%';
-}
- 
-}
-
 }
