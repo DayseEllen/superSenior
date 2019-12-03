@@ -15,8 +15,11 @@ export class MeuPerfilPage implements OnInit {
   usuario: Usuario;
   usuarios: Usuario[]=[];
   porcentagem: string;
+  porcentagemM:string;
   nivel: string;
+  nivelM: string;
   pontosP: number;
+  pontosM: number;
   
   constructor( private autenticacao : Autenticacao, 
     private rota: Router, private bdService: BDService,) {
@@ -26,8 +29,11 @@ private async carregarUsuarios(){
   this.usuarios = await this.bdService.listWithUIDs<Usuario>('/usuarios');
     this.getUser();
     this.pontosP = this.usuario.pontosPerguntas;
+    this.pontosM=this.usuario.pontosMemoria;
     this.calcularNivelPergunta();
     this.calcularPorcentagem();
+    this.calcularNivelMemoria();
+    this.calcularPorcentagemM();
 }
   private getUser(){
      this.usuario=null;
@@ -80,4 +86,32 @@ calcularNivelPergunta(){
     }
 }
 
+calcularPorcentagemM(){
+  if(this.nivelM == "Nível 1"){
+     this.porcentagemM = String(((100 * this.usuario.pontosMemoria) / 6).toFixed(0));
+  }
+  if(this.nivelM == "Nível 2"){
+    this.porcentagemM = String(((100 * (this.usuario.pontosMemoria-6)) / 6).toFixed(0));
+  }
+  if(this.nivelM == "Nível 3"){
+    this.porcentagemM = String(((100 * (this.usuario.pontosMemoria-12)) / 6).toFixed(0));
+  }
+}
+
+calcularNivelMemoria(){
+  if (!this.usuario) {
+    this.usuario = <Usuario> {};
+    this.usuario.pontosMemoria = this.pontosM;
+   }
+
+  if(this.usuario.pontosMemoria >=0 && this.usuario.pontosMemoria <6){
+      this.nivelM = "Nível 1";
+    }
+    if(this.usuario.pontosMemoria >=6 && this.usuario.pontosMemoria <12){
+      this.nivelM = "Nível 2";
+    }
+    if(this.usuario.pontosMemoria >=12 && this.usuario.pontosMemoria <18){
+      this.nivelM  = "Nível 3";
+    }
+}
 }
