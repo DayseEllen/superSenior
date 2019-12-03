@@ -22,15 +22,17 @@
        <div>
         <img *ngFor="let carta of cartas" (click)="imageClicked(carta)" class="cartaR" [src]="carta?.displayUrl">
       </div>
+      <button type="button" class="btn btn-light" id="voltar" (click)="abrirPagina('home')">Voltar</button>
     </div>
 
     <div text-center id="meio2"  *ngIf="cartas.length==8">
       <div>
        <img *ngFor="let carta of cartas" (click)="imageClicked(carta)" class="cartaL" [src]="carta?.displayUrl">
      </div>
+     <button type="button" class="btn btn-light" id="voltar" (click)="abrirPagina('home')">Voltar</button>
    </div>
   <br>
 
-  <button type="button" class="btn btn-light" id="voltar" (click)="abrirPagina('home')">Voltar</button>
+ 
 </div>
   </ion-content>
