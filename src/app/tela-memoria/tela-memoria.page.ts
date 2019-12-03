@@ -159,19 +159,13 @@ export class TelaMemoriaPage implements OnInit {
         this.cartas.push(this.cartasAuxiliar[posicionCard]);
         this.cartasAuxiliar.splice(posicionCard, 1);
       }
-    } if (this.pontosM >= 6 && this.pontosM < 12) {
+    } if (this.pontosM >= 6 && this.pontosM < 18) {
       while (this.cartas.length != 8) {
         var posicionCard = Math.floor(this.cartasAuxiliar.length * Math.random());
         this.cartas.push(this.cartasAuxiliar[posicionCard]);
         this.cartasAuxiliar.splice(posicionCard, 1);
       }
-    } if (this.pontosM >= 12 && this.pontosM < 18) {
-      while (this.cartas.length != 8) {
-        var posicionCard = Math.floor(this.cartasAuxiliar.length * Math.random());
-        this.cartas.push(this.cartasAuxiliar[posicionCard]);
-        this.cartasAuxiliar.splice(posicionCard, 1);
-      }
-    }
+    } 
 
   }
   imageClicked(carta) {
@@ -214,7 +208,7 @@ export class TelaMemoriaPage implements OnInit {
         ]
       });
       await alert.present();
-    } if(this.pontosM===11){
+    }else if(this.pontosM===11){
       this.calcularNivelMemoria();
       this.calcularPorcentagem();
       let alert = await this.alert.create({
@@ -223,19 +217,15 @@ export class TelaMemoriaPage implements OnInit {
         cssClass: 'alertsm',
         buttons: [
           {
-            text: 'Clique aqui para ir para a próxima fase',
+            text: 'Clique aqui para ir para continuar',
             handler: () => {
-              this.pontosM ++;
-              this.calcularNivelMemoria();
-              this.calcularPorcentagem();
-              this.imageSelect();
-              setTimeout(() =>  this.mostrarCartas(), 1000)
+              this.passarNivel3();
             }
           }
         ]
       });
       await alert.present();
-    }if(this.pontosM===17){
+    }else if(this.pontosM===17){
       this.calcularNivelMemoria();
       this.calcularPorcentagem();
       let alert = await this.alert.create({
@@ -256,7 +246,7 @@ export class TelaMemoriaPage implements OnInit {
         ]
       });
       await alert.present();
-    } if(this.pontosMensagem(this.pontosM)){
+    } else if(this.pontosMensagem(this.pontosM)){
       this.pontosM ++; 
       this.calcularPorcentagem();
       let alert = await this.alert.create({
@@ -311,7 +301,7 @@ export class TelaMemoriaPage implements OnInit {
           text: 'Entendi',
           handler: () => {
             this.punicaoCartaCoringa();
-          setTimeout(() => this.mostrarCartas(), 10000)
+          setTimeout(() => this.mostrarCartas(), 1000)
         }
         }
       ]
@@ -406,6 +396,15 @@ export class TelaMemoriaPage implements OnInit {
        if(this.pontosM >=12 && this.pontosM <18){
          this.nivel  = "Nível 3";
        }
+  }
+
+  passarNivel3(){
+    this.pontosM ++;
+    this.calcularNivelMemoria();
+    this.calcularPorcentagem();
+    this.imageSelect();
+    setTimeout(() =>  this.mostrarCartas(), 2000)
+   
   }
 
 }
