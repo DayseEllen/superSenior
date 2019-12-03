@@ -3,7 +3,7 @@
     position: center;
     font-family:  Times New Roman; 
     font-size: 1.5em;
-    margin-top: 22vh;
+    margin-top: 28.5vh;
 }
 
 #topo{
@@ -27,15 +27,23 @@
     margin-top: 1vh;
     background-color: white;
 }
-
-.meio{
+.meioNivel1{
     height: 50vh;
     width: 90vw;
     text-align: center;
     background: white;
     border-radius: 2vh;
     margin: auto;
-    margin-top: 7vh;
+    margin-top: 3vh;
+}
+.meioNivel2{
+    height: 50vh;
+    width: 90vw;
+    text-align: center;
+    background: white;
+    border-radius: 2vh;
+    margin: auto;
+    margin-top: 3vh;
 }
 
 #label{
@@ -47,7 +55,7 @@
     border: 2px solid;
     border-color: darkslategrey;
 }
-#fundo1{
+#fundo0-1{
     position: fixed;
     height: 13vh;
     width: 22vw;
@@ -55,35 +63,26 @@
     left: 18.8vw;
     z-index:1;
     color: black;
- 
 }
-#fundo2{
+#fundo1-1{
     position: fixed;
     height: 13vh;
     width: 22vw;
     top: 28.4vh;
     left: 60.2vw;
     z-index:1;
-  
+    color:black;
 }
-#fundo3{
+#fundo2-1{
     position: fixed;
     height: 13vh;
     width: 22vw;
     top: 50vh;
     left: 39.2vw;
     z-index:1;
-    
+    color: black;   
 }
-h6{
-    color: black;
-    margin-top: 2vh;
-    margin-bottom: 2vh;
-    font-family:  Times New Roman; 
-    font-size: 1em;
-    text-align: center;
-}
-#janela1{
+#janela0-1{
     position: relative;
     height: 13.5vh;
     width: 22.5vw;
@@ -95,7 +94,7 @@ h6{
     float: left;
     z-index:2;
 }
-#janela2{
+#janela1-1{
     position: relative;
     height: 13.5vh;
     width: 22.5vw;
@@ -107,7 +106,7 @@ h6{
     float: left;
     z-index:2;
 }
-#janela3{
+#janela2-1{
     position: relative;
     height: 13.5vh;
     width: 22.5vw;
@@ -118,15 +117,133 @@ h6{
     margin-left: 33.75vw;
     float: left;
     z-index:2;
+
+
+h6{
+    color: black;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    font-family:  Times New Roman; 
+    font-size: 1em;
+    text-align: center;
 }
 
-#painel{
+}
+#fundo0-2{
+    position: relative;
+    height: 13vh;
+    width: 22vw;
+    margin-top: 2vh;
+    margin-left: 10vw;
+    float: left;
+    z-index: 1;
+    color:black;
+    padding-top: 3vh;
+}
+#fundo1-2{
+    position: relative;
+    height: 13vh;
+    width: 22vw;
+    color:black;
+    margin-top: 2vh;
+    margin-right: 10vw;
+    float: right;
+    z-index:1;
+    padding-top: 3vh;
+}
+#fundo2-2{
     position: absolute;
     height: 13vh;
-    width: 100vw;
-    margin-top: 5vh;
-    margin-left: 1.5vw;
-}   
+    width: 22vw;
+    color:black;
+    margin-top: 18.25vh;
+    margin-right: 33.75vw;
+    margin-left: 33.75vw;
+    z-index: 1;
+    padding-top: 3vh;
+}
+#fundo3-2{
+    position: relative;
+    height: 13vh;
+    width: 22vw;
+    color:black;
+    margin-top: 19vh;
+    margin-left: 10vw;
+    float: left;
+    z-index:1;
+    padding-top: 3vh;
+}
+#fundo4-2{
+    position: relative;
+    height: 13vh;
+    width: 22vw;
+    color:black;
+    margin-top: 19vh;
+    margin-right: 10vw;
+    float: right;
+    z-index:1;
+    padding-top: 3vh;
+}
+#janela0-2{
+    position: relative;
+    height: 13.5vh;
+    width: 22.5vw;
+    border: 3px solid;
+    border-radius: 2vh;
+    border-color: darkslategrey;
+    margin-top: 2vh;
+    margin-left: -22.5vw;
+    float: left;
+    z-index: 2;
+}
+#janela1-2{
+    position: relative;
+    height: 13.5vh;
+    width: 22.5vw;
+    border: 3px solid;
+    border-radius: 2vh;
+    border-color: darkslategrey;
+    margin-top: -13.5vh;
+    margin-right: 10vw;
+    float: right;
+    z-index: 2;
+}
+#janela2-2{
+    position: absolute;
+    height: 13.5vh;
+    width: 22.5vw;
+    border: 3px solid;
+    border-radius: 2vh;
+    border-color: darkslategrey;
+    margin-top: 18.25vh;
+    margin-right: 33.75vw;
+    margin-left: 33.75vw;
+    z-index: 2;
+}
+#janela3-2{
+    position: absolute;
+    height: 13.5vh;
+    width: 22.5vw;
+    border: 3px solid;
+    border-radius: 2vh;
+    border-color: darkslategrey;
+    margin-top: 34.5vh;
+    margin-left: 10vw;
+    float: left;
+    z-index: 2
+}
+#janela4-2{
+    position: absolute;
+    height: 13.5vh;
+    width: 22.5vw;
+    border: 3px solid;
+    border-radius: 2vh;
+    border-color: darkslategrey;
+    margin-top: 34.5vh;
+    margin-left: 57.5vw;
+    float: right;
+    z-index: 2;
+}    
 #imgPainel{
     position: relative; 
     height: 12vh;
@@ -134,6 +251,20 @@ h6{
     border-radius: 2vh;
     background: white;
 }  
+#painelNivel1{
+    position: absolute;
+    height: 13vh;
+    width: 100vw;
+    margin-top: 5vh;
+    margin-left: 1.5vw;
+}   
+#painelNivel2{
+    position: absolute;
+    height: 25vh;
+    width: 80vw;
+    margin-top: 3vh;
+    margin-left: 11.25vw;
+} 
 #imgDrop{
     height: 12vh;
     width: 22vw;

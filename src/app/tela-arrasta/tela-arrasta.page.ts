@@ -31,14 +31,21 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
   nomes = [];
   isOk: boolean;
   subs = new Subscription();
-  janela = [];
-  janelaUmOk: boolean = false;
+  janelasOk: boolean[] = [false, false, false, false, false, false, false];
+  janela1 = [];
   janela2 = [];
+  janela0 = [];
   janela3 = [];
-  janelaDoisOk: boolean = false;
-  janelaTresOk: boolean = false;
+  janela4 = [];
+  janela5 = [];
+  janela6 = [];
   allImagesSelect: Imagem[] = [];
   pontosTotal: number = 0;
+  pontos: number = 0;
+  nivel: number = 1;
+  nivel1: boolean = true;
+  nivel2: boolean = false;
+  nivel3: boolean = false;
 
   constructor(private rota: Router, private alert: AlertController, private bdService: BDService, private dragulaService: DragulaService, private elementRef: ElementRef) {
     this.carregarImagens();
@@ -54,40 +61,50 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
   }
 
   containerUmModificado() {
-    if (this.nomes[0] === this.janela[0].nome) {
-      this.janelaUmOk = true;
+    if (this.nomes[0] === this.janela0[0].nome) {
+      this.janelasOk[0] = true;
+      this.pontos++;
       this.pontosTotal++;
+      this.verificaPontosNivel();
     } else {
-      this.janelaUmOk = true;
+      this.janelasOk[0] = true;
       setTimeout(() => {
         this.exibirMensagemErro();
       }, 400);
     }
+    console.log('Pontos: ' + this.pontos);
+    console.log('Pontos Total: ' + this.pontosTotal);
   }
 
   containerDoisModificado() {
-    if (this.nomes[1] === this.janela2[0].nome) {
-      this.janelaDoisOk = true;
+    if (this.nomes[1] === this.janela1[0].nome) {
+      this.janelasOk[1] = true;
+      this.pontos++;
       this.pontosTotal++;
-      
+      this.verificaPontosNivel();
     } else {
-      this.janelaDoisOk = true;
+      this.janelasOk[1] = true;
       setTimeout(() => {
         this.exibirMensagemErro();
       }, 400);
     }
+    console.log('Pontos: ' + this.pontos);
+    console.log('Pontos Total: ' + this.pontosTotal);
   }
   containerTresModificado() {
-    if (this.nomes[2] === this.janela3[0].nome) {
-      this.janelaTresOk = true;
+    if (this.nomes[2] === this.janela2[0].nome) {
+      this.janelasOk[2] = true;
+      this.pontos++;
       this.pontosTotal++;
-     
+      this.verificaPontosNivel();
     } else {
-      this.janelaTresOk = true;
+      this.janelasOk[2] = true;
       setTimeout(() => {
         this.exibirMensagemErro();
       }, 400);
     }
+    console.log('Pontos: ' + this.pontos);
+    console.log('Pontos Total: ' + this.pontosTotal);
   }
   private async carregarImagens() {
     this.imagensCarregadas = await this.bdService.listWithUIDs<Imagem>('/imagens');
@@ -115,7 +132,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
   imagensSelecionadas() {
     this.imagens = [];
     this.nomes = [];
-    for (var i = 0; i < 4; i++) {
+    for (var i = 0; i < (this.nivel * 2) + 2; i++) {
       this.imagem = this.randomImagem();
       this.imagens.push(this.imagem);
       this.nomes.push(this.imagem.nome);
@@ -145,7 +162,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
       buttons: [
         {
           text: 'Clique aqui para tentar novamente.',
-          handler: () => this.zerarJogo()
+          handler: () => this.zerarFaseNivel1()
         }
       ]
     });
@@ -179,19 +196,62 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
     });
     await alert.present();
   }
-  zerarJogo() {
-    this.janelaUmOk = false;
-    this.janelaDoisOk = false;
-    this.janelaTresOk = false;
-    this.janela = [];
+  zerarNivel() {
+    this.janelasOk[0] = false;
+    this.janelasOk[1] = false;
+    this.janelasOk[2] = false;
+    this.janela0 = [];
+    this.janela1 = [];
+    this.janela2 = [];
+    this.pontos = 0;
+  }
+  zerarFaseNivel1() {
+    this.janelasOk[0] = false;
+    this.janelasOk[1] = false;
+    this.janelasOk[2] = false;
+    this.janela0 = [];
+    this.janela1 = [];
+    this.janela2 = [];
+    this.imagens = this.allImagesSelect;
+    this.pontosTotal -= this.pontos;
+    this.pontos = 0;
+  }
+  zerarFaseNivel2() {
+    this.janelasOk[0] = false;
+    this.janelasOk[1] = false;
+    this.janelasOk[2] = false;
+    this.janelasOk[3] = false;
+    this.janelasOk[4] = false;
+    this.janela0 = [];
+    this.janela1 = [];
     this.janela2 = [];
     this.janela3 = [];
+    this.janela4 = [];
     this.imagens = this.allImagesSelect;
+    this.pontosTotal -= this.pontos;
+    this.pontos = 0;
   }
   proximaFase() {
+    this.imagensCarregadas.push(this.imagens[0]);
+    console.log(this.imagens[0]);
     this.imagensSelecionadas();
     this.randomNomes();
-    this.zerarJogo();
+    this.zerarNivel();
+    if (!this.dragulaService.find("bag")) {
+      this.dragulaService.createGroup("bag", {
+        revertOnSpill: true,
+        removeOnSpill: false
+      });
+    }
+    this.alterarNivel();
+  }
+
+  exibirNivel2() {
+    this.nivel1 = false;
+    this.nivel2 = true;
+    this.imagensSelecionadas();
+    this.randomNomes();
+    this.zerarFaseNivel2();
     if (!this.dragulaService.find("bag")) {
       this.dragulaService.createGroup("bag", {
         revertOnSpill: true,
@@ -199,17 +259,30 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
       });
     }
   }
-
-  exibirNivel2() {
-
-  }
-
-  verificaPontosNivel1() {
-    if (this.pontosTotal === 3 || this.pontosTotal === 6) {
-      this.exibirMensagemGanhou();
-    } else if (this.pontosTotal === 9) {
+  alterarNivel() {
+    if (this.pontosTotal === 9) {
       this.exibirMensagemProximoNivel();
+      this.nivel = 2;
     }
+    if (this.pontosTotal === 20) {
+      this.exibirMensagemProximoNivel();
+      this.nivel = 3;
+    }
+    if (this.pontosTotal === 35) {
+      this.exibirMensagemZerou();
+    }
+  }
+  verificaPontosNivel() {
+    if (this.nivel === 1 && this.pontos === 3) {
+      this.exibirMensagemGanhou();
+    } else if (this.nivel === 2 && this.pontos === 5) {
+      this.exibirMensagemGanhou();
+    } else if (this.nivel === 3 && this.pontos === 7) {
+      this.exibirMensagemGanhou();
+    }
+  }
+  exibirMensagemZerou() {
+
   }
   ngOnInit() {
 

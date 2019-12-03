@@ -12,7 +12,7 @@ export class Autenticacao {
      private usuario: Observable<firebase.User>;
      private userDetails: firebase.User;
 
-    constructor(private angularFireAuth : AngularFireAuth, private router: Router, private angularFirestore: AngularFirestore){
+    constructor(private angularFireAuth : AngularFireAuth, private angularFirestore: AngularFirestore, private router:Router){
       this.usuario = angularFireAuth.authState;
       this.usuario.subscribe(
               (user) => {
@@ -42,8 +42,9 @@ export class Autenticacao {
     }
     
   logout() {
-      this.angularFireAuth.auth.signOut()
-      .then((res) => this.router.navigate(['/cadastrar']));
+     this.angularFireAuth.auth.signOut()
+      .then((res) => this.router.navigate(['/cadastrar']))
+      .catch(e=> console.log(e));
     }
 
     getDisplayName(){

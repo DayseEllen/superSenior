@@ -18,32 +18,31 @@ import { Location } from '@angular/common';
 })
 export class LoginPage implements OnInit {
 
-  usuarios: Usuario[]=[];
-  usuario: Usuario=null;
-  
-  constructor(private rota: Router, private autenticacao : Autenticacao, private alertCtrl: AlertController, private location: Location, private bdService: BDService) { 
-  
+  usuarios: Usuario[] = [];
+  usuario: Usuario = null;
+
+  constructor(private router: Router, private autenticacao: Autenticacao, private alertCtrl: AlertController, private location: Location, private bdService: BDService) {
     this.carregarUsuarios();
-   }
+  }
 
   @ViewChild('login') form: NgForm;
 
-  private async carregarUsuarios(){
+  private async carregarUsuarios() {
     this.usuarios = await this.bdService.listWithUIDs<Usuario>('/usuarios');
 
   }
-  async loginGoogle(){
-     await this.autenticacao.signInWithGoogle();
-     
+
+  async loginGoogle() {
+    await this.autenticacao.signInWithGoogle();
   }
 
- 
+
   ngOnInit() {
-    
+
   }
 
-  abrirPagina(url:String){
-    this.rota.navigate([url]);
+  abrirPagina(url: String) {
+    this.router.navigate([url]);
 
   }
 
