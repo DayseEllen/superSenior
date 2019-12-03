@@ -88,13 +88,13 @@ calcularNivelPergunta(){
 
 calcularPorcentagemM(){
   if(this.nivelM == "Nível 1"){
-     this.porcentagemM = String(((100 * this.usuario.pontosMemoria) / 6).toFixed(0));
+     this.porcentagemM = String(((100 * this.usuario.pontosMemoria) / 5).toFixed(0));
   }
   if(this.nivelM == "Nível 2"){
-    this.porcentagemM = String(((100 * (this.usuario.pontosMemoria-6)) / 6).toFixed(0));
+    this.porcentagemM = String(((100 * (this.usuario.pontosMemoria-5)) / 5).toFixed(0));
   }
   if(this.nivelM == "Nível 3"){
-    this.porcentagemM = String(((100 * (this.usuario.pontosMemoria-12)) / 6).toFixed(0));
+    this.porcentagemM = String(((100 * (this.usuario.pontosMemoria-10)) / 5).toFixed(0));
   }
 }
 
