@@ -272,9 +272,9 @@ export class TelaPerguntaPage implements OnInit {
 
   abrirPagina(url: String) {
 
-      this.user = new Usuario(
-      this.autenticacao.getUid(),this.autenticacao.getDisplayName(),
-      this.autenticacao.getEmail(),this.usuario.genero,this.usuario.idade,this.pontosP,this.usuario.pontosMemoria,this.usuario.pontosArrasta);
+    this.user = new Usuario(
+    this.autenticacao.getUid(),this.autenticacao.getDisplayName(),
+    this.autenticacao.getEmail(),this.usuario.genero,this.usuario.idade,this.pontosP,this.usuario.pontosMemoria,this.usuario.pontosArrasta);
     this.rota.navigate([url]);
     this.bdService.update('/usuarios', this.usuario.uid, this.user);
      

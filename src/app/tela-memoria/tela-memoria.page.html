@@ -14,25 +14,31 @@
     <div class="loader" *ngIf="!memoriaAtual"></div>
 <div text-center>
   <br>
-  <div class="progress">
-      <div id ="barraprogresso3" class="progress-bar" role="progressbar" [style.width]="porcentagem + '%'" [attr.aria-valuenow]="porcentagem" aria-valuemin="0" aria-valuemax="100">{{porcentagem}}%</div>   
-    </div>
+  <div text-center *ngIf="cartas.length==6"> 
+    <div class="progress">
+        <div id ="barraprogresso3" class="progress-bar" role="progressbar" [style.width]="porcentagem + '%'" [attr.aria-valuenow]="porcentagem" aria-valuemin="0" aria-valuemax="100">{{porcentagem}}%</div>   
+    </div>   
     <p id="titlebarra" text-center>{{nivel}}</p>
-    <div text-center id="meio"  *ngIf="cartas.length==6">
-       <div>
+    <div>
+    <div text-center id="meio">
         <img *ngFor="let carta of cartas" (click)="imageClicked(carta)" class="cartaR" [src]="carta?.displayUrl">
       </div>
       <button type="button" class="btn btn-light" id="voltar" (click)="abrirPagina('home')">Voltar</button>
     </div>
+</div>
 
-    <div text-center id="meio2"  *ngIf="cartas.length==8">
+<div text-center *ngIf="cartas.length==8"> 
+       <div class="progress">
+            <div id ="barraprogresso3" class="progress-bar" role="progressbar" [style.width]="porcentagem + '%'" [attr.aria-valuenow]="porcentagem" aria-valuemin="0" aria-valuemax="100">{{porcentagem}}%</div>   
+          </div>
+          <p id="titlebarra" text-center>{{nivel}}</p>
       <div>
+    <div text-center id="meio2">
        <img *ngFor="let carta of cartas" (click)="imageClicked(carta)" class="cartaL" [src]="carta?.displayUrl">
      </div>
      <button type="button" class="btn btn-light" id="voltar" (click)="abrirPagina('home')">Voltar</button>
    </div>
+</div>
   <br>
-
- 
 </div>
   </ion-content>
