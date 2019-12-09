@@ -30,11 +30,11 @@ export class LoginPage implements OnInit {
     if (this.form.form.valid) {
      var emailLogin: string = login.username+'@seniorIFPE.com';
       this.usuario = {
-        nome: login.nome,
-        username: login.username,
+        nome: null,
+        username: null,
         email: emailLogin,
-        genero: login.genero,
-        idade: login.idade,
+        genero: null,
+        idade: null,
         senha: login.senha,
         pontosPerguntas: 0,
         pontosMemoria: 0,
@@ -44,7 +44,7 @@ export class LoginPage implements OnInit {
         qtArrasta:0
       }
 
-      this.usuario = new Usuario(null, null, null, null, null, null);
+      this.usuario = new Usuario(null, null, emailLogin, null, null, login.senha);
 
       await this.autenticacao.signIn(this.usuario)
         .then(async () => {
