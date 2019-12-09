@@ -28,5 +28,5 @@ export class Autenticacao {
   signOut() {
     return this.angularFireAuth.auth.signOut();
   }
-  
+
 }
