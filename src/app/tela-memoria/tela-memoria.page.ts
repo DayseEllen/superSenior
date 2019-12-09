@@ -1,4 +1,4 @@
-import { Autenticacao } from './../services/autenticacao';
+import { Autenticacao } from '../services/autenticacao';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'; import { BDService } from '../services/bd.service';
 import { AlertController } from '@ionic/angular';
@@ -44,12 +44,12 @@ export class TelaMemoriaPage implements OnInit {
 
   private async carregarUsuarios() {
     this.usuarios = await this.bdService.listWithUIDs<Usuario>('/usuarios');
-    this.getUser();
+    //this.getUser();
     this.pontosM = this.usuario.pontosMemoria;
     this.calcularNivelMemoria();
     this.calcularPorcentagem();
   }
-  private getUser() {
+ /* private getUser() {
     this.usuario = null;
     if (this.autenticacao.isLoggedIn()) {
       for (var i = 0; i < this.usuarios.length; i++) {
@@ -59,7 +59,7 @@ export class TelaMemoriaPage implements OnInit {
       }
     }
     return this.usuario;
-  }
+  }*/
   
 
 
@@ -363,14 +363,14 @@ export class TelaMemoriaPage implements OnInit {
     this.cartasComparacao = [];
   }
 
-  abrirPagina(url: String) {
+  /*abrirPagina(url: String) {
     console.log(this.pontosM);
     this.user = new Usuario(
       this.autenticacao.getUid(), this.autenticacao.getDisplayName(),
       this.autenticacao.getEmail(), this.usuario.genero, this.usuario.idade, this.usuario.pontosPerguntas, this.pontosM, this.usuario.pontosArrasta);
     this.rota.navigate([url]);
     this.bdService.update('/usuarios', this.usuario.uid, this.user);
-  }
+  }*/
 
   calcularPorcentagem(){
     if(this.nivel == "Nível 1"){

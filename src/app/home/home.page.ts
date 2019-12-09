@@ -1,6 +1,7 @@
-import { Autenticacao } from '../services/autenticacao';
+
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Autenticacao } from '../services/autenticacao';
 
 @Component({
   selector: 'app-home',

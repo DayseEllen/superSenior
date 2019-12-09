@@ -14,7 +14,7 @@ import { AngularFireModule } from 'angularfire2';
 import {AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { DragulaModule } from 'ng2-dragula';
-import { Autenticacao } from '../app/services/autenticacao';
+import { Autenticacao } from './services/autenticacao';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 

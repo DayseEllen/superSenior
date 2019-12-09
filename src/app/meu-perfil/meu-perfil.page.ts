@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { Autenticacao } from '../services/autenticacao';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/models/usuario';
 import { BDService } from '../services/bd.service';
+import { Autenticacao } from '../services/autenticacao';
 
 @Component({
   selector: 'app-meu-perfil',
@@ -27,7 +27,7 @@ export class MeuPerfilPage implements OnInit {
 }
 private async carregarUsuarios(){
   this.usuarios = await this.bdService.listWithUIDs<Usuario>('/usuarios');
-    this.getUser();
+    //this.getUser();
     this.pontosP = this.usuario.pontosPerguntas;
     this.pontosM=this.usuario.pontosMemoria;
     this.calcularNivelPergunta();
@@ -35,7 +35,7 @@ private async carregarUsuarios(){
     this.calcularNivelMemoria();
     this.calcularPorcentagemM();
 }
-  private getUser(){
+  /*private getUser(){
      this.usuario=null;
        if(this.autenticacao.isLoggedIn()){
        for(var i=0;i<this.usuarios.length;i++){
@@ -46,7 +46,7 @@ private async carregarUsuarios(){
        }
        return this.usuario;
      }
-
+*/
      
 
   ngOnInit() {
@@ -54,7 +54,13 @@ private async carregarUsuarios(){
   }
   
   singOut(){
-   this.autenticacao.logout();
+    this.autenticacao.signOut()
+    .then(() => {
+      this.rota.navigate(['cadastrar'])
+    })
+    .catch((error) => {
+      console.error(error);
+    });
  }
 
  calcularPorcentagem(){

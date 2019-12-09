@@ -5,10 +5,10 @@ import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 import { NgForm } from '@angular/forms';
-import { Autenticacao } from '../services/autenticacao';
 import { Usuario } from 'src/models/usuario';
 import { AlertController, ToastController } from '@ionic/angular';
 import { Location } from '@angular/common';
+import { Autenticacao } from '../services/autenticacao';
 
 
 @Component({
@@ -32,9 +32,7 @@ export class LoginPage implements OnInit {
 
   }
 
-  async loginGoogle() {
-    await this.autenticacao.signInWithGoogle();
-  }
+  
 
 
   ngOnInit() {

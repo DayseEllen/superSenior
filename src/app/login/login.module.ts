@@ -1,5 +1,5 @@
 import { BDService } from './../services/bd.service';
-import { Autenticacao } from './../services/autenticacao';
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -10,6 +10,7 @@ import { IonicModule } from '@ionic/angular';
 import { LoginPage } from './login.page';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { Autenticacao } from '../services/autenticacao';
 
 const routes: Routes = [
   {

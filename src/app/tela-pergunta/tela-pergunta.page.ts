@@ -34,13 +34,13 @@ export class TelaPerguntaPage implements OnInit {
 
   private async carregarUsuarios() {
     this.usuarios = await this.bdService.listWithUIDs<Usuario>('/usuarios');
-    this.getUser();
+    //this.getUser();
     this.pontosP = this.usuario.pontosPerguntas;
     this.calcularNivelPergunta();
     this.calcularPorcentagem();
   }
 
-  private getUser() {
+ /* private getUser() {
     this.usuario = null;
     if (this.autenticacao.isLoggedIn()) {
       for (var i = 0; i < this.usuarios.length; i++) {
@@ -51,7 +51,7 @@ export class TelaPerguntaPage implements OnInit {
     }
     return this.usuario;
   }
-
+*/
   randomPergunta() {
 
     if(this.pontosP >=0 && this.pontosP <6){
@@ -270,7 +270,7 @@ export class TelaPerguntaPage implements OnInit {
 
   }
 
-  abrirPagina(url: String) {
+/*  abrirPagina(url: String) {
 
     this.user = new Usuario(
     this.autenticacao.getUid(),this.autenticacao.getDisplayName(),
@@ -278,7 +278,7 @@ export class TelaPerguntaPage implements OnInit {
     this.rota.navigate([url]);
     this.bdService.update('/usuarios', this.usuario.uid, this.user);
      
-  }
+  }*/
 
 
   calcularPorcentagem(){

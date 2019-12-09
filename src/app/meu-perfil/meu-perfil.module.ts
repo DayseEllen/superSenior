@@ -1,4 +1,4 @@
-import { Autenticacao } from './../services/autenticacao';
+import { Autenticacao } from '../services/autenticacao';
 import { BDService } from './../services/bd.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';

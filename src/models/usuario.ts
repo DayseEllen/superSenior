@@ -1,22 +1,24 @@
 
-export class Usuario{
-    uid: string;
+export class Usuario {
     nome: string;
-    email: string;
+    username:string;
+    email:string;
     genero: string;
-   idade: number;
-   pontosPerguntas: number;
-   pontosMemoria:number;
-   pontosArrasta:number;
-    constructor(uid: string,nome:string, email:string, genero:string, idade: number, pontosP:number,pontosM:number,pontosA:number){
-        this.nome=nome;
+    idade: number;
+    senha: string;
+    pontosPerguntas: number;
+    pontosMemoria: number;
+    pontosArrasta: number;
+    qtPerguntas:number;
+    qtMemoria:number;
+    qtArrasta:number;
+    constructor(nome: string, username:string, email:string, genero: string, idade: number,senha:string) {
+        this.nome = nome;
+        this.genero = genero;
+        this.idade = idade;
+        this.username=username;
         this.email=email;
-       this.uid=uid;
-       this.genero=genero;
-       this.idade=idade;
-       this.pontosPerguntas=pontosP;
-       this.pontosMemoria=pontosM;
-       this.pontosArrasta=pontosA;
+        this.senha=senha;
     }
 
 }

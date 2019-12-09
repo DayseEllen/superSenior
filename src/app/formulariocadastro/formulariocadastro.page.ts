@@ -13,66 +13,63 @@ import { async } from 'q';
   selector: 'app-formulariocadastro',
   templateUrl: './formulariocadastro.page.html',
   styleUrls: ['./formulariocadastro.page.scss'],
-  providers:[BDService]
+  providers: [BDService]
 })
 export class FormulariocadastroPage implements OnInit {
-   usuario: Usuario=null;
-   usuarios: Usuario[]=[];
-  constructor(private rota:Router, 
-    private bdService: BDService, 
-    private alertCtrl: AlertController, 
-    private autenticacao : Autenticacao, 
-    ) { 
-this.carregarUsuarios();
-    }
-
-    private async carregarUsuarios(){
-      this.usuarios = await this.bdService.listWithUIDs<Usuario>('/usuarios');
-  
-    }
-
-@ViewChild('cadastro') form: NgForm
- async cadastrarComGoogle(cadastro){
-   if(this.form.form.valid===true){
-    await this.autenticacao.signInWithGoogle();
-    if(this.verificaSeExiste()==false){
-      this.usuario = new Usuario(
-        this.autenticacao.getUid(),this.autenticacao.getDisplayName(),
-        this.autenticacao.getEmail(),cadastro.genero,cadastro.idade,0,0,0);
-         this.inserirUsuario(this.usuario);
-     }else{
-       console.log("User já castrado antes")
-     }
-
-
-
-    
-}
+  usuario: Usuario = null;
+  usuarios: Usuario[] = [];
+  constructor(private rota: Router,
+    private bdService: BDService,
+    private alertCtrl: AlertController,
+    private autenticacao: Autenticacao,
+  ) {
   }
- 
 
-  verificaSeExiste(){
-    for(var i=0;i<this.usuarios.length;i++){
-      if(this.usuarios[i].email===this.autenticacao.getEmail()){
-        return true;
+  @ViewChild('cadastro') form: NgForm;
+
+  async createAccount(cadastro){
+      if (this.form.form.valid){
+        this.usuario = {
+          nome: cadastro.nome,
+          username:cadastro.username,
+          email: cadastro.username+'@supersenior.com',
+          genero: cadastro.genero,
+          idade: cadastro.idade,
+          senha: cadastro.senha,
+          pontosPerguntas: 0,
+          pontosMemoria: 0,
+          pontosArrasta:0,
+          qtPerguntas:0,
+          qtMemoria:0,
+          qtArrasta:0
+        }
+        console.log(this.usuario.email);
+        await this.autenticacao.createUser(this.usuario)
+            .then((usuario: any) => {
+             usuario.sendEmailVerification();
+              console.log("Pegou!");
+            
+            })
+            .catch((error: any) => {
+              if(error.code == 'auth/email-already-in-use'){
+                console.log("O e-mail digitado já está em uso");
+              } else if(error.code == 'auth/invalid-email'){
+                console.log("O e-mail digitado não é valido");
+              } else if(error.code == 'auth/operation-not-allowed'){
+                console.log("Não está habilitado criar usuários");
+              } else if(error.code == 'auth/weak-password'){
+                console.log("A senha digitada é muito fraca");
+              }
+            });
       }
-    }
-    return false;
   }
-
- private async inserirUsuario(usuario){
-   await this.bdService.insertInList<Usuario>('/usuarios',usuario);
-  }
-
-
 
   abrirPagina(url:String){
     this.rota.navigate([url]);
  }
- 
 
   ngOnInit() {
 
   }
-  
+
 }
