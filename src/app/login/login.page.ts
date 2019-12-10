@@ -18,47 +18,50 @@ import { Autenticacao } from '../services/autenticacao';
 })
 export class LoginPage implements OnInit {
   usuario: Usuario;
+  usuarios: Usuario[];
 
-  constructor(private rota: Router, private autenticacao: Autenticacao, private alertCtrl: AlertController, private location: Location) {
+  constructor(private rota: Router, private autenticacao: Autenticacao,
+     private alertCtrl: AlertController, private location: Location, private bdService: BDService) {
     //
-    this.usuario = new Usuario(null, null, null, null, null, null);
+    //this.usuario = new Usuario(null, null, null, null, null, null);
   }
-
+  private async carregarUsuarios() {
+    this.usuarios = await this.bdService.listWithUIDs<Usuario>('/usuarios');
+  }
   @ViewChild('login') form: NgForm;
-
+  
   async signIn(login) {
     if (this.form.form.valid) {
-     var emailLogin: string = login.username+'@seniorIFPE.com';
+     /* var emailLogin = login.username + '@seniorIFPE.com';
       this.usuario = {
-        nome: null,
-        username: null,
+        nome: this.autenticacao,
+        username: login.username,
         email: emailLogin,
-        genero: null,
-        idade: null,
+        genero: 'Feminino',
+        idade: 19,
         senha: login.senha,
         pontosPerguntas: 0,
         pontosMemoria: 0,
         pontosArrasta: 0,
-        qtPerguntas:0,
-        qtMemoria:0,
-        qtArrasta:0
-      }
+        qtPerguntas: 0,
+        qtMemoria: 0,
+        qtArrasta: 0
+      }*/
 
-      this.usuario = new Usuario(null, null, emailLogin, null, null, login.senha);
-
-      await this.autenticacao.signIn(this.usuario)
+      //this.usuario = new Usuario(this.autenticacao.getNomeUser(), null, emailLogin, null, null, login.senha);
+      this.carregarUsuarios();
+      await this.autenticacao.signIn(login.username + '@seniorifpe.com', login.senha)
         .then(async () => {
           let alert = await this.alertCtrl.create({
             header: 'Ebaa! 😃',
             message: 'Bem vindo(a)!',
-            cssClass: 'alertsforms',
+            cssClass: 'alertsformlog',
             buttons: [{
               text: 'Vamos lá!',
               handler: () => this.rota.navigate(['home'])
             }]
           });
           await alert.present();
-          console.log("PEGOUUUU")
         })
         .catch(async (error: any) => {
           if (error.code == 'auth/invalid-email') {
@@ -66,7 +69,7 @@ export class LoginPage implements OnInit {
             let alert = await this.alertCtrl.create({
               header: 'Falha ao entrar 😢',
               message: 'O e-mail digitado não é valido',
-              cssClass: 'alertsforms',
+              cssClass: 'alertsformlog',
               buttons: [
                 {
                   text: 'Tentar novamente',
@@ -80,7 +83,7 @@ export class LoginPage implements OnInit {
             let alert = await this.alertCtrl.create({
               header: 'Falha ao entrar 😢',
               message: 'O usuário está desativado',
-              cssClass: 'alertsforms',
+              cssClass: 'alertsformlog',
               buttons: [
                 {
                   text: 'Tentar novamente',
@@ -94,7 +97,7 @@ export class LoginPage implements OnInit {
             let alert = await this.alertCtrl.create({
               header: 'Falha ao entrar 😢',
               message: 'O usuário não foi encontrado',
-              cssClass: 'alertsforms',
+              cssClass: 'alertsformlog',
               buttons: [
                 {
                   text: 'Tentar novamente',
@@ -108,7 +111,7 @@ export class LoginPage implements OnInit {
             let alert = await this.alertCtrl.create({
               header: 'Falha ao entrar 😢',
               message: 'A senha digitada não é válida',
-              cssClass: 'alertsforms',
+              cssClass: 'alertsformlog',
               buttons: [{
                 text: 'Tentar novamente',
                 handler: () => this.rota.navigate(['login'])
@@ -121,7 +124,7 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
-    this.usuario = new Usuario(null, null, null, null, null, null);
+    // this.usuario = new Usuario(null, null, null, null, null, null);
   }
 
   abrirPagina(url: String) {

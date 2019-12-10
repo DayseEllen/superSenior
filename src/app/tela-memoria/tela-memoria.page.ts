@@ -27,9 +27,9 @@ export class TelaMemoriaPage implements OnInit {
   countCardsOpen: number = 0;
   user: Usuario;
   usuario: Usuario;
-  usuarios: Usuario[]=[];
+  usuarios: Usuario[] = [];
   pontosM: number;
-
+  qt: number;
   cartaCoringaUrl: string = '';
   cartaCoringa: Memoria;
   porcentagem: string;
@@ -39,17 +39,17 @@ export class TelaMemoriaPage implements OnInit {
   constructor(private rota: Router, private bdService: BDService, private alert: AlertController, private autenticacao: Autenticacao) {
     this.carregarUsuarios();
     this.carregarImagens();
-    
   }
 
   private async carregarUsuarios() {
     this.usuarios = await this.bdService.listWithUIDs<Usuario>('/usuarios');
-    //this.getUser();
+    this.getUser();
     this.pontosM = this.usuario.pontosMemoria;
+    this.qt = this.usuario.qtMemoria;
     this.calcularNivelMemoria();
     this.calcularPorcentagem();
   }
- /* private getUser() {
+  private getUser() {
     this.usuario = null;
     if (this.autenticacao.isLoggedIn()) {
       for (var i = 0; i < this.usuarios.length; i++) {
@@ -59,8 +59,8 @@ export class TelaMemoriaPage implements OnInit {
       }
     }
     return this.usuario;
-  }*/
-  
+  }
+
 
 
   /* private async inserirMemorias() {
@@ -106,26 +106,26 @@ export class TelaMemoriaPage implements OnInit {
     setTimeout(() => { this.exibirMensagemInicio() }, 800);
   }
 
-  private async recarregarImagens(){
+  private async recarregarImagens() {
     this.memorias = await this.bdService.listWithUIDs<Memoria>('/memorias');
   }
 
   randomImagem() {
-    console.log("Array de memoria"+this.memorias.length);   
+    console.log("Array de memoria" + this.memorias.length);
     this.memoriaAtual = this.memorias[Math.floor(this.memorias.length * Math.random())];
     for (var i = 0; i < this.memorias.length; i++) {
       if (this.memorias[i].url == this.memoriaAtual.url) {
         this.memorias.splice(i, 1);
       }
     }
-    
+
     return this.memoriaAtual.url;
   }
 
   imageSelect() {
     this.cartas = [];
     this.cartaCoringaUrl = 'assets/images/cartacoringa.svg.png';
-    if (this.pontosM >=0 && this.pontosM <5) {
+    if (this.pontosM >= 0 && this.pontosM < 5) {
       for (var i = 0; i < 3; i++) {
         var url = this.randomImagem();
         this.cartasAuxiliar.push(new Cartas(url));
@@ -137,7 +137,7 @@ export class TelaMemoriaPage implements OnInit {
         this.cartasAuxiliar.push(new Cartas(url));
         this.cartasAuxiliar.push(new Cartas(url));
       }
-    }else if (this.pontosM >=10 && this.pontosM <16) {
+    } else if (this.pontosM >= 10 && this.pontosM < 16) {
       for (var i = 0; i < 3; i++) {
         var url = this.randomImagem();
         this.cartasAuxiliar.push(new Cartas(url));
@@ -146,7 +146,7 @@ export class TelaMemoriaPage implements OnInit {
       this.cartasAuxiliar.push(new Cartas(this.cartaCoringaUrl));
       this.cartasAuxiliar.push(new Cartas(this.cartaCoringaUrl));
     }
-   
+
     this.randomImagesCards();
   }
 
@@ -173,7 +173,7 @@ export class TelaMemoriaPage implements OnInit {
         this.cartas.push(this.cartasAuxiliar[posicionCard]);
         this.cartasAuxiliar.splice(posicionCard, 1);
       }
-    } 
+    }
 
   }
   imageClicked(carta) {
@@ -182,7 +182,7 @@ export class TelaMemoriaPage implements OnInit {
       carta.displayUrl = carta.url;
       carta.isOpen = true;
       if (this.cartasComparacao.length == 2) {
-        if (this.cartasComparacao[0].url === this.cartaCoringaUrl 
+        if (this.cartasComparacao[0].url === this.cartaCoringaUrl
           && this.cartasComparacao[0].url === this.cartasComparacao[1].url) {
           console.log('Pares de cartas coringa');
           setTimeout(() => this.msgCartaCoringaEncontrada(), 500);
@@ -194,7 +194,7 @@ export class TelaMemoriaPage implements OnInit {
     }
   }
   async exibirMensagemPassarNivel() {
-    if(this.pontosM==5){
+    if (this.pontosM == 5) {
       this.calcularPorcentagem();
       let alert = await this.alert.create({
         header: 'Parabéns!!! Você agora está no nível 2. 😃',
@@ -212,7 +212,7 @@ export class TelaMemoriaPage implements OnInit {
       });
       await alert.present();
 
-    }if(this.pontosM==10){
+    } if (this.pontosM == 10) {
       this.calcularPorcentagem();
       let alert = await this.alert.create({
         header: 'Parabéns!!! Você agora está no nível 3. 😃',
@@ -229,7 +229,7 @@ export class TelaMemoriaPage implements OnInit {
         ]
       });
       await alert.present();
-    }if(this.pontosM==15){
+    } if (this.pontosM == 15) {
       this.calcularPorcentagem();
       let alert = await this.alert.create({
         header: 'Parabéns!!! Você zerou o jogos da Memória.😃',
@@ -239,8 +239,8 @@ export class TelaMemoriaPage implements OnInit {
           {
             text: 'Clique aqui para reiniciar o jogo',
             handler: () => {
-            this.recarregarImagens();
-            this.igualaZero();
+              this.recarregarImagens();
+              this.igualaZero();
             }
           }
         ]
@@ -249,31 +249,31 @@ export class TelaMemoriaPage implements OnInit {
     }
   }
 
- async addPontos(){
-      this.pontosM++ ;
-      this.calcularPorcentagem();
-      this.imageSelect();
-      setTimeout(() => this.mostrarCartas(), 0)
-      this.exibirMensagemPassarNivel(); 
+  async addPontos() {
+    this.pontosM++;
+    this.calcularPorcentagem();
+    this.imageSelect();
+    setTimeout(() => this.mostrarCartas(), 0)
+    this.exibirMensagemPassarNivel();
   }
 
- async exibirmensagemAcerto(){
-      this.calcularNivelMemoria();
-      this.calcularPorcentagem();
-  let alert = await this.alert.create({
-    header: 'Parabéns!!! Você acertou todas as cartas.😃',
+  async exibirmensagemAcerto() {
+    this.calcularNivelMemoria();
+    this.calcularPorcentagem();
+    let alert = await this.alert.create({
+      header: 'Parabéns!!! Você acertou todas as cartas.😃',
 
-    message: 'Você tem '+(this.pontosM + 1)+" ponto(s)",
-    cssClass: 'alertsm',
-    buttons: [
-      {
-        text: 'Aperte aqui para continuar',
-        handler: () => {this.mostrarCartas(); this.addPontos();}
-      }
-    ]
-  })
-  await alert.present();
- }
+      message: 'Você tem ' + (this.pontosM + 1) + " ponto(s)",
+      cssClass: 'alertsm',
+      buttons: [
+        {
+          text: 'Aperte aqui para continuar',
+          handler: () => { this.mostrarCartas(); this.addPontos(); }
+        }
+      ]
+    })
+    await alert.present();
+  }
 
   async exibirMensagemInicio() {
     let alert = await this.alert.create({
@@ -302,8 +302,8 @@ export class TelaMemoriaPage implements OnInit {
           text: 'Entendi',
           handler: () => {
             this.punicaoCartaCoringa();
-          setTimeout(() => this.mostrarCartas(), 1000)
-        }
+            setTimeout(() => this.mostrarCartas(), 1000)
+          }
         }
       ]
     })
@@ -318,7 +318,7 @@ export class TelaMemoriaPage implements OnInit {
       this.cartas[j].isDiscovered = false;
       this.cartas[j].displayUrl = "assets/images/memoria.png";
     }
-   
+
   }
 
   changeDiferentCards() {
@@ -334,14 +334,14 @@ export class TelaMemoriaPage implements OnInit {
   verifyTwoCards() {
     if (this.cartasComparacao[0].url == this.cartasComparacao[1].url) {
       this.changeEqualsCards(this.cartasComparacao[1].url);
-      if (this.pontosM >= 0 && this.pontosM <5 && this.countCardsOpen == 6) {
+      if (this.pontosM >= 0 && this.pontosM < 5 && this.countCardsOpen == 6) {
         this.countCardsOpen = 0;
         this.exibirmensagemAcerto();
       } if (this.pontosM >= 5 && this.pontosM < 10 && this.countCardsOpen == 8) {
         this.countCardsOpen = 0;
         this.exibirmensagemAcerto();
       }
-      if (this.pontosM >= 10 && this.pontosM <16) {
+      if (this.pontosM >= 10 && this.pontosM < 16) {
         if (this.countCardsOpen == 6) {
           this.countCardsOpen = 0;
           this.exibirmensagemAcerto();
@@ -363,54 +363,56 @@ export class TelaMemoriaPage implements OnInit {
     this.cartasComparacao = [];
   }
 
-  /*abrirPagina(url: String) {
-    console.log(this.pontosM);
-    this.user = new Usuario(
-      this.autenticacao.getUid(), this.autenticacao.getDisplayName(),
-      this.autenticacao.getEmail(), this.usuario.genero, this.usuario.idade, this.usuario.pontosPerguntas, this.pontosM, this.usuario.pontosArrasta);
+  abrirPagina(url: String) {
+
+    this.user = new Usuario(this.autenticacao.getUser().uid,
+      this.usuario.nome, this.usuario.username,
+      this.usuario.email, this.usuario.genero, this.usuario.idade, this.usuario.senha, this.usuario.pontosPerguntas, this.pontosM, this.usuario.pontosArrasta, this.usuario.qtPerguntas, this.qt, this.usuario.qtArrasta);
     this.rota.navigate([url]);
     this.bdService.update('/usuarios', this.usuario.uid, this.user);
-  }*/
 
-  calcularPorcentagem(){
-    if(this.nivel == "Nível 1"){
-       this.porcentagem = String(((100 * (this.pontosM)) / 5).toFixed(0));
+  }
+
+  calcularPorcentagem() {
+    if (this.nivel == "Nível 1") {
+      this.porcentagem = String(((100 * (this.pontosM)) / 5).toFixed(0));
     }
-    if(this.nivel == "Nível 2"){
-      this.porcentagem = String(((100 * (this.pontosM-5)) / 5).toFixed(0));
+    if (this.nivel == "Nível 2") {
+      this.porcentagem = String(((100 * (this.pontosM - 5)) / 5).toFixed(0));
     }
-    if(this.nivel == "Nível 3"){
-      this.porcentagem = String(((100 * (this.pontosM-10)) / 5).toFixed(0));
+    if (this.nivel == "Nível 3") {
+      this.porcentagem = String(((100 * (this.pontosM - 10)) / 5).toFixed(0));
     }
   }
 
-  calcularNivelMemoria(){
+  calcularNivelMemoria() {
     if (!this.usuario) {
-     this.usuario = <Usuario> {};
-     this.usuario.pontosMemoria = this.pontosM;
+      this.usuario = <Usuario>{};
+      this.usuario.pontosMemoria = this.pontosM;
     }
- 
-     if(this.pontosM >=0 && this.pontosM <5){
-         this.nivel = "Nível 1";
-       }
-       if(this.pontosM >=5 && this.pontosM <10){
-         this.nivel = "Nível 2";
-       }
-       if(this.pontosM >=10 && this.pontosM <16){
-         this.nivel  = "Nível 3";
-       }
+
+    if (this.pontosM >= 0 && this.pontosM < 5) {
+      this.nivel = "Nível 1";
+    }
+    if (this.pontosM >= 5 && this.pontosM < 10) {
+      this.nivel = "Nível 2";
+    }
+    if (this.pontosM >= 10 && this.pontosM < 16) {
+      this.nivel = "Nível 3";
+    }
   }
 
-  passarNivel(){
+  passarNivel() {
     this.calcularNivelMemoria();
     this.calcularPorcentagem();
     this.imageSelect();
-    setTimeout(() =>  this.mostrarCartas(), 2000)
-   
+    setTimeout(() => this.mostrarCartas(), 2000)
+
   }
 
-  igualaZero(){
-    this.pontosM=0;
+  igualaZero() {
+    this.pontosM = 0;
+    this.qt++;
     this.imageSelect()
     this.calcularNivelMemoria();
     this.calcularPorcentagem();

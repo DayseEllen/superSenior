@@ -23,6 +23,7 @@ export class TelaPerguntaPage implements OnInit {
   user: Usuario;
   usuarios: Usuario[] = [];
   pontosP: number;
+  qt: number;
   porcentagem: string;
   nivel: string;
 
@@ -34,13 +35,14 @@ export class TelaPerguntaPage implements OnInit {
 
   private async carregarUsuarios() {
     this.usuarios = await this.bdService.listWithUIDs<Usuario>('/usuarios');
-    //this.getUser();
+    this.getUser();
     this.pontosP = this.usuario.pontosPerguntas;
+    this.qt = this.usuario.qtPerguntas;
     this.calcularNivelPergunta();
     this.calcularPorcentagem();
   }
 
- /* private getUser() {
+  private getUser() {
     this.usuario = null;
     if (this.autenticacao.isLoggedIn()) {
       for (var i = 0; i < this.usuarios.length; i++) {
@@ -51,17 +53,17 @@ export class TelaPerguntaPage implements OnInit {
     }
     return this.usuario;
   }
-*/
+
   randomPergunta() {
 
-    if(this.pontosP >=0 && this.pontosP <6){
-    var perguntasFaceis = this.perguntas.filter(pergunta => pergunta.nivel == 1);
-    this.perguntaAtual = perguntasFaceis[Math.floor(perguntasFaceis.length * Math.random())];
-    for (var i = 0; i < this.perguntas.length; i++) {
-      if (this.perguntas[i].enunciado == this.perguntaAtual.enunciado && this.perguntas[i].resposta == this.perguntaAtual.resposta) {
-        this.perguntas.splice(i, 1);
+    if (this.pontosP >= 0 && this.pontosP < 6) {
+      var perguntasFaceis = this.perguntas.filter(pergunta => pergunta.nivel == 1);
+      this.perguntaAtual = perguntasFaceis[Math.floor(perguntasFaceis.length * Math.random())];
+      for (var i = 0; i < this.perguntas.length; i++) {
+        if (this.perguntas[i].enunciado == this.perguntaAtual.enunciado && this.perguntas[i].resposta == this.perguntaAtual.resposta) {
+          this.perguntas.splice(i, 1);
+        }
       }
-    }
 
     }
     if (this.pontosP >= 6 && this.pontosP < 12) {
@@ -74,7 +76,7 @@ export class TelaPerguntaPage implements OnInit {
       }
     }
 
-    if(this.pontosP >=12 && this.pontosP <19){
+    if (this.pontosP >= 12 && this.pontosP < 19) {
       var perguntasDificeis = this.perguntas.filter(pergunta => pergunta.nivel == 3);
       this.perguntaAtual = perguntasDificeis[Math.floor(perguntasDificeis.length * Math.random())];
       for (var i = 0; i < this.perguntas.length; i++) {
@@ -97,20 +99,20 @@ export class TelaPerguntaPage implements OnInit {
     this.randomPergunta();
   }
 
-  passarNivel(){
+  passarNivel() {
     this.calcularNivelPergunta();
     this.calcularPorcentagem();
     this.exibirProximaPergunta();
   }
 
-  async verificaPassarNivel(){
+  async verificaPassarNivel() {
     if (this.pontosP == 5) {
       this.calcularNivelPergunta();
       this.calcularPorcentagem();
       let alerta = await this.alert.create({
         header: 'Parabéns!!! Você agora está no nível 2. 😃',
         message: "Continue jogando e passe de nível.",
-        cssClass:'alertsp',
+        cssClass: 'alertsp',
         buttons: [
           {
             text: 'Clique aqui para a próxima pergunta',
@@ -122,13 +124,13 @@ export class TelaPerguntaPage implements OnInit {
 
     }
 
-    if (this.pontosP == 11) { 
+    if (this.pontosP == 11) {
       this.calcularNivelPergunta();
       this.calcularPorcentagem();
       let alerta = await this.alert.create({
         header: 'Parabéns!!! Você agora está no nível 3. 😃',
         message: "Continue jogando e passe de nível.",
-        cssClass:'alertsp',
+        cssClass: 'alertsp',
         buttons: [
           {
             text: 'Clique aqui para a próxima pergunta',
@@ -140,8 +142,8 @@ export class TelaPerguntaPage implements OnInit {
 
     }
 
-    if (this.pontosP == 17) {  
-      this.pontosP ++; 
+    if (this.pontosP == 17) {
+      this.pontosP++;
       this.calcularNivelPergunta();
       this.calcularPorcentagem();
 
@@ -157,18 +159,18 @@ export class TelaPerguntaPage implements OnInit {
         ]
       });
       await alerta.present();
-      
-    }else{
-      this.pontosP ++; 
+
+    } else {
+      this.pontosP++;
       this.calcularPorcentagem();
       this.exibirProximaPergunta();
     }
   }
 
   async conferirPergunta(resposta: String) {
-  
-    if (resposta != this.perguntaAtual.resposta) { 
-      this.calcularPorcentagem();   
+
+    if (resposta != this.perguntaAtual.resposta) {
+      this.calcularPorcentagem();
       let alert = await this.alert.create({
         header: 'Que pena! 😢 Você errou a pergunta',
         message: 'Preste atenção na dica: ' + this.perguntaAtual.dica,
@@ -182,11 +184,11 @@ export class TelaPerguntaPage implements OnInit {
       });
       await alert.present();
 
-    }else if(resposta == this.perguntaAtual.resposta){
-     let alerta = await this.alert.create({
+    } else if (resposta == this.perguntaAtual.resposta) {
+      let alerta = await this.alert.create({
         header: 'Parabéns! Você acertou a pergunta.😃',
-        message: ""+ this.perguntaAtual.dica,
-        cssClass:'alertsp',
+        message: "" + this.perguntaAtual.dica,
+        cssClass: 'alertsp',
         buttons: [
           {
             text: 'Clique aqui para a próxima pergunta',
@@ -201,6 +203,7 @@ export class TelaPerguntaPage implements OnInit {
 
   igualaZero() {
     this.pontosP = 0;
+    this.qt++;
     this.exibirProximaPergunta();
     this.calcularNivelPergunta();
     this.calcularPorcentagem();
@@ -270,45 +273,44 @@ export class TelaPerguntaPage implements OnInit {
 
   }
 
-/*  abrirPagina(url: String) {
-
-    this.user = new Usuario(
-    this.autenticacao.getUid(),this.autenticacao.getDisplayName(),
-    this.autenticacao.getEmail(),this.usuario.genero,this.usuario.idade,this.pontosP,this.usuario.pontosMemoria,this.usuario.pontosArrasta);
-    this.rota.navigate([url]);
-    this.bdService.update('/usuarios', this.usuario.uid, this.user);
-     
-  }*/
-
-
-  calcularPorcentagem(){
-    if(this.nivel == "Nível 1"){
-       this.porcentagem = String(((100 * (this.pontosP)) / 6).toFixed(0));
+  calcularPorcentagem() {
+    if (this.nivel == "Nível 1") {
+      this.porcentagem = String(((100 * (this.pontosP)) / 6).toFixed(0));
     }
-    if(this.nivel == "Nível 2"){
-      this.porcentagem = String(((100 * (this.pontosP-6)) / 6).toFixed(0));
+    if (this.nivel == "Nível 2") {
+      this.porcentagem = String(((100 * (this.pontosP - 6)) / 6).toFixed(0));
     }
-    if(this.nivel == "Nível 3"){
-      this.porcentagem = String(((100 * (this.pontosP-12)) / 6).toFixed(0));
+    if (this.nivel == "Nível 3") {
+      this.porcentagem = String(((100 * (this.pontosP - 12)) / 6).toFixed(0));
     }
   }
 
-  calcularNivelPergunta(){
-   if (!this.usuario) {
-    this.usuario = <Usuario> {};
-    this.usuario.pontosPerguntas = this.pontosP;
-   }
+  calcularNivelPergunta() {
+    if (!this.usuario) {
+      this.usuario = <Usuario>{};
+      this.usuario.pontosPerguntas = this.pontosP;
+    }
 
-    if(this.pontosP >=0 && this.pontosP <6){
-        this.nivel = "Nível 1";
-      }
-      if(this.pontosP >=6 && this.pontosP <12){
-        this.nivel = "Nível 2";
-      }
-      if(this.pontosP >=12 && this.pontosP <19){
-        this.nivel  = "Nível 3";
-      }
- }
+    if (this.pontosP >= 0 && this.pontosP < 6) {
+      this.nivel = "Nível 1";
+    }
+    if (this.pontosP >= 6 && this.pontosP < 12) {
+      this.nivel = "Nível 2";
+    }
+    if (this.pontosP >= 12 && this.pontosP < 19) {
+      this.nivel = "Nível 3";
+    }
+  }
+  abrirPagina(url: String) {
+
+    this.user = new Usuario(this.autenticacao.getUser().uid,
+      this.usuario.nome, this.usuario.username,
+      this.usuario.email, this.usuario.genero, this.usuario.idade, this.usuario.senha, this.pontosP, this.usuario.pontosMemoria, this.usuario.pontosArrasta, this.qt, this.usuario.qtMemoria, this.usuario.qtArrasta);
+    this.rota.navigate([url]);
+    this.bdService.update('/usuarios', this.usuario.uid, this.user);
+
+  }
+
 
 
 }

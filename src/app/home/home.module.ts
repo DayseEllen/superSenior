@@ -1,3 +1,4 @@
+import { BDService } from './../services/bd.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -20,6 +21,9 @@ import { HomePage } from './home.page';
     ]),
     
   ],
-  declarations: [HomePage]
+  declarations: [HomePage],
+  providers:[
+    BDService
+  ]
 })
 export class HomePageModule {}
