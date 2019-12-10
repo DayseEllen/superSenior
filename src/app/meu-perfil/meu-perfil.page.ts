@@ -14,9 +14,9 @@ import { Autenticacao } from '../services/autenticacao';
 export class MeuPerfilPage implements OnInit {
   usuario: Usuario;
   usuarios: Usuario[] = [];
-  porcentagem: string;
+  porcentagemP: string;
   porcentagemM: string;
-  nivel: string;
+  nivelP: string;
   nivelM: string;
   pontosP: number;
   pontosM: number;
@@ -31,7 +31,7 @@ export class MeuPerfilPage implements OnInit {
    this.pontosP = this.usuario.pontosPerguntas;
     this.pontosM = this.usuario.pontosMemoria;
     this.calcularNivelPergunta();
-    this.calcularPorcentagem();
+    this.calcularPorcentagemP();
     this.calcularNivelMemoria();
     this.calcularPorcentagemM();
   }
@@ -60,15 +60,15 @@ export class MeuPerfilPage implements OnInit {
       });
   }
 
-  calcularPorcentagem(){
-   if(this.nivel == "Nível 1"){
-      this.porcentagem = String(((100 * this.usuario.pontosPerguntas) / 6).toFixed(0));
+  calcularPorcentagemP(){
+   if(this.nivelP == "Nível 1"){
+      this.porcentagemP = String(((100 * this.usuario.pontosPerguntas) / 6).toFixed(0));
    }
-   if(this.nivel == "Nível 2"){
-     this.porcentagem = String(((100 * (this.usuario.pontosPerguntas-6)) / 6).toFixed(0));
+   if(this.nivelP == "Nível 2"){
+     this.porcentagemP = String(((100 * (this.usuario.pontosPerguntas-6)) / 6).toFixed(0));
    }
-   if(this.nivel == "Nível 3"){
-     this.porcentagem = String(((100 * (this.usuario.pontosPerguntas-12)) / 6).toFixed(0));
+   if(this.nivelP == "Nível 3"){
+     this.porcentagemP = String(((100 * (this.usuario.pontosPerguntas-12)) / 6).toFixed(0));
    }
  }
  
@@ -79,13 +79,13 @@ export class MeuPerfilPage implements OnInit {
     }
  
    if(this.usuario.pontosPerguntas >=0 && this.usuario.pontosPerguntas <6){
-       this.nivel = "Nível 1";
+       this.nivelP = "Nível 1";
      }
      if(this.usuario.pontosPerguntas >=6 && this.usuario.pontosPerguntas <12){
-       this.nivel = "Nível 2";
+       this.nivelP = "Nível 2";
      }
      if(this.usuario.pontosPerguntas >=12 && this.usuario.pontosPerguntas <18){
-       this.nivel  = "Nível 3";
+       this.nivelP  = "Nível 3";
      }
  }
  
@@ -107,13 +107,13 @@ export class MeuPerfilPage implements OnInit {
      this.usuario.pontosMemoria = this.pontosM;
     }
  
-   if(this.usuario.pontosMemoria >=0 && this.usuario.pontosMemoria <6){
+   if(this.usuario.pontosMemoria >=0 && this.usuario.pontosMemoria <5){
        this.nivelM = "Nível 1";
      }
-     if(this.usuario.pontosMemoria >=6 && this.usuario.pontosMemoria <12){
+     if(this.usuario.pontosMemoria >=5 && this.usuario.pontosMemoria <10){
        this.nivelM = "Nível 2";
      }
-     if(this.usuario.pontosMemoria >=12 && this.usuario.pontosMemoria <18){
+     if(this.usuario.pontosMemoria >=10 && this.usuario.pontosMemoria <16){
        this.nivelM  = "Nível 3";
      }
  }

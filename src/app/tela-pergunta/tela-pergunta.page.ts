@@ -111,7 +111,7 @@ export class TelaPerguntaPage implements OnInit {
       this.calcularPorcentagem();
       let alerta = await this.alert.create({
         header: 'Parabéns!!! Você agora está no nível 2. 😃',
-        message: "Continue jogando e passe de nível.",
+        message: "Continue jogando para acumular pontos e passar de nível.",
         cssClass: 'alertsp',
         buttons: [
           {
@@ -129,7 +129,7 @@ export class TelaPerguntaPage implements OnInit {
       this.calcularPorcentagem();
       let alerta = await this.alert.create({
         header: 'Parabéns!!! Você agora está no nível 3. 😃',
-        message: "Continue jogando e passe de nível.",
+        message: "Continue jogando para acumular pontos e passar de nível.",
         cssClass: 'alertsp',
         buttons: [
           {
@@ -148,8 +148,8 @@ export class TelaPerguntaPage implements OnInit {
       this.calcularPorcentagem();
 
       let alerta = await this.alert.create({
-        header: 'Parabéns!!! Você zerou o jogos das Perguntas.😃',
-        message: "",
+        header: 'Parabéns!!! Você zerou o jogos das perguntas.😃',
+        message: "Agora você pode reiniciá-lo e aprimorar seus conhecimentos ou se aventurar em outro jogo",
         cssClass: 'alertsp',
         buttons: [
           {

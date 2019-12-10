@@ -198,7 +198,7 @@ export class TelaMemoriaPage implements OnInit {
       this.calcularPorcentagem();
       let alert = await this.alert.create({
         header: 'Parabéns!!! Você agora está no nível 2. 😃',
-        message: "Continue jogando para passar de nível.",
+        message: "Continue jogando para acumular pontos e passar de nível.",
         cssClass: 'alertsm',
         buttons: [
           {
@@ -232,8 +232,8 @@ export class TelaMemoriaPage implements OnInit {
     } if (this.pontosM == 15) {
       this.calcularPorcentagem();
       let alert = await this.alert.create({
-        header: 'Parabéns!!! Você zerou o jogos da Memória.😃',
-        message: "",
+        header: 'Parabéns!!! Você zerou o jogos da memória.😃',
+        message: "Agora você pode reiniciá-lo e aprimorar seus conhecimentos ou se aventurar em outro jogo",
         cssClass: 'alertsm',
         buttons: [
           {
@@ -252,9 +252,9 @@ export class TelaMemoriaPage implements OnInit {
   async addPontos() {
     this.pontosM++;
     this.calcularPorcentagem();
-    this.imageSelect();
-    setTimeout(() => this.mostrarCartas(), 0)
     this.exibirMensagemPassarNivel();
+    this.imageSelect();
+    setTimeout(() => this.mostrarCartas(), 1000);
   }
 
   async exibirmensagemAcerto() {
@@ -263,12 +263,12 @@ export class TelaMemoriaPage implements OnInit {
     let alert = await this.alert.create({
       header: 'Parabéns!!! Você acertou todas as cartas.😃',
 
-      message: 'Você tem ' + (this.pontosM + 1) + " ponto(s)",
+      message: 'Você tem ' +(this.pontosM + 1)+ " ponto(s). Continue assim e passe de nível.",
       cssClass: 'alertsm',
       buttons: [
         {
           text: 'Aperte aqui para continuar',
-          handler: () => { this.mostrarCartas(); this.addPontos(); }
+          handler: () =>  this.addPontos()
         }
       ]
     })
@@ -279,7 +279,7 @@ export class TelaMemoriaPage implements OnInit {
     let alert = await this.alert.create({
       header: 'O jogo já vai começar',
 
-      message: 'As cartas ficarão abertas por 2 segundos, por isso preste atenção!',
+      message: 'As cartas ficarão abertas por apenas 2 segundos, por isso preste bastante atenção!',
       cssClass: 'alertsm',
       buttons: [
         {
@@ -295,7 +295,7 @@ export class TelaMemoriaPage implements OnInit {
     let alert = await this.alert.create({
       header: 'PAR DE CARTA CORINGA ENCONTRADO',
 
-      message: 'As cartas se fecharam novamente. Tente outra vez!',
+      message: 'As cartas se fecharam. Tente outra vez! Evite as cartas com o X.',
       cssClass: 'alertsm',
       buttons: [
         {
@@ -406,7 +406,7 @@ export class TelaMemoriaPage implements OnInit {
     this.calcularNivelMemoria();
     this.calcularPorcentagem();
     this.imageSelect();
-    setTimeout(() => this.mostrarCartas(), 2000)
+    setTimeout(() => this.mostrarCartas(), 1500);
 
   }
 
