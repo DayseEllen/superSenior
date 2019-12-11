@@ -11,6 +11,7 @@ import { DragulaService } from 'ng2-dragula';
 import { Subscription } from 'rxjs';
 import { AlertController } from '@ionic/angular';
 import { Usuario } from 'src/models/usuario';
+import { Autenticacao } from '../services/autenticacao';
 
 
 
@@ -46,24 +47,75 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
   nivel1: boolean = true;
   nivel2: boolean = false;
   nivel3: boolean = false;
-  static porcentagem: number;
   usuario: Usuario;
-  usuarios: Usuario[]=[];
-  pontosTotal: number;
-  porcentagem: string;
+  user: Usuario;
+  usuarios: Usuario[] = [];
+  pontosA: number;
+  qt: number;
+  porcentagemA: string;
+  nivelA: string;
   sit:boolean;
 
-  constructor(private rota: Router, private alert: AlertController, private bdService: BDService, private dragulaService: DragulaService, private elementRef: ElementRef) {
+  constructor(private rota: Router, private alert: AlertController, private bdService: BDService, private dragulaService: DragulaService, private elementRef: ElementRef, private autenticacao: Autenticacao) {
+    this.carregarUsuarios();
     this.carregarImagens();
-
+    
     /*this.test = [
       {
         name: 'IFPE',
         url: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Instituto_Federal_de_Pernambuco_-_Marca_Vertical_2015.svg/1024px-Instituto_Federal_de_Pernambuco_-_Marca_Vertical_2015.svg.png"
       }
     ];*/
+  }
 
+  private async carregarUsuarios() {
+    this.usuarios = await this.bdService.listWithUIDs<Usuario>('/usuarios');
+    this.getUser();
+    this.pontosA = this.usuario.pontosPerguntas;
+    this.qt = this.usuario.qtPerguntas;
+    this.calcularNivelArrasta();
+    this.calcularPorcentagem();
+  }
 
+  private getUser() {
+    this.usuario = null;
+    if (this.autenticacao.isLoggedIn()) {
+      for (var i = 0; i < this.usuarios.length; i++) {
+        if (this.autenticacao.getEmail() === this.usuarios[i].email) {
+          this.usuario = this.usuarios[i];
+        }
+      }
+    }
+    return this.usuario;
+  }
+
+  calcularPorcentagem() {
+    if (this.nivelA == "Nível 1") {
+      this.porcentagemA = String(((100 * (this.pontosA)) / 5).toFixed(0));
+    }
+    if (this.nivelA == "Nível 2") {
+      this.porcentagemA = String(((100 * (this.pontosA - 5)) / 4).toFixed(0));
+    }
+    if (this.nivelA == "Nível 3") {
+      this.porcentagemA = String(((100 * (this.pontosA - 9)) / 3).toFixed(0));
+    }
+  }
+
+  calcularNivelArrasta() {
+    if (!this.usuario) {
+      this.usuario = <Usuario>{};
+      this.usuario.pontosArrasta = this.pontosA;
+    }
+
+    if (this.pontosA >= 0 && this.pontosA < 5) {
+      this.nivelA = "Nível 1";
+    }
+    if (this.pontosA >= 5 && this.pontosA < 9) {
+      this.nivelA = "Nível 2";
+    }
+    if (this.pontosA >= 9 && this.pontosA < 13) {
+      this.nivelA = "Nível 3";
+    }
   }
 
   containerUmModificado() {
@@ -71,7 +123,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
    
     if (this.nomes[0] === this.janela0[0].nome) {
       this.pontos++;
-      this.pontosTotal++;
+      this.pontosA++;
       this.verificaPontosFaseNivel();
     } else {
       setTimeout(() => {
@@ -84,7 +136,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
     
     if (this.nomes[1] === this.janela1[0].nome) {
       this.pontos++;
-      this.pontosTotal++;
+      this.pontosA++;
       this.verificaPontosFaseNivel();
     } else {
       setTimeout(() => {
@@ -97,7 +149,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
    
     if (this.nomes[2] === this.janela2[0].nome) {
       this.pontos++;
-      this.pontosTotal++;
+      this.pontosA++;
       this.verificaPontosFaseNivel();
     } else {
       setTimeout(() => {
@@ -110,7 +162,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
     
     if (this.nomes[3] === this.janela3[0].nome) {
       this.pontos++;
-      this.pontosTotal++;
+      this.pontosA++;
       this.verificaPontosFaseNivel();
     } else {
       setTimeout(() => {
@@ -123,7 +175,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
   
     if (this.nomes[4] === this.janela4[0].nome) {
       this.pontos++;
-      this.pontosTotal++;
+      this.pontosA++;
       this.verificaPontosFaseNivel();
     } else {
       setTimeout(() => {
@@ -136,7 +188,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
   
     if (this.nomes[5] === this.janela5[0].nome) {
       this.pontos++;
-      this.pontosTotal++;
+      this.pontosA++;
       this.verificaPontosFaseNivel();
     } else {
       setTimeout(() => {
@@ -149,7 +201,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
     
     if (this.nomes[6] === this.janela6[0].nome) {
       this.pontos++;
-      this.pontosTotal++;
+      this.pontosA++;
       this.verificaPontosFaseNivel();
     } else {
       setTimeout(() => {
@@ -282,10 +334,10 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
   }
   zerarFase() {
     this.imagens = this.allImagesSelect;
-    this.pontosTotal -= this.pontos;
+    this.pontosA -= this.pontos;
   }
   zerarJogo() {
-    this.pontosTotal = 0;
+    this.pontosA = 0;
     this.pontos = 0;
   }
   proximaFase() {
@@ -323,7 +375,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
     this.randomNomes();
     this.zerarFase();
     this.zerarJanelas();
-    this.pontosTotal=0;
+    this.pontosA=0;
     if (!this.dragulaService.find("bag")) {
       this.dragulaService.createGroup("bag", {
         revertOnSpill: true,
@@ -337,7 +389,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
     this.carregarImagens();
     this.zerarFase();
     this.zerarJanelas();
-    this.pontosTotal=0;
+    this.pontosA=0;
     if (!this.dragulaService.find("bag")) {
       this.dragulaService.createGroup("bag", {
         revertOnSpill: true,
@@ -346,17 +398,17 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
     }
   }
   alterarNivel() {
-    if (this.pontosTotal === 15 && this.nivel===1) {
+    if (this.pontosA === 15 && this.nivel===1) {
       this.exibirMensagemNivel2();
       this.nivel = 2;
       return false;
     }
-    if (this.pontosTotal === 20 && this.nivel===2) {
+    if (this.pontosA === 20 && this.nivel===2) {
       this.exibirMensagemNivel3();
       this.nivel = 3;
       return false;
     }
-    if (this.pontosTotal === 21 && this.nivel===3) {
+    if (this.pontosA === 21 && this.nivel===3) {
       this.exibirMensagemZerou();
       return false;
     }

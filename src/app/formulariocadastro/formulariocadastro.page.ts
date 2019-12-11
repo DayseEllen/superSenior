@@ -31,11 +31,13 @@ export class FormulariocadastroPage implements OnInit {
   async createAccount(cadastro) {
     if (this.form.form.valid) {
       var nome = this.maiuscula(cadastro.nome);
+      var username = cadastro.username;
+      var minusculo = username.toLowerCase();
       this.usuario = {
         uid: null,
         nome: nome,
-        username: cadastro.username,
-        email: cadastro.username + '@seniorifpe.com',
+        username: minusculo,
+        email: minusculo + '@seniorifpe.com',
         genero: cadastro.genero,
         idade: cadastro.idade,
         senha: cadastro.senha,

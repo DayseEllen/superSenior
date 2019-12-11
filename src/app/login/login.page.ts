@@ -47,10 +47,12 @@ export class LoginPage implements OnInit {
         qtMemoria: 0,
         qtArrasta: 0
       }*/
+      var username = login.username;
+      var minusculo = username.toLowerCase();
 
       //this.usuario = new Usuario(this.autenticacao.getNomeUser(), null, emailLogin, null, null, login.senha);
       this.carregarUsuarios();
-      await this.autenticacao.signIn(login.username + '@seniorifpe.com', login.senha)
+      await this.autenticacao.signIn(minusculo+ '@seniorifpe.com', login.senha)
         .then(async () => {
           let alert = await this.alertCtrl.create({
             header: 'Ebaa! 😃',
