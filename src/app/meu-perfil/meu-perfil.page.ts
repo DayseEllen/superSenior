@@ -24,10 +24,10 @@ export class MeuPerfilPage implements OnInit {
   pontosM: number;
   pontosAS:number;
 
-  constructor(private autenticacao: Autenticacao,
-    private rota: Router, private bdService: BDService, ) {
-    this.carregarUsuarios();
+  constructor(private autenticacao: Autenticacao, private rota: Router, private bdService: BDService, ) {
+      this.carregarUsuarios();
   }
+
   private async carregarUsuarios() {
     this.usuarios = await this.bdService.listWithUIDs<Usuario>('/usuarios');
     this.getUser();
