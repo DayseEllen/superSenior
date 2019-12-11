@@ -21,14 +21,14 @@ export class MeuPerfilPage implements OnInit {
   pontosP: number;
   pontosM: number;
 
-  constructor(private autenticacao: Autenticacao,
-    private rota: Router, private bdService: BDService, ) {
+  constructor(private autenticacao: Autenticacao, private rota: Router, private bdService: BDService, ) {
       this.carregarUsuarios();
   }
+
   private async carregarUsuarios() {
     this.usuarios = await this.bdService.listWithUIDs<Usuario>('/usuarios');
     this.getUser();
-   this.pontosP = this.usuario.pontosPerguntas;
+    this.pontosP = this.usuario.pontosPerguntas;
     this.pontosM = this.usuario.pontosMemoria;
     this.calcularNivelPergunta();
     this.calcularPorcentagemP();

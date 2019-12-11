@@ -18,6 +18,7 @@ import { async } from 'q';
 export class FormulariocadastroPage implements OnInit {
   usuario: Usuario;
   usuarios: Usuario[];
+  contador: number = 0;
   constructor(private rota: Router,
     private bdService: BDService,
     private alertCtrl: AlertController,
@@ -113,6 +114,29 @@ export class FormulariocadastroPage implements OnInit {
     palavra = espaco;
     return palavra;
 
+  }
+
+ async alertSenha(){
+   if(this.contador==0){
+    let alert = await this.alertCtrl.create({
+      header: 'ATENÇÃO! ',
+      message: 'A senha precisa ter no mínimo 6 caracteres.',
+      cssClass: 'alertsformcad',
+      buttons: [{
+        text: "Ok"
+      }]
+    });
+    this.contador++;
+    await alert.present();
+   }else{
+     console.log(this.contador)
+   }
+  }
+
+  validarIdade(){
+    var el = document.getElementById("inputName4"); 
+    var nome = el.innerHTML.valueOf();
+    console.log(nome)
   }
 
   abrirPagina(url: String) {

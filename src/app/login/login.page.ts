@@ -22,8 +22,7 @@ export class LoginPage implements OnInit {
 
   constructor(private rota: Router, private autenticacao: Autenticacao,
      private alertCtrl: AlertController, private location: Location, private bdService: BDService) {
-    //
-    //this.usuario = new Usuario(null, null, null, null, null, null);
+
   }
   private async carregarUsuarios() {
     this.usuarios = await this.bdService.listWithUIDs<Usuario>('/usuarios');
@@ -32,23 +31,6 @@ export class LoginPage implements OnInit {
   
   async signIn(login) {
     if (this.form.form.valid) {
-     /* var emailLogin = login.username + '@seniorIFPE.com';
-      this.usuario = {
-        nome: this.autenticacao,
-        username: login.username,
-        email: emailLogin,
-        genero: 'Feminino',
-        idade: 19,
-        senha: login.senha,
-        pontosPerguntas: 0,
-        pontosMemoria: 0,
-        pontosArrasta: 0,
-        qtPerguntas: 0,
-        qtMemoria: 0,
-        qtArrasta: 0
-      }*/
-
-      //this.usuario = new Usuario(this.autenticacao.getNomeUser(), null, emailLogin, null, null, login.senha);
       this.carregarUsuarios();
       await this.autenticacao.signIn(login.username + '@seniorifpe.com', login.senha)
         .then(async () => {
@@ -124,12 +106,12 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
-    // this.usuario = new Usuario(null, null, null, null, null, null);
   }
 
   abrirPagina(url: String) {
     this.rota.navigate([url]);
 
   }
+
 
 }
