@@ -10,6 +10,7 @@ import { Imagem } from 'src/models/imagem';
 import { DragulaService } from 'ng2-dragula';
 import { Subscription } from 'rxjs';
 import { AlertController } from '@ionic/angular';
+import { Usuario } from 'src/models/usuario';
 
 
 
@@ -40,12 +41,17 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
   janela5 = [];
   janela6 = [];
   allImagesSelect: Imagem[] = [];
-  pontosTotal: number = 0;
   pontos: number = 0;
   nivel: number = 1;
   nivel1: boolean = true;
   nivel2: boolean = false;
   nivel3: boolean = false;
+  static porcentagem: number;
+  usuario: Usuario;
+  usuarios: Usuario[]=[];
+  pontosTotal: number;
+  porcentagem: string;
+  sit:boolean;
 
   constructor(private rota: Router, private alert: AlertController, private bdService: BDService, private dragulaService: DragulaService, private elementRef: ElementRef) {
     this.carregarImagens();
@@ -61,54 +67,98 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
   }
 
   containerUmModificado() {
+    this.janelasOk[0] = true;
+   
     if (this.nomes[0] === this.janela0[0].nome) {
-      this.janelasOk[0] = true;
       this.pontos++;
       this.pontosTotal++;
-      this.verificaPontosNivel();
+      this.verificaPontosFaseNivel();
     } else {
-      this.janelasOk[0] = true;
       setTimeout(() => {
         this.exibirMensagemErro();
       }, 400);
     }
-    console.log('Pontos: ' + this.pontos);
-    console.log('Pontos Total: ' + this.pontosTotal);
   }
-
   containerDoisModificado() {
+    this.janelasOk[1] = true;
+    
     if (this.nomes[1] === this.janela1[0].nome) {
-      this.janelasOk[1] = true;
       this.pontos++;
       this.pontosTotal++;
-      this.verificaPontosNivel();
+      this.verificaPontosFaseNivel();
     } else {
-      this.janelasOk[1] = true;
       setTimeout(() => {
         this.exibirMensagemErro();
       }, 400);
     }
-    console.log('Pontos: ' + this.pontos);
-    console.log('Pontos Total: ' + this.pontosTotal);
   }
   containerTresModificado() {
+    this.janelasOk[2] = true;
+   
     if (this.nomes[2] === this.janela2[0].nome) {
-      this.janelasOk[2] = true;
       this.pontos++;
       this.pontosTotal++;
-      this.verificaPontosNivel();
+      this.verificaPontosFaseNivel();
     } else {
-      this.janelasOk[2] = true;
       setTimeout(() => {
         this.exibirMensagemErro();
       }, 400);
     }
-    console.log('Pontos: ' + this.pontos);
-    console.log('Pontos Total: ' + this.pontosTotal);
+  }
+  containerQuatroModificado() {
+    this.janelasOk[3] = true;
+    
+    if (this.nomes[3] === this.janela3[0].nome) {
+      this.pontos++;
+      this.pontosTotal++;
+      this.verificaPontosFaseNivel();
+    } else {
+      setTimeout(() => {
+        this.exibirMensagemErro();
+      }, 400);
+    }
+  }
+  containerCincoModificado() {
+    this.janelasOk[4] = true;
+  
+    if (this.nomes[4] === this.janela4[0].nome) {
+      this.pontos++;
+      this.pontosTotal++;
+      this.verificaPontosFaseNivel();
+    } else {
+      setTimeout(() => {
+        this.exibirMensagemErro();
+      }, 400);
+    }
+  }
+  containerSeisModificado() {
+    this.janelasOk[5] = true;
+  
+    if (this.nomes[5] === this.janela5[0].nome) {
+      this.pontos++;
+      this.pontosTotal++;
+      this.verificaPontosFaseNivel();
+    } else {
+      setTimeout(() => {
+        this.exibirMensagemErro();
+      }, 400);
+    }
+  }
+  containerSeteModificado() {
+    this.janelasOk[6] = true;
+    
+    if (this.nomes[6] === this.janela6[0].nome) {
+      this.pontos++;
+      this.pontosTotal++;
+      this.verificaPontosFaseNivel();
+    } else {
+      setTimeout(() => {
+        this.exibirMensagemErro();
+      }, 400);
+    }
   }
   private async carregarImagens() {
     this.imagensCarregadas = await this.bdService.listWithUIDs<Imagem>('/imagens');
-    console.log(this.imagensCarregadas.length);
     this.imagensSelecionadas();
     this.randomNomes();
     if (!this.dragulaService.find("bag")) {
@@ -162,13 +212,16 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
       buttons: [
         {
           text: 'Clique aqui para tentar novamente.',
-          handler: () => this.zerarFaseNivel1()
+          handler: () => {
+            this.zerarFase()
+            this.zerarJanelas()
+          }
         }
       ]
     });
     await alert.present();
   }
-  async exibirMensagemGanhou() {
+  async exibirMensagemGanhouFase() {
     let alert = await this.alert.create({
       header: 'Parabéns!!! Você conquistou essa fase. 😃',
       message: 'Continue assim e você logo subirá de nível',
@@ -182,7 +235,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
     });
     await alert.present();
   }
-  async exibirMensagemProximoNivel() {
+  async exibirMensagemNivel2() {
     let alert = await this.alert.create({
       header: 'Parabéns!!! Você conquistou essa  e avançou de nível. 😃',
       message: 'Agora você está no nível 2!',
@@ -196,54 +249,71 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
     });
     await alert.present();
   }
-  zerarNivel() {
-    this.janelasOk[0] = false;
-    this.janelasOk[1] = false;
-    this.janelasOk[2] = false;
-    this.janela0 = [];
-    this.janela1 = [];
-    this.janela2 = [];
-    this.pontos = 0;
+  async exibirMensagemNivel3() {
+    let alert = await this.alert.create({
+      header: 'Parabéns!!! Você conquistou essa  e avançou de nível. 😃',
+      message: 'Agora você está no nível 3!',
+      cssClass: 'alertsp',
+      buttons: [
+        {
+          text: 'Clique aqui para avançar de nível.',
+          handler: () => this.exibirNivel3()
+        }
+      ]
+    });
+    await alert.present();
   }
-  zerarFaseNivel1() {
-    this.janelasOk[0] = false;
-    this.janelasOk[1] = false;
-    this.janelasOk[2] = false;
-    this.janela0 = [];
-    this.janela1 = [];
-    this.janela2 = [];
-    this.imagens = this.allImagesSelect;
-    this.pontosTotal -= this.pontos;
-    this.pontos = 0;
-  }
-  zerarFaseNivel2() {
+  zerarJanelas() {
     this.janelasOk[0] = false;
     this.janelasOk[1] = false;
     this.janelasOk[2] = false;
     this.janelasOk[3] = false;
     this.janelasOk[4] = false;
+    this.janelasOk[5] = false;
+    this.janelasOk[6] = false;
     this.janela0 = [];
     this.janela1 = [];
     this.janela2 = [];
     this.janela3 = [];
     this.janela4 = [];
+    this.janela5 = [];
+    this.janela6 = [];
+    this.pontos = 0;
+  }
+  zerarFase() {
     this.imagens = this.allImagesSelect;
     this.pontosTotal -= this.pontos;
+  }
+  zerarJogo() {
+    this.pontosTotal = 0;
     this.pontos = 0;
   }
   proximaFase() {
+    this.sit =this.alterarNivel();
     this.imagensCarregadas.push(this.imagens[0]);
-    console.log(this.imagens[0]);
-    this.imagensSelecionadas();
-    this.randomNomes();
-    this.zerarNivel();
-    if (!this.dragulaService.find("bag")) {
-      this.dragulaService.createGroup("bag", {
-        revertOnSpill: true,
-        removeOnSpill: false
-      });
+    if(this.imagensCarregadas.length<=5){
+      this.carregarImagens();
+      this.sit=false;
+      this.randomNomes();
+      this.zerarJanelas();
+      if (!this.dragulaService.find("bag")) {
+        this.dragulaService.createGroup("bag", {
+          revertOnSpill: true,
+          removeOnSpill: false
+        });
+      }
     }
-    this.alterarNivel();
+    if(this.sit) {
+      this.imagensSelecionadas();
+      this.randomNomes();
+      this.zerarJanelas();
+      if (!this.dragulaService.find("bag")) {
+        this.dragulaService.createGroup("bag", {
+          revertOnSpill: true,
+          removeOnSpill: false
+        });
+      }
+    }
   }
 
   exibirNivel2() {
@@ -251,7 +321,23 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
     this.nivel2 = true;
     this.imagensSelecionadas();
     this.randomNomes();
-    this.zerarFaseNivel2();
+    this.zerarFase();
+    this.zerarJanelas();
+    this.pontosTotal=0;
+    if (!this.dragulaService.find("bag")) {
+      this.dragulaService.createGroup("bag", {
+        revertOnSpill: true,
+        removeOnSpill: false
+      });
+    }
+  }
+  exibirNivel3() {
+    this.nivel2 = false;
+    this.nivel3 = true;
+    this.carregarImagens();
+    this.zerarFase();
+    this.zerarJanelas();
+    this.pontosTotal=0;
     if (!this.dragulaService.find("bag")) {
       this.dragulaService.createGroup("bag", {
         revertOnSpill: true,
@@ -260,29 +346,44 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
     }
   }
   alterarNivel() {
-    if (this.pontosTotal === 9) {
-      this.exibirMensagemProximoNivel();
+    if (this.pontosTotal === 15 && this.nivel===1) {
+      this.exibirMensagemNivel2();
       this.nivel = 2;
+      return false;
     }
-    if (this.pontosTotal === 20) {
-      this.exibirMensagemProximoNivel();
+    if (this.pontosTotal === 20 && this.nivel===2) {
+      this.exibirMensagemNivel3();
       this.nivel = 3;
+      return false;
     }
-    if (this.pontosTotal === 35) {
+    if (this.pontosTotal === 21 && this.nivel===3) {
       this.exibirMensagemZerou();
+      return false;
     }
+    return true;
   }
-  verificaPontosNivel() {
+  verificaPontosFaseNivel() {
     if (this.nivel === 1 && this.pontos === 3) {
-      this.exibirMensagemGanhou();
+      this.exibirMensagemGanhouFase();
     } else if (this.nivel === 2 && this.pontos === 5) {
-      this.exibirMensagemGanhou();
+      this.exibirMensagemGanhouFase();
     } else if (this.nivel === 3 && this.pontos === 7) {
-      this.exibirMensagemGanhou();
+      this.exibirMensagemGanhouFase();
     }
   }
-  exibirMensagemZerou() {
+  async exibirMensagemZerou() {
+    let alert = await this.alert.create({
+      header: 'Parabéns!!! Você chegou até o fim. 😃',
+      cssClass: 'alertsp',
+      buttons: [
+        {
+          text: 'Clique aqui para voltar ao Menu Principal.',
+          handler: () => this.rota.navigate(['home'])
+        }
 
+      ]
+    });
+    await alert.present();
   }
   ngOnInit() {
 

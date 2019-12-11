@@ -13,7 +13,14 @@
 
 <ion-content color="primary">
   <div *ngIf="imagensCarregadas" text-center>
-    <div text-center class="meioNivel1" *ngIf="nivel1">
+    <br>
+    <div class="progress">
+      <div id="barraprogresso1" class="progress-bar" role="progressbar" [style.width]="porcentagem + '%'"
+        [attr.aria-valuenow]="porcentagem" aria-valuemin="0" aria-valuemax="100">{{porcentagem}}%</div>
+    </div>
+    <p id="titlebarra" text-center>{{nivel}}</p>
+
+    <div text-center class="meio" *ngIf="nivel1">
       <div *ngIf="!janelasOk[0]" id="fundo0-1">
         <h6 id="nome1">{{nomes[0]}}</h6>
       </div>
@@ -43,10 +50,10 @@
       </div>
     </div>
     <div id="painelNivel1" dragula="bag" [(dragulaModel)]="imagens" *ngIf="nivel1">
-      <img id="imgPainel" *ngFor="let imagem of imagens" [src]="imagem.url">
+      <img id="imgPainel1" *ngFor="let imagem of imagens" [src]="imagem.url">
     </div>
 
-    <div text-center class="meioNivel2" *ngIf="nivel2">
+    <div text-center class="meio" *ngIf="nivel2">
       <div *ngIf="!janelasOk[0]" id="fundo0-2">
         <h6 id="nome1">{{nomes[0]}}</h6>
       </div>
@@ -65,7 +72,7 @@
       <div *ngIf="janelasOk[1]" id="janela1-2">
         <img id="imgDrop" [src]="janela1[0].url">
       </div>
-      <div *ngIf="!janelasOk[0]" id="fundo2-2">
+      <div *ngIf="!janelasOk[2]" id="fundo2-2">
         <h6 id="nome1">{{nomes[2]}}</h6>
       </div>
       <div *ngIf="!janelasOk[2]" id="janela2-2" dragula="bag" [(dragulaModel)]="janela2"
@@ -93,32 +100,81 @@
         <img id="imgDrop" [src]="janela4[0].url">
       </div>
     </div>
-
     <div id="painelNivel2" dragula="bag" [(dragulaModel)]="imagens" *ngIf="nivel2">
+      <img id="imgPainel" *ngFor="let imagem of imagens" [src]="imagem.url">
+    </div>
+    <div text-center class="meio" *ngIf="nivel3">
+      <div *ngIf="!janelasOk[0]" id="fundo0-3">
+        <h6 id="nome1">{{nomes[0]}}</h6>
+      </div>
+      <div *ngIf="!janelasOk[0]" id="janela0-3" dragula="bag" [(dragulaModel)]="janela0"
+        (dragulaModelChange)="containerUmModificado()">
+      </div>
+      <div *ngIf="janelasOk[0]" id="janela0-3">
+        <img id="imgDrop" [src]="janela0[0].url">
+      </div>
+      <div *ngIf="!janelasOk[1]" id="fundo1-3">
+        <h6 id="nome1">{{nomes[1]}}</h6>
+      </div>
+      <div *ngIf="!janelasOk[1]" id="janela1-3" dragula="bag" [(dragulaModel)]="janela1"
+        (dragulaModelChange)="containerDoisModificado()">
+      </div>
+      <div *ngIf="janelasOk[1]" id="janela1-3">
+        <img id="imgDrop" [src]="janela1[0].url">
+      </div>
+      <div *ngIf="!janelasOk[2]" id="fundo2-3">
+        <h6 id="nome1">{{nomes[2]}}</h6>
+      </div>
+      <div *ngIf="!janelasOk[2]" id="janela2-3" dragula="bag" [(dragulaModel)]="janela2"
+        (dragulaModelChange)="containerTresModificado()">
+      </div>
+      <div *ngIf="janelasOk[2]" id="janela2-3">
+        <img id="imgDrop" [src]="janela2[0].url">
+      </div>
+      <div *ngIf="!janelasOk[3]" id="fundo3-3">
+        <h6 id="nome1">{{nomes[3]}}</h6>
+      </div>
+      <div *ngIf="!janelasOk[3]" id="janela3-3" dragula="bag" [(dragulaModel)]="janela3"
+        (dragulaModelChange)="containerQuatroModificado()">
+      </div>
+      <div *ngIf="janelasOk[3]" id="janela3-3">
+        <img id="imgDrop" [src]="janela3[0].url">
+      </div>
+      <div *ngIf="!janelasOk[4]" id="fundo4-3">
+        <h6 id="nome1">{{nomes[4]}}</h6>
+      </div>
+      <div *ngIf="!janelasOk[4]" id="janela4-3" dragula="bag" [(dragulaModel)]="janela4"
+        (dragulaModelChange)="containerCincoModificado()">
+      </div>
+      <div *ngIf="janelasOk[4]" id="janela4-3">
+        <img id="imgDrop" [src]="janela4[0].url">
+      </div>
+      <div *ngIf="!janelasOk[5]" id="fundo5-3">
+        <h6 id="nome1">{{nomes[5]}}</h6>
+      </div>
+      <div *ngIf="!janelasOk[5]" id="janela5-3" dragula="bag" [(dragulaModel)]="janela5"
+        (dragulaModelChange)="containerSeisModificado()">
+      </div>
+      <div *ngIf="janelasOk[5]" id="janela5-3">
+        <img id="imgDrop" [src]="janela5[0].url">
+      </div>
+      <div *ngIf="!janelasOk[6]" id="fundo6-3">
+        <h6 id="nome1">{{nomes[6]}}</h6>
+      </div>
+      <div *ngIf="!janelasOk[6]" id="janela6-3" dragula="bag" [(dragulaModel)]="janela6"
+        (dragulaModelChange)="containerSeteModificado()">
+      </div>
+      <div *ngIf="janelasOk[6]" id="janela6-3">
+        <img id="imgDrop" [src]="janela6[0].url">
+      </div>
+    </div>
+    <div id="painelNivel3" dragula="bag" [(dragulaModel)]="imagens" *ngIf="nivel3">
       <img id="imgPainel" *ngFor="let imagem of imagens" [src]="imagem.url">
     </div>
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <button type="button" class="btn btn-light" id="voltar" (click)="abrirPagina('home')">Voltar</button>
   </div>
+  <button *ngIf='imagensCarregadas' type="button" class="btn btn-light" id="voltar" (click)="abrirPagina('home')">Voltar</button>
 </ion-content>
