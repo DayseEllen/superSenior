@@ -52,8 +52,8 @@
     <p id="titleavanco">No Jogo do Arrasta&Solta:</p>
 
     <div class="progress">
-        <div id="barraprogresso2" class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="25"
-            aria-valuemin="0" aria-valuemax="100">50%</div>
+        <div id="barraprogresso2" class="progress-bar" role="progressbar" [style.width]="porcentagemAS + '%'"
+            [attr.aria-valuenow]="porcentagemAS" aria-valuemin="0" aria-valuemax="100">{{porcentagemAS}}%</div>
     </div>
     <p id="titlebarra" text-center>Nível 2</p>
     <p id="titleavanco">No Jogo da Memória:</p>
