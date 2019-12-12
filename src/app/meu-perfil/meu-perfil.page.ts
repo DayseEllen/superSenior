@@ -26,11 +26,16 @@ export class MeuPerfilPage implements OnInit {
 
   constructor(private autenticacao: Autenticacao, private rota: Router, private bdService: BDService, ) {
       this.carregarUsuarios();
+      
   }
 
   private async carregarUsuarios() {
     this.usuarios = await this.bdService.listWithUIDs<Usuario>('/usuarios');
     this.getUser();
+    this.carregarPontos();
+  }
+  
+  carregarPontos(){
     this.pontosP = this.usuario.pontosPerguntas;
     this.pontosM = this.usuario.pontosMemoria;
     this.pontosAS = this.usuario.pontosArrasta;
@@ -41,6 +46,7 @@ export class MeuPerfilPage implements OnInit {
     this.calcularNivelArrastaSolta();
     this.calcularPorcentagemAS();
   }
+
   private getUser() {
     this.usuario = null;
     if (this.autenticacao.isLoggedIn()) {

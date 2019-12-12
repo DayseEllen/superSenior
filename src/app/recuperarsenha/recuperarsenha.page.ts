@@ -28,9 +28,15 @@ export class RecuperarsenhaPage implements OnInit {
   @ViewChild('recuperar') form: NgForm;
 
   async recuperarSenha(recuperar) {
-    this.getUser(recuperar.username);
     if (this.form.form.valid) {
-      if (this.verificaSeExisteUsuario(recuperar.username, recuperar.nomeM)) {
+
+      var username = recuperar.username;
+      var minusculo = username.toLowerCase();
+      var usernameValido = this.limpaString(minusculo);
+
+    this.getUser(usernameValido);
+    if (this.form.form.valid) {
+      if (this.verificaSeExisteUsuario(usernameValido, recuperar.nomeM)) {
         let alert = await this.alertCtrl.create({
           header: 'Legal! ',
           message: 'A sua senha é: ' + this.usuario.senha,
@@ -45,7 +51,7 @@ export class RecuperarsenhaPage implements OnInit {
       }else{
         let alert = await this.alertCtrl.create({
           header: 'Que pena! ',
-          message: 'Seu apelido e/ou o nome da sua estão incorretos',
+          message: 'Seu apelido e/ou o nome da sua mãe estão incorretos',
           cssClass: 'alertsformcad',
           buttons: [{
             text: 'Tentar novamente',
@@ -56,6 +62,7 @@ export class RecuperarsenhaPage implements OnInit {
       }
     }
   }
+}
 
   verificaSeExisteUsuario(username:string,nomeM:string) {
     for (var i = 0; i < this.usuarios.length; i++) {
@@ -77,6 +84,19 @@ export class RecuperarsenhaPage implements OnInit {
     return this.usuarios;
 
   }
+
+  limpaString(palavra) {
+    var tamanho = palavra.length;
+    var novaString = "";
+    for (var i = 0; i < tamanho; i++) {
+      if (palavra.charAt(i) != " ") {
+        novaString += palavra.charAt(i);
+      }
+    }
+    palavra = novaString;
+    return palavra;
+  }
+
 
   abrirPagina(url: String) {
     this.rota.navigate([url]);
