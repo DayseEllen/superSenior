@@ -17,10 +17,14 @@
       <div class="form-group col-md-6">
         <input type="text" class="form-control campos inputs" id="inputUserName" placeholder="Apelido" name="username" ngModel required>
       </div>
+      <div class="form-group col-md-6">
+        <input type="text" class="form-control campos inputs" id="inputUserName" placeholder="Nome da mãe" name="nomeM" ngModel required>
+      </div>
     </div>
     <br>
   <div>
-    <ion-button type="submit" id="botao" color="light" [disabled]="!recuperar.form.valid">Mudar senha</ion-button>
+      <ion-button  class="campos botao" color="light" (click)="abrirPagina('cadastrar')">Voltar</ion-button>
+    <ion-button type="submit" class="campos botao entrar" color="light" [disabled]="!recuperar.form.valid">Mudar senha</ion-button>
  </div>
   </form>
 </ion-content>

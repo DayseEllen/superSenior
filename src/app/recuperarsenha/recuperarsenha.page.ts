@@ -17,6 +17,8 @@ export class RecuperarsenhaPage implements OnInit {
   contador: number = 0;
   usuario2: Usuario;
   constructor(private rota: Router, private alertCtrl: AlertController, private bdService: BDService, private autenticacao: Autenticacao) {
+    this.carregarUsuarios();
+
   }
 
   private async carregarUsuarios() {
@@ -26,10 +28,9 @@ export class RecuperarsenhaPage implements OnInit {
   @ViewChild('recuperar') form: NgForm;
 
   async recuperarSenha(recuperar) {
+    this.getUser(recuperar.username);
     if (this.form.form.valid) {
-      if (this.verificaSeExisteUsuario(recuperar.username)) {
-        this.getUser(recuperar.username);
-
+      if (this.verificaSeExisteUsuario(recuperar.username, recuperar.nomeM)) {
         let alert = await this.alertCtrl.create({
           header: 'Legal! ',
           message: 'A sua senha é: ' + this.usuario.senha,
@@ -40,17 +41,25 @@ export class RecuperarsenhaPage implements OnInit {
           }]
         });
         await alert.present();
-      }
 
+      }else{
+        let alert = await this.alertCtrl.create({
+          header: 'Que pena! ',
+          message: 'Seu apelido e/ou o nome da sua estão incorretos',
+          cssClass: 'alertsformcad',
+          buttons: [{
+            text: 'Tentar novamente',
+            handler: () => this.rota.navigate(['recuperarsenha'])
+          }]
+        });
+        await alert.present();
+      }
     }
   }
 
-  verificaSeExisteUsuario(username) {
-    this.carregarUsuarios();
-
+  verificaSeExisteUsuario(username:string,nomeM:string) {
     for (var i = 0; i < this.usuarios.length; i++) {
-
-      if (username === this.usuarios[i].username) {
+      if (username === this.usuarios[i].username && nomeM === this.usuarios[i].nomeM ) {
         console.log(this.usuarios[i].username)
         return true;
       }
@@ -60,7 +69,6 @@ export class RecuperarsenhaPage implements OnInit {
   }
 
   getUser(username) {
-
     for (var i = 0; i < this.usuarios.length; i++) {
       if (username == this.usuarios[i].username) {
         this.usuario = this.usuarios[i];
@@ -70,23 +78,10 @@ export class RecuperarsenhaPage implements OnInit {
 
   }
 
-  async alertSenha() {
-    if (this.contador == 0) {
-      let alert = await this.alertCtrl.create({
-        header: 'ATENÇÃO! ',
-        message: 'A senha precisa ter no mínimo 6 caracteres.',
-        cssClass: 'alertsformcad',
-        buttons: [{
-          text: "Ok"
-        }]
-      });
-      this.contador++;
-      await alert.present();
-    } else {
-      console.log(this.contador)
-    }
-  }
+  abrirPagina(url: String) {
+    this.rota.navigate([url]);
 
+  }
 
   ngOnInit() {
   }

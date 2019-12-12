@@ -25,14 +25,14 @@
     height: 8vh;
     width: 80%;
 }
-
-#botao{
-    font-family: Rum Raisin;
-    margin-left: 12.3vw;
-    margin-top: 10px;
+.campos.botao{
+    margin-top: 20px;
     font-size: 1em;
     width: 100px;
-    position: relative;
+    margin-left: 11.8vw;
+}
+.campos.botao.entrar{
+    margin-left: 7.5%;
 }
 
 .ng-invalid.ng-touched:not(form){

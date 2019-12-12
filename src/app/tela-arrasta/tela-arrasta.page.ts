@@ -459,7 +459,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
       this.zerarJanelas();
       this.user = new Usuario(this.autenticacao.getUser().uid,
         this.usuario.nome, this.usuario.username,
-        this.usuario.email, this.usuario.genero, this.usuario.idade, this.usuario.senha, this.usuario.pontosPerguntas, this.usuario.pontosMemoria, this.pontosAS, this.usuario.qtPerguntas, this.usuario.qtMemoria, this.usuario.qtArrasta);
+        this.usuario.email, this.usuario.genero, this.usuario.idade, this.usuario.senha, this.usuario.nomeM, this.usuario.pontosPerguntas, this.usuario.pontosMemoria, this.pontosAS, this.usuario.qtPerguntas, this.usuario.qtMemoria, this.usuario.qtArrasta);
       this.bdService.update('/usuarios', this.usuario.uid, this.user);
     },500);
   }

@@ -367,7 +367,7 @@ export class TelaMemoriaPage implements OnInit {
 
     this.user = new Usuario(this.autenticacao.getUser().uid,
       this.usuario.nome, this.usuario.username,
-      this.usuario.email, this.usuario.genero, this.usuario.idade, this.usuario.senha, this.usuario.pontosPerguntas, this.pontosM, this.usuario.pontosArrasta, this.usuario.qtPerguntas, this.qt, this.usuario.qtArrasta);
+      this.usuario.email, this.usuario.genero, this.usuario.idade, this.usuario.senha, this.usuario.nomeM, this.usuario.pontosPerguntas, this.pontosM, this.usuario.pontosArrasta, this.usuario.qtPerguntas, this.qt, this.usuario.qtArrasta);
     this.rota.navigate([url]);
     this.bdService.update('/usuarios', this.usuario.uid, this.user);
 

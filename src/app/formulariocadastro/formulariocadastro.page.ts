@@ -19,6 +19,7 @@ export class FormulariocadastroPage implements OnInit {
   usuario: Usuario;
   usuarios: Usuario[];
   contador: number = 0;
+  contadorD: number = 0;
   constructor(private rota: Router,
     private bdService: BDService,
     private alertCtrl: AlertController,
@@ -43,6 +44,7 @@ export class FormulariocadastroPage implements OnInit {
         genero: cadastro.genero,
         idade: cadastro.idade,
         senha: cadastro.senha,
+        nomeM: cadastro.nomeMae,
         pontosPerguntas: 0,
         pontosMemoria: 0,
         pontosArrasta: 0,
@@ -149,11 +151,23 @@ export class FormulariocadastroPage implements OnInit {
     }
   }
 
-  validarIdade() {
-    var el = document.getElementById("inputName4");
-    var nome = el.innerHTML.valueOf();
-    console.log(nome)
+  async alertDica() {
+    if (this.contadorD == 0) {
+      let alert = await this.alertCtrl.create({
+        header: 'ATENÇÃO! ',
+        message: 'O nome da sua mãe será usado caso você esqueça sua senha.',
+        cssClass: 'alertsformcad',
+        buttons: [{
+          text: "Ok"
+        }]
+      });
+      this.contadorD++;
+      await alert.present();
+    } else {
+      console.log(this.contador)
+    }
   }
+
 
   abrirPagina(url: String) {
     this.rota.navigate([url]);
