@@ -148,7 +148,7 @@ export class TelaPerguntaPage implements OnInit {
       this.calcularPorcentagem();
 
       let alerta = await this.alert.create({
-        header: 'Parabéns!!! Você zerou o jogos das perguntas.😃',
+        header: 'Parabéns!!! Você zerou o jogo das perguntas.😃',
         message: "Agora você pode reiniciá-lo e aprimorar seus conhecimentos ou se aventurar em outro jogo",
         cssClass: 'alertsp',
         buttons: [

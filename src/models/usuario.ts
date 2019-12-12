@@ -5,7 +5,7 @@ export class Usuario {
     username: string;
     email: string;
     genero: string;
-    idade: number;
+    idade: string;
     senha: string;
     pontosPerguntas: number;
     pontosMemoria: number;
@@ -13,7 +13,7 @@ export class Usuario {
     qtPerguntas: number;
     qtMemoria: number;
     qtArrasta: number;
-    constructor(uid: string, nome: string, username: string, email: string, genero: string, idade: number, senha: string, pontosP: number, pontosM: number,
+    constructor(uid: string, nome: string, username: string, email: string, genero: string, idade: string, senha: string, pontosP: number, pontosM: number,
         pontosA: number, qtP: number, qtM: number, qtA: number) {
         this.uid = uid;
         this.nome = nome;

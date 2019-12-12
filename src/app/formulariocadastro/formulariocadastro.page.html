@@ -16,8 +16,17 @@
           <input type="text" class="form-control campos inputs" id="inputName1" placeholder="Nome" name="nome" ngModel required>
         </div>
         <div class="form-group col-md-6">
-          <label for="inputName4" class="campos textoformulario">Digite sua idade:</label>
-          <input type="number" class="form-control campos inputs" id="inputName4" placeholder="Idade" name="idade" ngModel required>
+          <label for="inputUserName" class="campos textoformulario">Digite seu apelido:</label>
+          <input type="text" class="form-control campos inputs" id="inputUserName" placeholder="Apelido" name="username" ngModel required>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputAno" class="campos textoformulario">Escolha sua idade:</label>
+        <select class="form-control campos inputs" id="exampleFormControlSelect2" name="idade" ngModel required >
+          <option>Menos de 60</option>
+          <option>Entre 60 e 70</option>
+          <option>Entre 71 e 80</option>
+          <option>Mais de 80</option>
+        </select>
         </div>
         <div class="form-group col-md-6">
           <label class="campos textoformulario" for="exampleFormControlSelect1" >Escolha o seu sexo:</label>
@@ -28,14 +37,8 @@
         </div>
         <div class="form-group col-md-6"> 
             <label for="inputPassword4" class="campos textoformulario">Digite sua senha:</label>
-          <input type="password" class="form-control campos inputs" id="inputPassword4" placeholder="Senha" name="senha" ngModel required minlength="6">
+          <input type="password" class="form-control campos inputs" id="inputPassword4" placeholder="Senha" name="senha" ngModel required minlength="6" (click)="alertSenha()">
         </div>
-        <div class="form-group col-md-6">
-            <label for="inputUserName" class="campos textoformulario">Digite seu apelido:</label>
-            <input type="text" class="form-control campos inputs" id="inputUserName" placeholder="Apelido" name="username" ngModel required>
-          </div>
-        
-           
         </div>
         <br>
       <div>

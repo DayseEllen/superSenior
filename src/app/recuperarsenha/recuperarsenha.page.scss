@@ -1,29 +1,21 @@
-/**Id's**/
 #logo{
     width: 35vw;
     height: 20vh;
     border-radius: 10px;
     margin-top: 10vh;
-    }
+}
 
-#titulo{
+ #titulo{
     font-size: 2em;
     font-family:  Rum Raisin;
     color: black;
     margin-top: 4vh;
 }
+
 #formulario{
     margin-top: 10vh;
     margin-left: 1vw;
 }
-#recuperarSenha{
-    font-family: Rum Raisin;
-    margin-left: 11vw;
-    color: #3299CC;
-    font-size: 1.2em;
-}
-
-/**Classes**/
 
 .campos{
     font-family: Rum Raisin;
@@ -33,13 +25,19 @@
     height: 8vh;
     width: 80%;
 }
-.campos.botao{
-    margin-top: 20px;
+
+#botao{
+    font-family: Rum Raisin;
+    margin-left: 12.3vw;
+    margin-top: 10px;
     font-size: 1em;
     width: 100px;
-    margin-left: 11.8vw;
-}
-.campos.botao.entrar{
-    margin-left: 7.5%;
+    position: relative;
 }
 
+.ng-invalid.ng-touched:not(form){
+    border: 1px solid red;
+}
+.ng-valid:not(form){
+    border: 1px solid green;
+}

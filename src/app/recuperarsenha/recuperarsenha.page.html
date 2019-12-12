@@ -1,0 +1,26 @@
+<ion-header>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+</ion-header>
+
+<ion-content color="primary" padding>
+  <div text-center>
+    <img id="logo" src="assets/images/logoProjeto.jpeg">
+  </div>
+  <div text-center id='titulo'>Mudar a senha</div>
+
+  <form #recuperar="ngForm" (ngSubmit)="recuperarSenha(recuperar.value)">
+    <div class="form-row formulario">
+      <div class="form-group col-md-6">
+        <input type="text" class="form-control campos inputs" id="inputUserName" placeholder="Apelido" name="username" ngModel required>
+      </div>
+    </div>
+    <br>
+  <div>
+    <ion-button type="submit" id="botao" color="light" [disabled]="!recuperar.form.valid">Mudar senha</ion-button>
+ </div>
+  </form>
+</ion-content>

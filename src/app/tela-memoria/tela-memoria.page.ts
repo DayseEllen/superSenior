@@ -232,7 +232,7 @@ export class TelaMemoriaPage implements OnInit {
     } if (this.pontosM == 15) {
       this.calcularPorcentagem();
       let alert = await this.alert.create({
-        header: 'Parabéns!!! Você zerou o jogos da memória.😃',
+        header: 'Parabéns!!! Você zerou o jogo da memória.😃',
         message: "Agora você pode reiniciá-lo e aprimorar seus conhecimentos ou se aventurar em outro jogo",
         cssClass: 'alertsm',
         buttons: [

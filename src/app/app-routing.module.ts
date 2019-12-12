@@ -18,7 +18,9 @@ const routes: Routes = [
   { path: 'meu-perfil', loadChildren: './meu-perfil/meu-perfil.module#MeuPerfilPageModule' },
   { path: 'tela-pergunta', loadChildren: './tela-pergunta/tela-pergunta.module#TelaPerguntaPageModule' },
   { path: 'tela-memoria', loadChildren: './tela-memoria/tela-memoria.module#TelaMemoriaPageModule' },
-  { path: 'tela-arrasta', loadChildren: './tela-arrasta/tela-arrasta.module#TelaArrastaPageModule' }
+  { path: 'tela-arrasta', loadChildren: './tela-arrasta/tela-arrasta.module#TelaArrastaPageModule' },
+  { path: 'recuperarsenha', loadChildren: './recuperarsenha/recuperarsenha.module#RecuperarsenhaPageModule' }
+
 
 ];
 
