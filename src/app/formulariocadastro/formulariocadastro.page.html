@@ -16,6 +16,10 @@
           <input type="text" class="form-control campos inputs" id="inputName1" placeholder="Nome" name="nome" ngModel required>
         </div>
         <div class="form-group col-md-6">
+          <label for="inputUserName" class="campos textoformulario">Digite seu apelido:</label>
+          <input type="text" class="form-control campos inputs" id="inputUserName" placeholder="Apelido" name="username" ngModel required>
+        </div>
+        <div class="form-group col-md-6">
           <label for="inputAno" class="campos textoformulario">Escolha sua idade:</label>
         <select class="form-control campos inputs" id="exampleFormControlSelect2" name="idade" ngModel required >
           <option>Menos de 60</option>
@@ -35,12 +39,6 @@
             <label for="inputPassword4" class="campos textoformulario">Digite sua senha:</label>
           <input type="password" class="form-control campos inputs" id="inputPassword4" placeholder="Senha" name="senha" ngModel required minlength="6" (click)="alertSenha()">
         </div>
-        <div class="form-group col-md-6">
-            <label for="inputUserName" class="campos textoformulario">Digite seu nome de usuário:</label>
-            <input type="text" class="form-control campos inputs" id="inputUserName" placeholder="Nome de usuário" name="username" ngModel required>
-          </div>
-        
-           
         </div>
         <br>
       <div>

@@ -32,11 +32,14 @@ export class FormulariocadastroPage implements OnInit {
   async createAccount(cadastro) {
     if (this.form.form.valid) {
       var nome = this.maiuscula(cadastro.nome);
+      var username = cadastro.username;
+      var minusculo = username.toLowerCase();
+      var usernameValido = this.limpaString(minusculo);
       this.usuario = {
         uid: null,
         nome: nome,
-        username: cadastro.username,
-        email: cadastro.username + '@seniorifpe.com',
+        username: usernameValido,
+        email: usernameValido + '@seniorifpe.com',
         genero: cadastro.genero,
         idade: cadastro.idade,
         senha: cadastro.senha,
@@ -101,6 +104,7 @@ export class FormulariocadastroPage implements OnInit {
     }
   }
 
+
   maiuscula(palavra) {
     palavra = palavra.split("");
     var espaco = "";
@@ -113,28 +117,40 @@ export class FormulariocadastroPage implements OnInit {
     }
     palavra = espaco;
     return palavra;
-
   }
 
- async alertSenha(){
-   if(this.contador==0){
-    let alert = await this.alertCtrl.create({
-      header: 'ATENÇÃO! ',
-      message: 'A senha precisa ter no mínimo 6 caracteres.',
-      cssClass: 'alertsformcad',
-      buttons: [{
-        text: "Ok"
-      }]
-    });
-    this.contador++;
-    await alert.present();
-   }else{
-     console.log(this.contador)
-   }
+
+  limpaString(palavra) {
+    var tamanho = palavra.length;
+    var novaString = "";
+    for (var i = 0; i < tamanho; i++) {
+      if (palavra.charAt(i) != " ") {
+        novaString += palavra.charAt(i);
+      }
+    }
+    palavra = novaString;
+    return palavra;
   }
 
-  validarIdade(){
-    var el = document.getElementById("inputName4"); 
+  async alertSenha() {
+    if (this.contador == 0) {
+      let alert = await this.alertCtrl.create({
+        header: 'ATENÇÃO! ',
+        message: 'A senha precisa ter no mínimo 6 caracteres.',
+        cssClass: 'alertsformcad',
+        buttons: [{
+          text: "Ok"
+        }]
+      });
+      this.contador++;
+      await alert.present();
+    } else {
+      console.log(this.contador)
+    }
+  }
+
+  validarIdade() {
+    var el = document.getElementById("inputName4");
     var nome = el.innerHTML.valueOf();
     console.log(nome)
   }

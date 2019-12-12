@@ -21,18 +21,24 @@ export class LoginPage implements OnInit {
   usuarios: Usuario[];
 
   constructor(private rota: Router, private autenticacao: Autenticacao,
-     private alertCtrl: AlertController, private location: Location, private bdService: BDService) {
+    private alertCtrl: AlertController, private location: Location, private bdService: BDService) {
 
   }
   private async carregarUsuarios() {
     this.usuarios = await this.bdService.listWithUIDs<Usuario>('/usuarios');
   }
   @ViewChild('login') form: NgForm;
-  
+
   async signIn(login) {
     if (this.form.form.valid) {
+
+      var username = login.username;
+      var minusculo = username.toLowerCase();
+      var usernameValido = this.limpaString(minusculo);
+
+      //this.usuario = new Usuario(this.autenticacao.getNomeUser(), null, emailLogin, null, null, login.senha);
       this.carregarUsuarios();
-      await this.autenticacao.signIn(login.username + '@seniorifpe.com', login.senha)
+      await this.autenticacao.signIn(usernameValido + '@seniorifpe.com', login.senha)
         .then(async () => {
           let alert = await this.alertCtrl.create({
             header: 'Ebaa! 😃',
@@ -105,6 +111,18 @@ export class LoginPage implements OnInit {
     }
   }
 
+
+  limpaString(palavra) {
+    var tamanho = palavra.length;
+    var novaString = "";
+    for (var i = 0; i < tamanho; i++) {
+      if (palavra.charAt(i) != " ") {
+        novaString += palavra.charAt(i);
+      }
+    }
+    palavra = novaString;
+    return palavra;
+  }
   ngOnInit() {
   }
 

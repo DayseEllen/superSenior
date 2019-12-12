@@ -10,6 +10,8 @@ import { Imagem } from 'src/models/imagem';
 import { DragulaService } from 'ng2-dragula';
 import { Subscription } from 'rxjs';
 import { AlertController } from '@ionic/angular';
+import { Usuario } from 'src/models/usuario';
+import { Autenticacao } from '../services/autenticacao';
 
 
 
@@ -40,75 +42,172 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
   janela5 = [];
   janela6 = [];
   allImagesSelect: Imagem[] = [];
-  pontosTotal: number = 0;
   pontos: number = 0;
   nivel: number = 1;
-  nivel1: boolean = true;
+  nivel1: boolean = false;
   nivel2: boolean = false;
   nivel3: boolean = false;
+  usuario: Usuario;
+  user: Usuario;
+  usuarios: Usuario[] = [];
+  pontosAS: number = 0;
+  qt: number;
+  porcentagemAS: string;
+  nivelA: string;
+  sit: boolean;
+  porcentagem: string;
+  telaIs: boolean = false;
 
-  constructor(private rota: Router, private alert: AlertController, private bdService: BDService, private dragulaService: DragulaService, private elementRef: ElementRef) {
+  constructor(private rota: Router, private alert: AlertController, private bdService: BDService, private dragulaService: DragulaService, private elementRef: ElementRef, private autenticacao: Autenticacao) {
+    this.carregarUsuarios();
     this.carregarImagens();
-
-    /*this.test = [
-      {
-        name: 'IFPE',
-        url: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Instituto_Federal_de_Pernambuco_-_Marca_Vertical_2015.svg/1024px-Instituto_Federal_de_Pernambuco_-_Marca_Vertical_2015.svg.png"
-      }
-    ];*/
-
-
   }
+
+  private async carregarUsuarios() {
+    this.usuarios = await this.bdService.listWithUIDs<Usuario>('/usuarios');
+    this.getUser();
+    this.pontosAS = this.usuario.pontosArrasta;
+    this.calcularNivel();
+    this.calcularPorcentagem();
+  }
+  calcularPorcentagem() {
+    if (this.nivel === 1) {
+      this.porcentagem = String(((100 * this.pontosAS) / 15).toFixed(0));
+    } else
+      if (this.nivel === 2) {
+
+        this.porcentagem = String(((100 * (this.pontosAS - 15)) / 20).toFixed(0));
+      } else
+        if (this.nivel === 3) {
+          this.porcentagem = String(((100 * (this.pontosAS - 35)) / 21).toFixed(0));
+        }
+  }
+  calcularNivel() {
+    if (!this.usuario) {
+      this.usuario = <Usuario>{};
+      this.usuario.pontosArrasta = this.pontosAS;
+    }
+
+    if (this.pontosAS >= 0 && this.pontosAS < 15) {
+      this.nivel = 1;
+      this.nivel1 = true;
+    }
+    if (this.pontosAS >= 15 && this.pontosAS < 35) {
+      this.nivel = 2;
+      this.nivel2 = true;
+    }
+    if (this.pontosAS >= 35 && this.pontosAS <= 56) {
+      this.nivel = 3;
+      this.nivel3 = true;
+    }
+  }
+  private getUser() {
+    this.usuario = null;
+    if (this.autenticacao.isLoggedIn()) {
+      for (var i = 0; i < this.usuarios.length; i++) {
+        if (this.autenticacao.getEmail() === this.usuarios[i].email) {
+          this.usuario = this.usuarios[i];
+        }
+      }
+    }
+    return this.usuario;
+  }
+
 
   containerUmModificado() {
-    if (this.nomes[0] === this.janela0[0].nome) {
-      this.janelasOk[0] = true;
-      this.pontos++;
-      this.pontosTotal++;
-      this.verificaPontosNivel();
-    } else {
-      this.janelasOk[0] = true;
-      setTimeout(() => {
-        this.exibirMensagemErro();
-      }, 400);
-    }
-    console.log('Pontos: ' + this.pontos);
-    console.log('Pontos Total: ' + this.pontosTotal);
-  }
+    this.janelasOk[0] = true;
 
-  containerDoisModificado() {
-    if (this.nomes[1] === this.janela1[0].nome) {
-      this.janelasOk[1] = true;
+    if (this.nomes[0] === this.janela0[0].nome) {
       this.pontos++;
-      this.pontosTotal++;
-      this.verificaPontosNivel();
+      this.pontosAS++;
+      this.verificaPontosFaseNivel();
     } else {
-      this.janelasOk[1] = true;
       setTimeout(() => {
         this.exibirMensagemErro();
       }, 400);
     }
-    console.log('Pontos: ' + this.pontos);
-    console.log('Pontos Total: ' + this.pontosTotal);
+  }
+  containerDoisModificado() {
+    this.janelasOk[1] = true;
+
+    if (this.nomes[1] === this.janela1[0].nome) {
+      this.pontos++;
+      this.pontosAS++;
+      this.verificaPontosFaseNivel();
+    } else {
+      setTimeout(() => {
+        this.exibirMensagemErro();
+      }, 400);
+    }
   }
   containerTresModificado() {
+    this.janelasOk[2] = true;
+
     if (this.nomes[2] === this.janela2[0].nome) {
-      this.janelasOk[2] = true;
       this.pontos++;
-      this.pontosTotal++;
-      this.verificaPontosNivel();
+      this.pontosAS++;
+      this.verificaPontosFaseNivel();
     } else {
-      this.janelasOk[2] = true;
       setTimeout(() => {
         this.exibirMensagemErro();
       }, 400);
     }
-    console.log('Pontos: ' + this.pontos);
-    console.log('Pontos Total: ' + this.pontosTotal);
+  }
+  containerQuatroModificado() {
+    this.janelasOk[3] = true;
+
+    if (this.nomes[3] === this.janela3[0].nome) {
+      this.pontos++;
+      this.pontosAS++;
+      this.verificaPontosFaseNivel();
+    } else {
+      setTimeout(() => {
+        this.exibirMensagemErro();
+      }, 400);
+    }
+  }
+  containerCincoModificado() {
+    this.janelasOk[4] = true;
+
+    if (this.nomes[4] === this.janela4[0].nome) {
+      this.pontos++;
+      this.pontosAS++;
+      this.verificaPontosFaseNivel();
+    } else {
+      setTimeout(() => {
+        this.exibirMensagemErro();
+      }, 400);
+    }
+  }
+  containerSeisModificado() {
+    this.janelasOk[5] = true;
+
+    if (this.nomes[5] === this.janela5[0].nome) {
+      this.pontos++;
+      this.pontosAS++;
+      this.verificaPontosFaseNivel();
+    } else {
+      setTimeout(() => {
+        this.exibirMensagemErro();
+      }, 400);
+    }
+  }
+  containerSeteModificado() {
+    this.janelasOk[6] = true;
+
+    if (this.nomes[6] === this.janela6[0].nome) {
+      this.pontos++;
+      this.pontosAS++;
+      this.verificaPontosFaseNivel();
+    } else {
+      setTimeout(() => {
+        this.exibirMensagemErro();
+      }, 400);
+    }
   }
   private async carregarImagens() {
     this.imagensCarregadas = await this.bdService.listWithUIDs<Imagem>('/imagens');
-    console.log(this.imagensCarregadas.length);
+    this.telaIs = true;
     this.imagensSelecionadas();
     this.randomNomes();
     if (!this.dragulaService.find("bag")) {
@@ -162,13 +261,16 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
       buttons: [
         {
           text: 'Clique aqui para tentar novamente.',
-          handler: () => this.zerarFaseNivel1()
+          handler: () => {
+            this.zerarFase()
+            this.zerarJanelas()
+          }
         }
       ]
     });
     await alert.present();
   }
-  async exibirMensagemGanhou() {
+  async exibirMensagemGanhouFase() {
     let alert = await this.alert.create({
       header: 'Parabéns!!! Você conquistou essa fase. 😃',
       message: 'Continue assim e você logo subirá de nível',
@@ -182,7 +284,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
     });
     await alert.present();
   }
-  async exibirMensagemProximoNivel() {
+  async exibirMensagemNivel2() {
     let alert = await this.alert.create({
       header: 'Parabéns!!! Você conquistou essa  e avançou de nível. 😃',
       message: 'Agora você está no nível 2!',
@@ -196,54 +298,75 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
     });
     await alert.present();
   }
-  zerarNivel() {
-    this.janelasOk[0] = false;
-    this.janelasOk[1] = false;
-    this.janelasOk[2] = false;
-    this.janela0 = [];
-    this.janela1 = [];
-    this.janela2 = [];
-    this.pontos = 0;
+  async exibirMensagemNivel3() {
+    let alert = await this.alert.create({
+      header: 'Parabéns!!! Você conquistou essa  e avançou de nível. 😃',
+      message: 'Agora você está no nível 3!',
+      cssClass: 'alertsp',
+      buttons: [
+        {
+          text: 'Clique aqui para avançar de nível.',
+          handler: () => this.exibirNivel3()
+        }
+      ]
+    });
+    await alert.present();
   }
-  zerarFaseNivel1() {
-    this.janelasOk[0] = false;
-    this.janelasOk[1] = false;
-    this.janelasOk[2] = false;
-    this.janela0 = [];
-    this.janela1 = [];
-    this.janela2 = [];
-    this.imagens = this.allImagesSelect;
-    this.pontosTotal -= this.pontos;
-    this.pontos = 0;
-  }
-  zerarFaseNivel2() {
+  zerarJanelas() {
     this.janelasOk[0] = false;
     this.janelasOk[1] = false;
     this.janelasOk[2] = false;
     this.janelasOk[3] = false;
     this.janelasOk[4] = false;
+    this.janelasOk[5] = false;
+    this.janelasOk[6] = false;
     this.janela0 = [];
     this.janela1 = [];
     this.janela2 = [];
     this.janela3 = [];
     this.janela4 = [];
+    this.janela5 = [];
+    this.janela6 = [];
+    this.pontos = 0;
+  }
+  zerarFase() {
     this.imagens = this.allImagesSelect;
-    this.pontosTotal -= this.pontos;
+    if (this.pontosAS === 15 || this.pontosAS === 35) {
+      this.calcularPorcentagem();
+    } else {
+      this.pontosAS -= this.pontos;
+      this.calcularPorcentagem();
+    }
+  }
+  zerarJogo() {
     this.pontos = 0;
   }
   proximaFase() {
+    this.sit = this.alterarNivel();
     this.imagensCarregadas.push(this.imagens[0]);
-    console.log(this.imagens[0]);
-    this.imagensSelecionadas();
-    this.randomNomes();
-    this.zerarNivel();
-    if (!this.dragulaService.find("bag")) {
-      this.dragulaService.createGroup("bag", {
-        revertOnSpill: true,
-        removeOnSpill: false
-      });
+    if (this.imagensCarregadas.length <= 5) {
+      this.carregarImagens();
+      this.sit = false;
+      this.randomNomes();
+      this.zerarJanelas();
+      if (!this.dragulaService.find("bag")) {
+        this.dragulaService.createGroup("bag", {
+          revertOnSpill: true,
+          removeOnSpill: false
+        });
+      }
     }
-    this.alterarNivel();
+    if (this.sit) {
+      this.imagensSelecionadas();
+      this.randomNomes();
+      this.zerarJanelas();
+      if (!this.dragulaService.find("bag")) {
+        this.dragulaService.createGroup("bag", {
+          revertOnSpill: true,
+          removeOnSpill: false
+        });
+      }
+    }
   }
 
   exibirNivel2() {
@@ -251,7 +374,25 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
     this.nivel2 = true;
     this.imagensSelecionadas();
     this.randomNomes();
-    this.zerarFaseNivel2();
+    this.zerarFase();
+    this.zerarJanelas();
+    this.telaIs = true;
+    this.pontosAS = 15;
+    if (!this.dragulaService.find("bag")) {
+      this.dragulaService.createGroup("bag", {
+        revertOnSpill: true,
+        removeOnSpill: false
+      });
+    }
+  }
+  exibirNivel3() {
+    this.nivel2 = false;
+    this.nivel3 = true;
+    this.carregarImagens();
+    this.zerarFase();
+    this.zerarJanelas();
+    this.telaIs = true;
+    this.pontosAS = 35;
     if (!this.dragulaService.find("bag")) {
       this.dragulaService.createGroup("bag", {
         revertOnSpill: true,
@@ -260,29 +401,48 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
     }
   }
   alterarNivel() {
-    if (this.pontosTotal === 9) {
-      this.exibirMensagemProximoNivel();
+    if (this.pontosAS === 15 && this.nivel === 1) {
+      this.exibirMensagemNivel2();
       this.nivel = 2;
+      this.telaIs = false;
+      return false;
     }
-    if (this.pontosTotal === 20) {
-      this.exibirMensagemProximoNivel();
+    if (this.pontosAS === 35 && this.nivel === 2) {
+      this.exibirMensagemNivel3();
       this.nivel = 3;
+      this.telaIs = false;
+      return false;
     }
-    if (this.pontosTotal === 35) {
+    if (this.pontosAS === 56 && this.nivel === 3) {
       this.exibirMensagemZerou();
+      this.telaIs = false;
+      return false;
     }
+    return true;
   }
-  verificaPontosNivel() {
+  verificaPontosFaseNivel() {
+    this.calcularPorcentagem();
     if (this.nivel === 1 && this.pontos === 3) {
-      this.exibirMensagemGanhou();
+      this.exibirMensagemGanhouFase();
     } else if (this.nivel === 2 && this.pontos === 5) {
-      this.exibirMensagemGanhou();
+      this.exibirMensagemGanhouFase();
     } else if (this.nivel === 3 && this.pontos === 7) {
-      this.exibirMensagemGanhou();
+      this.exibirMensagemGanhouFase();
     }
   }
-  exibirMensagemZerou() {
+  async exibirMensagemZerou() {
+    let alert = await this.alert.create({
+      header: 'Parabéns!!! Você chegou até o fim. 😃',
+      cssClass: 'alertsp',
+      buttons: [
+        {
+          text: 'Clique aqui para voltar ao Menu Principal.',
+          handler: () => this.rota.navigate(['home'])
+        }
 
+      ]
+    });
+    await alert.present();
   }
   ngOnInit() {
 
@@ -294,6 +454,14 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
   }
   abrirPagina(url: String) {
     this.rota.navigate([url]);
+    setTimeout(() => {
+      this.zerarFase();
+      this.zerarJanelas();
+      this.user = new Usuario(this.autenticacao.getUser().uid,
+        this.usuario.nome, this.usuario.username,
+        this.usuario.email, this.usuario.genero, this.usuario.idade, this.usuario.senha, this.usuario.pontosPerguntas, this.usuario.pontosMemoria, this.pontosAS, this.usuario.qtPerguntas, this.usuario.qtMemoria, this.usuario.qtArrasta);
+      this.bdService.update('/usuarios', this.usuario.uid, this.user);
+    },500);
   }
   /* inserirImagens(){
      const imagens =
