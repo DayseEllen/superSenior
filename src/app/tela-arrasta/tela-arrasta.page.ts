@@ -56,7 +56,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
   nivelA: string;
   sit: boolean;
   porcentagem: string;
-  telaIs: boolean = false;
+  telaIs: boolean = true;
 
   constructor(private rota: Router, private alert: AlertController, private bdService: BDService, private dragulaService: DragulaService, private elementRef: ElementRef, private autenticacao: Autenticacao) {
     this.carregarUsuarios();
@@ -207,7 +207,6 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
   }
   private async carregarImagens() {
     this.imagensCarregadas = await this.bdService.listWithUIDs<Imagem>('/imagens');
-    this.telaIs = true;
     this.imagensSelecionadas();
     this.randomNomes();
     if (!this.dragulaService.find("bag")) {
@@ -237,6 +236,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
       this.nomes.push(this.imagem.nome);
     }
     this.allImagesSelect = this.imagens;
+    this.telaIs = true;
   }
 
   randomNomes() {
@@ -338,13 +338,12 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
       this.calcularPorcentagem();
     }
   }
-  zerarJogo() {
-    this.pontos = 0;
-  }
+ 
+
   proximaFase() {
     this.sit = this.alterarNivel();
     this.imagensCarregadas.push(this.imagens[0]);
-    if (this.imagensCarregadas.length <= 5) {
+    if (this.imagensCarregadas.length <8) {
       this.carregarImagens();
       this.sit = false;
       this.randomNomes();
@@ -385,10 +384,12 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
       });
     }
   }
+
   exibirNivel3() {
     this.nivel2 = false;
     this.nivel3 = true;
-    this.carregarImagens();
+    this.imagensSelecionadas();
+    this.randomNomes();
     this.zerarFase();
     this.zerarJanelas();
     this.telaIs = true;
@@ -400,22 +401,23 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
       });
     }
   }
+
   alterarNivel() {
     if (this.pontosAS === 15 && this.nivel === 1) {
-      this.exibirMensagemNivel2();
       this.nivel = 2;
       this.telaIs = false;
+      this.exibirMensagemNivel2();
       return false;
     }
     if (this.pontosAS === 35 && this.nivel === 2) {
-      this.exibirMensagemNivel3();
       this.nivel = 3;
       this.telaIs = false;
+      this.exibirMensagemNivel3();
       return false;
     }
     if (this.pontosAS === 56 && this.nivel === 3) {
-      this.exibirMensagemZerou();
       this.telaIs = false;
+      this.exibirMensagemZerou();
       return false;
     }
     return true;
@@ -437,7 +439,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
       buttons: [
         {
           text: 'Clique aqui para voltar ao Menu Principal.',
-          handler: () => this.rota.navigate(['home'])
+          handler: () => this.abrirPagina('home')
         }
 
       ]
@@ -454,14 +456,22 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
   }
   abrirPagina(url: String) {
     this.rota.navigate([url]);
-    setTimeout(() => {
+    if(this.pontosAS!==56){
       this.zerarFase();
       this.zerarJanelas();
-      this.user = new Usuario(this.autenticacao.getUser().uid,
+      this.updateBancoDados();
+    }else{
+      this.pontosAS=0;
+      this.pontos=0;
+      this.updateBancoDados();
+    }
+    
+  }
+  updateBancoDados(){
+    this.user = new Usuario(this.autenticacao.getUser().uid,
         this.usuario.nome, this.usuario.username,
         this.usuario.email, this.usuario.genero, this.usuario.idade, this.usuario.senha, this.usuario.pontosPerguntas, this.usuario.pontosMemoria, this.pontosAS, this.usuario.qtPerguntas, this.usuario.qtMemoria, this.usuario.qtArrasta);
       this.bdService.update('/usuarios', this.usuario.uid, this.user);
-    },500);
   }
   /* inserirImagens(){
      const imagens =
