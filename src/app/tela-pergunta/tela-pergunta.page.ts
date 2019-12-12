@@ -153,7 +153,7 @@ export class TelaPerguntaPage implements OnInit {
         cssClass: 'alertsp',
         buttons: [
           {
-            text: 'Clique aqui para reiniciar o jogo',
+            text: 'Clique aqui para voltar ao Menu Principal.',
             handler: () => this.igualaZero()
           }
         ]
@@ -204,10 +204,9 @@ export class TelaPerguntaPage implements OnInit {
   igualaZero() {
     this.pontosP = 0;
     this.qt++;
-    this.exibirProximaPergunta();
     this.calcularNivelPergunta();
     this.calcularPorcentagem();
-    this.carregarPerguntas();
+    this.abrirPagina('home');
   }
 
 

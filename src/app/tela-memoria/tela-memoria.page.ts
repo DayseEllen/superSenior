@@ -413,10 +413,9 @@ export class TelaMemoriaPage implements OnInit {
   igualaZero() {
     this.pontosM = 0;
     this.qt++;
-    this.imageSelect()
     this.calcularNivelMemoria();
     this.calcularPorcentagem();
-    setTimeout(() => this.mostrarCartas(), 1000)
+    this.abrirPagina('home');
   }
 
 }
