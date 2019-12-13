@@ -39,6 +39,7 @@ export class TelaMemoriaPage implements OnInit {
   constructor(private rota: Router, private bdService: BDService, private alert: AlertController, private autenticacao: Autenticacao) {
     this.carregarUsuarios();
     this.carregarImagens();
+    //this.inserirMemorias();
   }
 
   private async carregarUsuarios() {
@@ -60,6 +61,18 @@ export class TelaMemoriaPage implements OnInit {
     }
     return this.usuario;
   }
+
+  /*private async inserirMemorias() {
+    const memorias =
+  [
+    {url: 'https://firebasestorage.googleapis.com/v0/b/super-senior.appspot.com/o/Settings.png?alt=media&token=06624d9f-8b08-4154-a83b-e9cf299b3288'},
+    {url: 'https://firebasestorage.googleapis.com/v0/b/super-senior.appspot.com/o/arquivos.png?alt=media&token=865df6c5-a854-4806-b4ea-3a648cafeef2'},
+    {url: 'https://firebasestorage.googleapis.com/v0/b/super-senior.appspot.com/o/calculator.png?alt=media&token=fd2c8a06-58ba-494a-8cd2-5cead6056acf'},
+    {url: 'https://firebasestorage.googleapis.com/v0/b/super-senior.appspot.com/o/calendar.png?alt=media&token=f0f25749-013c-4963-9e21-0802fb587a88'},
+    {url: 'https://firebasestorage.googleapis.com/v0/b/super-senior.appspot.com/o/voice_recorde.png?alt=media&token=39a3bdeb-cb6c-4397-b19a-62e33513b633'}
+  ];
+  memorias.forEach(async memoria => await this.bdService.insertInList<Memoria>('/memorias', memoria));
+  }*/
 
 
 
@@ -221,10 +234,7 @@ export class TelaMemoriaPage implements OnInit {
         buttons: [
           {
             text: 'Clique aqui para ir para continuar',
-            handler: () => {
-              this.recarregarImagens();
-              this.passarNivel();
-            }
+            handler: () => this.passarNivel()
           }
         ]
       });
@@ -238,10 +248,7 @@ export class TelaMemoriaPage implements OnInit {
         buttons: [
           {
             text: 'Clique aqui para reiniciar o jogo',
-            handler: () => {
-              this.recarregarImagens();
-              this.igualaZero();
-            }
+            handler: () => this.igualaZero()
           }
         ]
       });
@@ -249,13 +256,6 @@ export class TelaMemoriaPage implements OnInit {
     }
   }
 
-  async addPontos() {
-    this.pontosM++;
-    this.calcularPorcentagem();
-    this.exibirMensagemPassarNivel();
-    this.imageSelect();
-    setTimeout(() => this.mostrarCartas(), 1000);
-  }
 
   async exibirmensagemAcerto() {
     this.calcularNivelMemoria();
@@ -402,12 +402,20 @@ export class TelaMemoriaPage implements OnInit {
     }
   }
 
+  async addPontos() {
+    this.pontosM++;
+    this.calcularPorcentagem();
+    this.exibirMensagemPassarNivel();
+    this.imageSelect();
+    setTimeout(() => this.mostrarCartas(), 1000);
+  }
+
   passarNivel() {
     this.calcularNivelMemoria();
     this.calcularPorcentagem();
     this.imageSelect();
-    setTimeout(() => this.mostrarCartas(), 1500);
-
+    setTimeout(() => this.mostrarCartas(), 500);
+    this.recarregarImagens();
   }
 
   igualaZero() {
