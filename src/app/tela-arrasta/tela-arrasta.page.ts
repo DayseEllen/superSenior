@@ -463,6 +463,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
     }else{
       this.pontosAS=0;
       this.pontos=0;
+      this.usuario.qtArrasta++;
       this.updateBancoDados();
     }
     
