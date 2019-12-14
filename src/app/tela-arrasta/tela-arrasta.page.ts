@@ -67,6 +67,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
     this.usuarios = await this.bdService.listWithUIDs<Usuario>('/usuarios');
     this.getUser();
     this.pontosAS = this.usuario.pontosArrasta;
+    this.qt = this.usuario.qtArrasta;
     this.calcularNivel();
     this.calcularPorcentagem();
   }
@@ -278,7 +279,8 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
       buttons: [
         {
           text: 'Clique aqui avançar de fase.',
-          handler: () => this.proximaFase()
+          handler: () =>
+           this.proximaFase()
         }
       ]
     });
@@ -306,7 +308,8 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
       buttons: [
         {
           text: 'Clique aqui para avançar de nível.',
-          handler: () => this.exibirNivel3()
+          handler: () => 
+          this.exibirNivel3()
         }
       ]
     });
@@ -366,6 +369,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
         });
       }
     }
+    this.updateBancoDados();
   }
 
   exibirNivel2() {
@@ -383,6 +387,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
         removeOnSpill: false
       });
     }
+    this.updateBancoDados();
   }
 
   exibirNivel3() {
@@ -400,6 +405,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
         removeOnSpill: false
       });
     }
+    this.updateBancoDados();
   }
 
   alterarNivel() {
@@ -432,6 +438,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
       this.exibirMensagemGanhouFase();
     }
   }
+
   async exibirMensagemZerou() {
     let alert = await this.alert.create({
       header: 'Parabéns!!! Você chegou até o fim. 😃',
@@ -454,6 +461,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
     this.dragulaService.destroy("bag");
     this.subs.unsubscribe();
   }
+
   abrirPagina(url: String) {
     this.rota.navigate([url]);
     if(this.pontosAS!==56){
@@ -463,14 +471,14 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
     }else{
       this.pontosAS=0;
       this.pontos=0;
+      this.qt++;
       this.updateBancoDados();
     }
-    
   }
   updateBancoDados(){
     this.user = new Usuario(this.autenticacao.getUser().uid,
         this.usuario.nome, this.usuario.username,
-        this.usuario.email, this.usuario.genero, this.usuario.idade, this.usuario.senha, this.usuario.nomeM, this.usuario.pontosPerguntas, this.usuario.pontosMemoria, this.pontosAS, this.usuario.qtPerguntas, this.usuario.qtMemoria, this.usuario.qtArrasta);
+        this.usuario.email, this.usuario.genero, this.usuario.idade, this.usuario.senha, this.usuario.nomeM, this.usuario.pontosPerguntas, this.usuario.pontosMemoria, this.pontosAS, this.usuario.qtPerguntas, this.usuario.qtMemoria, this.qt);
       this.bdService.update('/usuarios', this.usuario.uid, this.user);
   }
   /* inserirImagens(){

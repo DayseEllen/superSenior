@@ -10,7 +10,7 @@
   <div text-center>
     <img id="logo" src="assets/images/logoProjeto.jpeg">
   </div>
-  <div text-center id='titulo'>Mudar a senha</div>
+  <div text-center id='titulo'>Recuperar a senha</div>
 
   <form #recuperar="ngForm" (ngSubmit)="recuperarSenha(recuperar.value)">
     <div class="form-row formulario">
@@ -24,7 +24,7 @@
     <br>
   <div>
       <ion-button  class="campos botao" color="light" (click)="abrirPagina('cadastrar')">Voltar</ion-button>
-    <ion-button type="submit" class="campos botao entrar" color="light" [disabled]="!recuperar.form.valid">Mudar senha</ion-button>
+    <ion-button type="submit" class="campos botao entrar" color="light" [disabled]="!recuperar.form.valid">Recuperar senha</ion-button>
  </div>
   </form>
 </ion-content>
