@@ -71,6 +71,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
     this.calcularNivel();
     this.calcularPorcentagem();
   }
+
   calcularPorcentagem() {
     if (this.nivel === 1) {
       this.porcentagem = String(((100 * this.pontosAS) / 15).toFixed(0));
@@ -210,6 +211,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
     this.imagensCarregadas = await this.bdService.listWithUIDs<Imagem>('/imagens');
     this.imagensSelecionadas();
     this.randomNomes();
+    setTimeout(() => { this.exibirMensagemInicio() }, 800);
     if (!this.dragulaService.find("bag")) {
       this.dragulaService.createGroup("bag", {
         revertOnSpill: true,
@@ -254,6 +256,21 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
     return this.nomes;
   }
 
+  async exibirMensagemInicio(){
+      let alert = await this.alert.create({
+        header: 'O jogo já vai começar',
+  
+        message: 'Arraste as imagens para as caixas com os seus nomes certos!',
+        cssClass: 'alertsm',
+        buttons: [
+          {
+            text: 'Entendi'
+          }
+        ]
+      })
+      await alert.present();
+  }
+
   async exibirMensagemErro() {
     let alert = await this.alert.create({
       header: 'Que pena! 😢 Você errou',
@@ -278,7 +295,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
       cssClass: 'alertsp',
       buttons: [
         {
-          text: 'Clique aqui avançar de fase.',
+          text: 'Clique aqui para avançar de fase.',
           handler: () =>
            this.proximaFase()
         }
@@ -288,7 +305,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
   }
   async exibirMensagemNivel2() {
     let alert = await this.alert.create({
-      header: 'Parabéns!!! Você conquistou essa  e avançou de nível. 😃',
+      header: 'Parabéns!!! Você conquistou essa fase e avançou de nível. 😃',
       message: 'Agora você está no nível 2!',
       cssClass: 'alertsp',
       buttons: [
@@ -302,7 +319,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
   }
   async exibirMensagemNivel3() {
     let alert = await this.alert.create({
-      header: 'Parabéns!!! Você conquistou essa  e avançou de nível. 😃',
+      header: 'Parabéns!!! Você conquistou essa fase e avançou de nível. 😃',
       message: 'Agora você está no nível 3!',
       cssClass: 'alertsp',
       buttons: [
