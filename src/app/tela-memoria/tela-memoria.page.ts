@@ -217,10 +217,7 @@ export class TelaMemoriaPage implements OnInit {
         buttons: [
           {
             text: 'Clique aqui para ir para a próxima fase',
-            handler: () => {
-              this.recarregarImagens();
-              this.passarNivel();
-            }
+            handler: () => this.passarNivel()
           }
         ]
       });
@@ -275,7 +272,6 @@ export class TelaMemoriaPage implements OnInit {
     })
     await alert.present();
   }
-
   async exibirMensagemInicio() {
     let alert = await this.alert.create({
       header: 'O jogo já vai começar',
@@ -350,8 +346,8 @@ export class TelaMemoriaPage implements OnInit {
     else {
       this.changeDiferentCards();
     }
-
   }
+
   changeEqualsCards(url: String) {
     for (var i = 0; i < this.cartas.length; i++) {
       if (this.cartas[i].url == url) {
@@ -402,9 +398,10 @@ export class TelaMemoriaPage implements OnInit {
     this.exibirMensagemPassarNivel();
     this.atualizaUser();
     this.imageSelect();
+    if(this.pontosM!=5 && this.pontosM!=10 && this.pontosM!=15){
     setTimeout(() => this.mostrarCartas(), 1000);
   }
-
+}
   passarNivel() {
     this.calcularNivelMemoria();
     this.calcularPorcentagem();
