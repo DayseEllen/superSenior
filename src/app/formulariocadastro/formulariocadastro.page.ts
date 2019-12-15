@@ -1,4 +1,4 @@
-import { AlertController, ToastController } from '@ionic/angular';
+import { AlertController, ToastController, MenuController } from '@ionic/angular';
 import { BDService } from '../services/bd.service';
 import { Usuario } from './../../models/usuario';
 import { Autenticacao } from '../services/autenticacao';
@@ -24,7 +24,9 @@ export class FormulariocadastroPage implements OnInit {
     private bdService: BDService,
     private alertCtrl: AlertController,
     private autenticacao: Autenticacao,
+    private menu: MenuController
   ) {
+    this.menu.enable(false);
 
   }
 

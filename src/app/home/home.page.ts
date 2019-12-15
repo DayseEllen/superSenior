@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Autenticacao } from '../services/autenticacao';
 import { Usuario } from 'src/models/usuario';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -15,8 +16,9 @@ export class HomePage {
   usuario: Usuario;
   usuarios: Usuario[] = [];
 
-  constructor(private rota:Router,  private autenticacao : Autenticacao, private bdService: BDService) { 
+  constructor(private rota:Router,  private autenticacao : Autenticacao, private bdService: BDService,private menu: MenuController) { 
     this.carregarUsuarios();
+    this.menu.enable(true);
   }
 
   async carregarUsuarios(){
