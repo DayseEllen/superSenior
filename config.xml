@@ -1,8 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Super Senior</name>
-    <description>An awesome Ionic/Cordova app.</description>
-    <author email="hi@ionicframework.com" href="http://ionicframework.com/">Ionic Framework Team</author>
+<widget id="superSenior" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Super Sênior</name>
+    <description>Jogos educativos para idosos sobre o uso de smartphones </description>
+    <author email="esyadnelle@gmail.com" href="https://dayseellen.github.io/">Dayse Ellen da Silva Pinheiro</author>
+    <author email="emanuel.ifpe.ga@gmail.com" href="https://vieiraep.github.io/">Emanuel Pedro Felix Vieira</author>
+    <author email="noemi.tavares2@gmail.com" href="https://noemialvestavares.github.io/">Noemi Alves Tavares<author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
