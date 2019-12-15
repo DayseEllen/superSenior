@@ -405,12 +405,12 @@ export class TelaMemoriaPage implements OnInit {
     setTimeout(() => this.mostrarCartas(), 1000);
   }
 }
-  passarNivel() {
+async passarNivel() {
     this.calcularNivelMemoria();
     this.calcularPorcentagem();
     this.atualizaUser();
     this.imageSelect();
-    setTimeout(() => this.mostrarCartas(), 500);
+    setTimeout(() => this.mostrarCartas(), 1000);
     this.recarregarImagens();
   }
 
