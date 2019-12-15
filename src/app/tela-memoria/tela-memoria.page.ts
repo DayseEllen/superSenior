@@ -1,7 +1,7 @@
 import { Autenticacao } from '../services/autenticacao';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'; import { BDService } from '../services/bd.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, MenuController } from '@ionic/angular';
 import { Memoria } from 'src/models/memoria';
 import { Cartas } from 'src/models/cartas';
 import { Usuario } from 'src/models/usuario';
@@ -36,9 +36,11 @@ export class TelaMemoriaPage implements OnInit {
   nivel: string;
 
 
-  constructor(private rota: Router, private bdService: BDService, private alert: AlertController, private autenticacao: Autenticacao) {
+  constructor(private rota: Router, private menu: MenuController,private bdService: BDService, private alert: AlertController, private autenticacao: Autenticacao) {
+    this.menu.enable(false);
     this.carregarUsuarios();
     this.carregarImagens();
+   
     //this.inserirMemorias();
   }
 
@@ -360,6 +362,7 @@ export class TelaMemoriaPage implements OnInit {
 
   abrirPagina(url: String) {
     this.atualizaUser();
+    this.menu.enable(true);
     this.rota.navigate([url]);
   }
 

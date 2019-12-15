@@ -1,7 +1,7 @@
 import { Autenticacao } from './../services/autenticacao';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, MenuController } from '@ionic/angular';
 import { BDService } from '../services/bd.service';
 import { Usuario } from 'src/models/usuario';
 import { NgForm } from '@angular/forms';
@@ -16,9 +16,9 @@ export class RecuperarsenhaPage implements OnInit {
   usuarios: Usuario[] = [];
   contador: number = 0;
   usuario2: Usuario;
-  constructor(private rota: Router, private alertCtrl: AlertController, private bdService: BDService, private autenticacao: Autenticacao) {
+  constructor(private rota: Router, private alertCtrl: AlertController, private bdService: BDService, private autenticacao: Autenticacao,private menu: MenuController) {
+    this.menu.enable(false);
     this.carregarUsuarios();
-
   }
 
   private async carregarUsuarios() {

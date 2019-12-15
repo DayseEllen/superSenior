@@ -1,4 +1,4 @@
-import { AlertController } from '@ionic/angular';
+import { AlertController, MenuController } from '@ionic/angular';
 import { BDService } from '../services/bd.service';
 
 
@@ -27,8 +27,9 @@ export class TelaPerguntaPage implements OnInit {
   porcentagem: string;
   nivel: string;
 
-  constructor(private rota: Router, private bdService: BDService, private alert: AlertController, private autenticacao: Autenticacao) {
+  constructor(private rota: Router,private menu: MenuController, private bdService: BDService, private alert: AlertController, private autenticacao: Autenticacao) {
     //this.inserirPerguntas();
+    this.menu.enable(false);
     this.carregarUsuarios();
     this.carregarPerguntas();
   }
@@ -305,6 +306,7 @@ export class TelaPerguntaPage implements OnInit {
   }
   abrirPagina(url: String) {
     this.atualizaUser();
+    this.menu.enable(true);
     this.rota.navigate([url]);
   }
 

@@ -9,7 +9,7 @@ import { Imagem } from 'src/models/imagem';
 
 import { DragulaService } from 'ng2-dragula';
 import { Subscription } from 'rxjs';
-import { AlertController } from '@ionic/angular';
+import { AlertController, MenuController } from '@ionic/angular';
 import { Usuario } from 'src/models/usuario';
 import { Autenticacao } from '../services/autenticacao';
 
@@ -58,7 +58,8 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
   porcentagem: string;
   telaIs: boolean = true;
 
-  constructor(private rota: Router, private alert: AlertController, private bdService: BDService, private dragulaService: DragulaService, private elementRef: ElementRef, private autenticacao: Autenticacao) {
+  constructor(private rota: Router, private alert: AlertController, private bdService: BDService, private dragulaService: DragulaService, private elementRef: ElementRef, private autenticacao: Autenticacao, private menu: MenuController) {
+    this.menu.enable(false);
     this.carregarUsuarios();
     this.carregarImagens();
   }
@@ -480,6 +481,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
   }
 
   abrirPagina(url: String) {
+    this.menu.enable(true);
     this.rota.navigate([url]);
     if(this.pontosAS!==56){
       this.zerarFase();
