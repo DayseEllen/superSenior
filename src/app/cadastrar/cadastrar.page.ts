@@ -1,5 +1,8 @@
+import { Autenticacao } from './../services/autenticacao';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
+
 
 
 @Component({
@@ -9,7 +12,16 @@ import { Router } from '@angular/router';
 })
 export class CadastrarPage implements OnInit {
 
-  constructor(private rota: Router) { }
+
+  constructor(private rota: Router, private menu: MenuController) {
+      this.menu.enable(false);
+   
+   }
+
+
+  
+
+  
 
   ngOnInit() {
   }

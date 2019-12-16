@@ -1,4 +1,4 @@
-import { AlertController } from '@ionic/angular';
+import { AlertController, MenuController } from '@ionic/angular';
 import { BDService } from '../services/bd.service';
 
 
@@ -27,8 +27,9 @@ export class TelaPerguntaPage implements OnInit {
   porcentagem: string;
   nivel: string;
 
-  constructor(private rota: Router, private bdService: BDService, private alert: AlertController, private autenticacao: Autenticacao) {
+  constructor(private rota: Router,private menu: MenuController, private bdService: BDService, private alert: AlertController, private autenticacao: Autenticacao) {
     //this.inserirPerguntas();
+    this.menu.enable(false);
     this.carregarUsuarios();
     this.carregarPerguntas();
   }
@@ -102,6 +103,7 @@ export class TelaPerguntaPage implements OnInit {
   passarNivel() {
     this.calcularNivelPergunta();
     this.calcularPorcentagem();
+    this.atualizaUser();
     this.exibirProximaPergunta();
   }
 
@@ -146,7 +148,7 @@ export class TelaPerguntaPage implements OnInit {
       this.pontosP++;
       this.calcularNivelPergunta();
       this.calcularPorcentagem();
-
+      this.atualizaUser();
       let alerta = await this.alert.create({
         header: 'Parabéns!!! Você zerou o jogo das perguntas.😃',
         message: "Agora você pode reiniciá-lo e aprimorar seus conhecimentos ou se aventurar em outro jogo",
@@ -163,6 +165,7 @@ export class TelaPerguntaPage implements OnInit {
     } else {
       this.pontosP++;
       this.calcularPorcentagem();
+      this.atualizaUser();
       this.exibirProximaPergunta();
     }
   }
@@ -206,6 +209,7 @@ export class TelaPerguntaPage implements OnInit {
     this.qt++;
     this.calcularNivelPergunta();
     this.calcularPorcentagem();
+    this.atualizaUser();
     this.abrirPagina('home');
   }
 
@@ -301,13 +305,16 @@ export class TelaPerguntaPage implements OnInit {
     }
   }
   abrirPagina(url: String) {
-
-    this.user = new Usuario(this.autenticacao.getUser().uid,
-      this.usuario.nome, this.usuario.username,
-      this.usuario.email, this.usuario.genero, this.usuario.idade, this.usuario.senha,this.usuario.nomeM, this.pontosP, this.usuario.pontosMemoria, this.usuario.pontosArrasta, this.qt, this.usuario.qtMemoria, this.usuario.qtArrasta);
+    this.atualizaUser();
+    this.menu.enable(true);
     this.rota.navigate([url]);
-    this.bdService.update('/usuarios', this.usuario.uid, this.user);
+  }
 
+  atualizaUser(){
+    this.user = new Usuario(this.autenticacao.getUser().uid,
+    this.usuario.nome, this.usuario.username,
+    this.usuario.email, this.usuario.genero, this.usuario.idade, this.usuario.senha,this.usuario.nomeM, this.pontosP, this.usuario.pontosMemoria, this.usuario.pontosArrasta, this.qt, this.usuario.qtMemoria, this.usuario.qtArrasta);
+    this.bdService.update('/usuarios', this.usuario.uid, this.user);
   }
 
 

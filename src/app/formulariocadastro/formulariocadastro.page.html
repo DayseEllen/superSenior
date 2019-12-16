@@ -21,7 +21,7 @@
         </div>
         <div class="form-group col-md-6">
           <label for="inputAno" class="campos textoformulario">Escolha sua idade:</label>
-        <select class="form-control campos inputs" id="exampleFormControlSelect2" name="idade" ngModel required >
+        <select class="form-control campos inputs" id="inputAno" name="idade" ngModel required >
           <option>Menos de 50</option>
           <option>Entre 50 e 60</option>
           <option>Entre 61 e 70</option>
@@ -30,8 +30,8 @@
         </select>
         </div>
         <div class="form-group col-md-6">
-          <label class="campos textoformulario" for="exampleFormControlSelect1" >Escolha o seu sexo:</label>
-          <select class="form-control campos inputs" id="exampleFormControlSelect1" name="genero" ngModel required >
+          <label class="campos textoformulario" for="sexo" >Escolha o seu sexo:</label>
+          <select class="form-control campos inputs" id="sexo" name="genero" ngModel required >
             <option>Feminino</option>
             <option>Masculino</option>
           </select>
@@ -48,7 +48,7 @@
         <br>
       <div>
         <ion-button  class="campos botao" color="light" (click)="abrirPagina('cadastrar')">Voltar</ion-button>
-        <ion-button type="submit" class="campos botao cadastrar" color="light"  [disabled]="!cadastro.form.valid">Cadastrar</ion-button>
+        <ion-button type="submit" class="campos botao cadastrar" color="light"  [disabled]="!cadastro.form.valid" id="cadastrar">Cadastrar</ion-button>
      </div>
       </form>
     </div>

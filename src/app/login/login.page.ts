@@ -6,7 +6,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 import { NgForm } from '@angular/forms';
 import { Usuario } from 'src/models/usuario';
-import { AlertController, ToastController } from '@ionic/angular';
+import { AlertController, ToastController, MenuController } from '@ionic/angular';
 import { Location } from '@angular/common';
 import { Autenticacao } from '../services/autenticacao';
 
@@ -21,8 +21,8 @@ export class LoginPage implements OnInit {
   usuarios: Usuario[];
 
   constructor(private rota: Router, private autenticacao: Autenticacao,
-    private alertCtrl: AlertController, private location: Location, private bdService: BDService) {
-
+    private alertCtrl: AlertController, private location: Location, private bdService: BDService, private menu: MenuController) {
+      this.menu.enable(false);
   }
   private async carregarUsuarios() {
     this.usuarios = await this.bdService.listWithUIDs<Usuario>('/usuarios');
@@ -108,6 +108,7 @@ export class LoginPage implements OnInit {
             await alert.present();
           }
         });
+        
     }
   }
 

@@ -9,7 +9,7 @@ import { Imagem } from 'src/models/imagem';
 
 import { DragulaService } from 'ng2-dragula';
 import { Subscription } from 'rxjs';
-import { AlertController } from '@ionic/angular';
+import { AlertController, MenuController } from '@ionic/angular';
 import { Usuario } from 'src/models/usuario';
 import { Autenticacao } from '../services/autenticacao';
 
@@ -51,14 +51,14 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
   user: Usuario;
   usuarios: Usuario[] = [];
   pontosAS: number = 0;
-  qt: number;
   porcentagemAS: string;
   nivelA: string;
   sit: boolean;
   porcentagem: string;
   telaIs: boolean = true;
 
-  constructor(private rota: Router, private alert: AlertController, private bdService: BDService, private dragulaService: DragulaService, private elementRef: ElementRef, private autenticacao: Autenticacao) {
+  constructor(private rota: Router, private alert: AlertController, private bdService: BDService, private dragulaService: DragulaService, private elementRef: ElementRef, private autenticacao: Autenticacao, private menu: MenuController) {
+    this.menu.enable(false);
     this.carregarUsuarios();
     this.carregarImagens();
   }
@@ -70,6 +70,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
     this.calcularNivel();
     this.calcularPorcentagem();
   }
+
   calcularPorcentagem() {
     if (this.nivel === 1) {
       this.porcentagem = String(((100 * this.pontosAS) / 15).toFixed(0));
@@ -209,6 +210,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
     this.imagensCarregadas = await this.bdService.listWithUIDs<Imagem>('/imagens');
     this.imagensSelecionadas();
     this.randomNomes();
+    setTimeout(() => { this.exibirMensagemInicio() }, 800);
     if (!this.dragulaService.find("bag")) {
       this.dragulaService.createGroup("bag", {
         revertOnSpill: true,
@@ -253,6 +255,21 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
     return this.nomes;
   }
 
+  async exibirMensagemInicio(){
+      let alert = await this.alert.create({
+        header: 'O jogo já vai começar',
+  
+        message: 'Arraste as imagens para as caixas com os seus nomes certos!',
+        cssClass: 'alertsm',
+        buttons: [
+          {
+            text: 'Entendi'
+          }
+        ]
+      })
+      await alert.present();
+  }
+
   async exibirMensagemErro() {
     let alert = await this.alert.create({
       header: 'Que pena! 😢 Você errou',
@@ -277,8 +294,9 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
       cssClass: 'alertsp',
       buttons: [
         {
-          text: 'Clique aqui avançar de fase.',
-          handler: () => this.proximaFase()
+          text: 'Clique aqui para avançar de fase.',
+          handler: () =>
+           this.proximaFase()
         }
       ]
     });
@@ -286,7 +304,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
   }
   async exibirMensagemNivel2() {
     let alert = await this.alert.create({
-      header: 'Parabéns!!! Você conquistou essa  e avançou de nível. 😃',
+      header: 'Parabéns!!! Você conquistou essa fase e avançou de nível. 😃',
       message: 'Agora você está no nível 2!',
       cssClass: 'alertsp',
       buttons: [
@@ -300,13 +318,14 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
   }
   async exibirMensagemNivel3() {
     let alert = await this.alert.create({
-      header: 'Parabéns!!! Você conquistou essa  e avançou de nível. 😃',
+      header: 'Parabéns!!! Você conquistou essa fase e avançou de nível. 😃',
       message: 'Agora você está no nível 3!',
       cssClass: 'alertsp',
       buttons: [
         {
           text: 'Clique aqui para avançar de nível.',
-          handler: () => this.exibirNivel3()
+          handler: () => 
+          this.exibirNivel3()
         }
       ]
     });
@@ -366,6 +385,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
         });
       }
     }
+    this.updateBancoDados();
   }
 
   exibirNivel2() {
@@ -383,6 +403,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
         removeOnSpill: false
       });
     }
+    this.updateBancoDados();
   }
 
   exibirNivel3() {
@@ -400,6 +421,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
         removeOnSpill: false
       });
     }
+    this.updateBancoDados();
   }
 
   alterarNivel() {
@@ -432,6 +454,7 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
       this.exibirMensagemGanhouFase();
     }
   }
+
   async exibirMensagemZerou() {
     let alert = await this.alert.create({
       header: 'Parabéns!!! Você chegou até o fim. 😃',
@@ -454,7 +477,9 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
     this.dragulaService.destroy("bag");
     this.subs.unsubscribe();
   }
+
   abrirPagina(url: String) {
+    this.menu.enable(true);
     this.rota.navigate([url]);
     if(this.pontosAS!==56){
       this.zerarFase();
@@ -466,7 +491,6 @@ export class TelaArrastaPage implements OnInit, OnDestroy {
       this.usuario.qtArrasta++;
       this.updateBancoDados();
     }
-    
   }
   updateBancoDados(){
     this.user = new Usuario(this.autenticacao.getUser().uid,
