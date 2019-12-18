@@ -409,9 +409,9 @@ async passarNivel() {
     this.calcularNivelMemoria();
     this.calcularPorcentagem();
     this.atualizaUser();
+    this.recarregarImagens();
     this.imageSelect();
     setTimeout(() => this.mostrarCartas(), 1000);
-    this.recarregarImagens();
   }
 
   igualaZero() {
