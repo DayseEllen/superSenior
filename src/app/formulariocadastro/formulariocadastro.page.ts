@@ -71,10 +71,10 @@ export class FormulariocadastroPage implements OnInit {
         })
         .catch(async (error: any) => {
           if (error.code == 'auth/email-already-in-use') {
-            console.log("O nome de usuário digitado já está em uso");
+            console.log("O apelido digitado já está em uso");
             let alert = await this.alertCtrl.create({
               header: 'Que pena! 😢 ',
-              message: 'O usuário já existe.',
+              message: 'O apelido já existe. Digite um novo.',
               cssClass: 'alertsformcad',
               buttons: [{
                 text: "Ok"
